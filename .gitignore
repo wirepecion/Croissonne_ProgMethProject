@@ -1,0 +1,17 @@
+# Ignore Eclipse project files
+.project
+.classpath
+.settings/
+
+# Ignore compiled Java files
+*.class
+
+# Ignore build output (e.g., 'bin' folder where compiled classes are placed)
+bin/
+
+# Ignore logs
+*.log
+
+# Ignore temporary or backup files created by the editor (e.g., Eclipse)
+*~
+*.bak
