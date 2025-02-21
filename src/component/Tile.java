@@ -55,8 +55,12 @@ public abstract class Tile extends Pane implements Rotatable {
 		return edge;
 	}
 
-	public static boolean isOwnable(TileType tileType) {
+	private static boolean isOwnable(TileType tileType) {
 		return tileType.toString().contains("CASTLE") ||
 			   tileType.toString().contains("RIVER");
+	}
+	
+	public String toString() {
+		return tileType.name();
 	}
 }

@@ -17,7 +17,6 @@ public class OwnableTile extends Tile implements Ownable {
 	public void ownBy(Player player) {
 		this.isOwned = true;
 		this.owner = player;
-		
 	}
 
 	public boolean isOwned() {
