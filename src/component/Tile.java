@@ -9,13 +9,17 @@ import utils.TileArea;
 import utils.TileType;
 import utils.Constant;
 import interfaces.Rotatable;
+import javafx.geometry.Insets;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 
 public class Tile extends Pane implements Rotatable {
-	private TileArea[] border;
-	private boolean isCastle;
-	private TileArea tileType;
+	private TileType tileType;
+	private static final int TILE_SIZE = 50;
 //	private final Image boardImage = new Image(ClassLoader.getSystemResource("res/board.png").toString());
 	// border contains 4 TileArea 
 	// (1) north border
@@ -24,60 +28,19 @@ public class Tile extends Pane implements Rotatable {
 	// (4) west border
 	
 	public Tile() {
-		
-	}
+		setTileType(tileType.EMPTY);
+		setPrefHeight(TILE_SIZE);
+		setPrefWidth(TILE_SIZE);
+		setBackground(new Background(new BackgroundFill(Color.CHOCOLATE, CornerRadii.EMPTY, Insets.EMPTY)));
+	}	
 	
-	public Tile(TileArea northArea, TileArea eastArea, TileArea southArea, TileArea westArea, boolean isCastle) {
-		TileArea[] border = new TileArea[] {northArea, eastArea, southArea, westArea};
-		checkTileArea(border);
-		
-		setTileType(tileType);
-	}
-	
-	// rotate clockwise
-	public void rotate() {
-		TileArea oldNorthArea = getNorthArea();
-		setSouthtArea(getEastArea());
-		setWestArea(getSouthtArea());
-		setNorthArea(getWestArea());
-		setEastArea(oldNorthArea);
-	}
-
-	public TileType getTileType() {
-		return tileType;
-	}
-
 	public void setTileType(TileType tileType) {
 		this.tileType = tileType;
 	}
-	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + Arrays.hashCode(border);
-		result = prime * result + Objects.hash(isCastle);
-		return result;
-	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Tile other = (Tile) obj;
-		return Arrays.equals(border, other.border) && isCastle == other.isCastle;
-	}
-
-	private void checkTileArea(TileArea[] arr) {
-		TileArea tileType = TileArea.ABYSS;
-		for (TileArea eachTileArea : arr) {
-			if (eachTileArea.equals(TileArea.CASTLE)) {
-				eachTileArea = TileArea.ABYSS;
-			}
-		}
+	public void rotate() {
+		// TODO Auto-generated method stub
+		
 	}
 }

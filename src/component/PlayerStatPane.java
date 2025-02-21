@@ -9,31 +9,17 @@ import javafx.scene.paint.Color;
 import utils.PlayerColor;
 
 public class PlayerStatPane extends GridPane{
-	private PlayerColor color;
-	private String name;
-	private int score;
-	private int penalty;
 	
+	private Player player;
 	
-	public PlayerStatPane(String name, int score, int penalty) {
-		setName(name);
-		setScore(score);
-		setPenalty(penalty);
-		
+	public PlayerStatPane(Player player) {		
+		setPlayer(player);
 		setPrefHeight(100);
 		setPrefWidth(300);
-		setBackground(new Background(new BackgroundFill(Color.DARKRED, CornerRadii.EMPTY, Insets.EMPTY)));
+		setBackground(new Background(new BackgroundFill(Color.AQUA, CornerRadii.EMPTY, Insets.EMPTY)));
 	}
 	
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	public void setScore(int score) {
-		this.score = score;
-	}
-	
-	public void setPenalty(int penalty) {
-		this.penalty = penalty;
+	public void setPlayer(Player player) {
+		this.player = player;
 	}
 }
