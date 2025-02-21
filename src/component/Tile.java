@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 import utils.TileArea;
+import utils.TileType;
 import utils.Constant;
 import interfaces.Rotatable;
 import javafx.scene.image.Image;
@@ -21,6 +22,10 @@ public class Tile extends Pane implements Rotatable {
 	// (2) east border
 	// (3) south border
 	// (4) west border
+	
+	public Tile() {
+		
+	}
 	
 	public Tile(TileArea northArea, TileArea eastArea, TileArea southArea, TileArea westArea, boolean isCastle) {
 		TileArea[] border = new TileArea[] {northArea, eastArea, southArea, westArea};
@@ -38,11 +43,11 @@ public class Tile extends Pane implements Rotatable {
 		setEastArea(oldNorthArea);
 	}
 
-	public TileArea getTileType() {
+	public TileType getTileType() {
 		return tileType;
 	}
 
-	public void setTileType(TileArea tileType) {
+	public void setTileType(TileType tileType) {
 		this.tileType = tileType;
 	}
 	
