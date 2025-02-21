@@ -1,7 +1,5 @@
 package component;
 
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -12,12 +10,11 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import logic.TileAreaDeterminer;
 
-public class Tile extends Pane implements Rotatable {
-	private static final int BORDER_DIRECTIONS = 4;
+public abstract class Tile extends Pane implements Rotatable {
+	private static final int EDGE_DIRECTIONS = 4;
 	private TileType tileType;
-	private boolean isCastle;
 	private List<TileArea> edge;
-//	private final Image boardImage = new Image(ClassLoader.getSystemResource("res/board.png").toString());
+//	private final Image tileImage = new Image(ClassLoader.getSystemResource("res/board.png").toString());
 	// edge contains 4 TileArea 
 	// (0) north edge
 	// (1) east edge
@@ -26,13 +23,19 @@ public class Tile extends Pane implements Rotatable {
 	
 	public Tile(TileType tiletype) {
 		this.tileType = tiletype;
-		this.isCastle = (tiletype.toString().contains("CASTLE") ?
-				true : false);
 		this.edge = TileAreaDeterminer.determineTileArea(tileType);
 	}
 	
-	public Tile() {
-		this(TileType.EMPTY);
+	public static Tile createTile(TileType tileType) {
+		if (isOwnable(tileType)) {
+			return new OwnableTile(tileType);
+		} else {
+			return new RegularTile(tileType);
+		}
+	}
+	
+	public static Tile createTile() {
+		return new RegularTile(TileType.EMPTY);
 	}
 	
 	// rotate clockwise
@@ -40,20 +43,20 @@ public class Tile extends Pane implements Rotatable {
 		Collections.rotate(edge, 1);
 	}
 
-	public static int getBorderDirections() {
-		return BORDER_DIRECTIONS;
+	public static int getEdgeDirections() {
+		return EDGE_DIRECTIONS;
 	}
 
 	public TileType getTileType() {
 		return tileType;
 	}
 
-	public boolean isCastle() {
-		return isCastle;
-	}
-
 	public List<TileArea> getEdge() {
 		return edge;
 	}
 
+	public static boolean isOwnable(TileType tileType) {
+		return tileType.toString().contains("CASTLE") ||
+			   tileType.toString().contains("RIVER");
+	}
 }

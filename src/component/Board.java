@@ -22,11 +22,10 @@ public class Board extends GridPane {
 		setBorder(new Border(new BorderStroke(javafx.scene.paint.Color.SADDLEBROWN, 
 				BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		setBackground(new Background(new BackgroundFill(Color.DARKGOLDENROD, CornerRadii.EMPTY, Insets.EMPTY)));
-		
 		for(int row = 0; row < BOARD_SIZE; row++) {
 			allTiles.add(new ArrayList<Tile>());
 			for(int col = 0; col < BOARD_SIZE; col++) {
-				allTiles.get(row).add(new Tile());
+				allTiles.get(row).add(Tile.createTile());
 			}
 		}
 	}
