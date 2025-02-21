@@ -1,4 +1,4 @@
-package component;
+package interfaces;
 
 public interface Rotatable {
 	void rotate();

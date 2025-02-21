@@ -1,6 +1,6 @@
 package component;
 
-import enums.PlayerColor;
+import utils.PlayerColor;
 
 public class Player {
 	private PlayerColor color;

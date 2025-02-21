@@ -1,4 +1,4 @@
-package enums;
+package utils;
 
 public enum PlayerColor {
 	WHITE,
