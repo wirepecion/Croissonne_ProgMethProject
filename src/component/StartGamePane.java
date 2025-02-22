@@ -13,7 +13,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 public class StartGamePane extends VBox {
-	private static final String  TITLE_TEXT = "Croissinee";
+	private static final String  TITLE_TEXT = "Croissonne";
 	private static final String  SUBTITLE_TEXT = "Click Start To Begin!";
 	private Label titleLabel;
 	private Label subtitleLabel;

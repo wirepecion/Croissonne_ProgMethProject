@@ -24,8 +24,8 @@ public class Board extends GridPane {
 	
 	public Board() {
 		
-		setHgap(8); setVgap(8);
-		setPadding(new Insets(8));
+		setHgap(10); setVgap(10);
+		setPadding(new Insets(10));
 		setPrefWidth(800);
 		setAlignment(Pos.CENTER);
 		setBorder(new Border(new BorderStroke(Color.RED,BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
@@ -43,8 +43,6 @@ public class Board extends GridPane {
 			allTiles.add(new ArrayList<Tile>());
 			for(int col = 0; col < BOARD_SIZE; col++) {
 				Tile tile = Tile.createTile();
-				// you could uncomment below command to see random tile
-				// if ((row+col)%3 == 0) tile = TileStorage.getRandomTile();
 				allTiles.get(row).add(tile);
 				this.add(tile, col, row);
 			}
@@ -55,8 +53,12 @@ public class Board extends GridPane {
 		return allTiles;
 	}
 	
+	public Tile getTile(int row, int col) {
+		return allTiles.get(row).get(col);
+	}
+	
 	public boolean isEmpty(int row, int col) {
-		return allTiles.get(row).get(col).equals(TileType.EMPTY);
+		return allTiles.get(row).get(col).getTileType().equals(TileType.EMPTY);
 	}
 	
 	public void setTileInBoard(Tile tile, int row, int col) {
