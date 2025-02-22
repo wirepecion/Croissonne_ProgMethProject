@@ -6,12 +6,19 @@ import java.util.List;
 import interfaces.Rotatable;
 import utils.TileArea;
 import utils.TileType;
-import javafx.scene.image.Image;
-import javafx.scene.layout.Pane;
 import logic.TileAreaDeterminer;
 
+import javafx.geometry.Insets;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+
 public abstract class Tile extends Pane implements Rotatable {
-	
+
+	private static final int TILE_SIZE = 50;
 	private static final int EDGE_DIRECTIONS = 4;
 	private TileType tileType;
 	private List<TileArea> edge;
@@ -27,8 +34,11 @@ public abstract class Tile extends Pane implements Rotatable {
 		this.edge = TileAreaDeterminer.determineTileArea(tileType);
 		String path = "tempTilePic/" + tiletype.toString() + ".png";
 		this.tileURL = ClassLoader.getSystemResource(path).toString();
+		setPrefHeight(TILE_SIZE);
+		setPrefWidth(TILE_SIZE);
+		setBackground(new Background(new BackgroundFill(Color.CHOCOLATE, CornerRadii.EMPTY, Insets.EMPTY)));
 	}
-	
+
 	public static Tile createTile(TileType tileType) {
 		if (isOwnable(tileType)) {
 			return new OwnableTile(tileType);
@@ -62,4 +72,5 @@ public abstract class Tile extends Pane implements Rotatable {
 		return tileType.toString().contains("CASTLE") ||
 			   tileType.toString().contains("RIVER");
 	}
+
 }
