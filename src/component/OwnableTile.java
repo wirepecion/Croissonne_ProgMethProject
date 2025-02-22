@@ -4,6 +4,7 @@ import interfaces.Ownable;
 import utils.TileType;
 
 public class OwnableTile extends Tile implements Ownable {
+	
 	private boolean isOwned;
 	private Player owner;
 	

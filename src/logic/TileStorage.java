@@ -9,11 +9,14 @@ import component.Tile;
 import utils.TileType;
 
 public class TileStorage {
-
+	
+	private static final int TOTAL_TILES = 61;
 	private static ArrayList<Tile> tileList;
+	private static int tileCount;
 	
 	public static void init() {
 		tileList = new ArrayList<Tile>();
+		tileCount = TOTAL_TILES;
 		populateWordTile();
 	}
 
@@ -43,6 +46,16 @@ public class TileStorage {
 		 int idx = new Random().nextInt(tileList.size());
 		 Tile tile = tileList.get(idx);
 		 tileList.remove(idx);
+		 tileCount--;
 		 return tile;
 	}
+
+	public static ArrayList<Tile> getTileList() {
+		return tileList;
+	}
+
+	public static int getTileCount() {
+		return tileCount;
+	}
+
 }

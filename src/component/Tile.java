@@ -11,10 +11,11 @@ import javafx.scene.layout.Pane;
 import logic.TileAreaDeterminer;
 
 public abstract class Tile extends Pane implements Rotatable {
+	
 	private static final int EDGE_DIRECTIONS = 4;
 	private TileType tileType;
 	private List<TileArea> edge;
-//	private final Image tileImage = new Image(ClassLoader.getSystemResource("res/board.png").toString());
+	private final String tileURL;
 	// edge contains 4 TileArea 
 	// (0) north edge
 	// (1) east edge
@@ -24,6 +25,8 @@ public abstract class Tile extends Pane implements Rotatable {
 	public Tile(TileType tiletype) {
 		this.tileType = tiletype;
 		this.edge = TileAreaDeterminer.determineTileArea(tileType);
+		String path = "tempTilePic/" + tiletype.toString() + ".png";
+		this.tileURL = ClassLoader.getSystemResource(path).toString();
 	}
 	
 	public static Tile createTile(TileType tileType) {
@@ -58,9 +61,5 @@ public abstract class Tile extends Pane implements Rotatable {
 	private static boolean isOwnable(TileType tileType) {
 		return tileType.toString().contains("CASTLE") ||
 			   tileType.toString().contains("RIVER");
-	}
-	
-	public String toString() {
-		return tileType.name();
 	}
 }
