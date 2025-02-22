@@ -2,6 +2,7 @@ package application;
 
 import component.Board;
 import component.ControlPane;
+import component.StartGamePane;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -29,7 +30,16 @@ public class Main extends Application{
 		
 		root.getChildren().addAll(board, controlPane);
 		
-		Scene scene = new Scene(root);
+		StartGamePane startGamePane = new StartGamePane();	
+
+		
+		//==============================================================//
+		//This one use for test In-Game GUI		
+//		Scene scene = new Scene(root);
+		
+		//This one use for test Start-Game GUI	
+		Scene scene = new Scene(startGamePane);
+		
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Croissinee");
 		primaryStage.show();
