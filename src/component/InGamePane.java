@@ -8,12 +8,12 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 
-public class GamePane extends HBox {
+public class InGamePane extends HBox {
 	
 	 private Board board;
 	 private ControlPane controlPane;
 
-	 public GamePane() {
+	 public InGamePane() {
 		 
 	   board = new Board();
 	   controlPane = new ControlPane();
