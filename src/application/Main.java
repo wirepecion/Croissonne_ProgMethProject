@@ -3,7 +3,6 @@ package application;
 import component.Board;
 import component.ControlPane;
 import javafx.application.Application;
-import javafx.beans.property.ReadOnlySetPropertyBase;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.layout.Background;

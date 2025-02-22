@@ -43,7 +43,7 @@ public class TileStorage {
 	}
 	
 	public static Tile getRandomTile() {
-		 int idx = new Random().nextInt(tileList.size());
+		 int idx = (tileCount == 0 ? 0 : new Random().nextInt(tileCount));
 		 Tile tile = tileList.get(idx);
 		 tileList.remove(idx);
 		 tileCount--;

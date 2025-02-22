@@ -12,6 +12,8 @@ import javafx.geometry.Insets;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -36,7 +38,13 @@ public abstract class Tile extends Pane implements Rotatable {
 		this.tileURL = ClassLoader.getSystemResource(path).toString();
 		setPrefHeight(TILE_SIZE);
 		setPrefWidth(TILE_SIZE);
-		setBackground(new Background(new BackgroundFill(Color.CHOCOLATE, CornerRadii.EMPTY, Insets.EMPTY)));
+		BackgroundFill bgFill = new BackgroundFill(Color.CHOCOLATE, CornerRadii.EMPTY, Insets.EMPTY);
+		BackgroundFill[] bgFillA = {bgFill};
+		BackgroundSize bgSize = new BackgroundSize(TILE_SIZE, TILE_SIZE, false, false, false, false);
+		Image img = new Image(tileURL);
+		BackgroundImage bgImg = new BackgroundImage(img, null, null, null, bgSize);
+		BackgroundImage[] bgImgA = {bgImg};
+		setBackground(new Background(bgFillA, bgImgA));
 	}
 
 	public static Tile createTile(TileType tileType) {

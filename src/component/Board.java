@@ -14,30 +14,37 @@ import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import logic.TileStorage;
 import utils.TileType;
 
 public class Board extends GridPane {
+	
 	private static final int BOARD_SIZE = 12;
 	private ArrayList<ArrayList<Tile>> allTiles;
 	
 	public Board() {
-		setBorder(new Border(new BorderStroke(javafx.scene.paint.Color.SADDLEBROWN, 
-				BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-		setBackground(new Background(new BackgroundFill(Color.DARKGOLDENROD, CornerRadii.EMPTY, Insets.EMPTY)));
-		setBorder(new Border(new BorderStroke(javafx.scene.paint.Color.SADDLEBROWN, 
-				BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-		setBackground(new Background(new BackgroundFill(Color.DARKGOLDENROD, CornerRadii.EMPTY, Insets.EMPTY)));
-		setAlignment(Pos.CENTER);
 		
+		setHgap(8); setVgap(8);
+		setPadding(new Insets(8));
+		setPrefWidth(800);
+		setAlignment(Pos.CENTER);
 		setBorder(new Border(new BorderStroke(Color.RED,BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
 		
+		initializeBoard();
+	}
+	
+	private void initializeBoard() {
+		
 		allTiles = new ArrayList<ArrayList<Tile>>();
+		TileStorage.init();
 
 		for(int row = 0; row < BOARD_SIZE; row++) {
 			allTiles.add(new ArrayList<Tile>());
 			for(int col = 0; col < BOARD_SIZE; col++) {
 				Tile tile = Tile.createTile();
+				// you could uncomment below command to see random tile
+				// if ((row+col)%3 == 0) tile = TileStorage.getRandomTile();
 				allTiles.get(row).add(tile);
 				this.add(tile, col, row);
 			}
