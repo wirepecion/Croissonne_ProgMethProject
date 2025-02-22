@@ -1,7 +1,5 @@
 package application;
 
-public class Main {
-
 import component.Board;
 import component.ControlPane;
 import javafx.application.Application;
