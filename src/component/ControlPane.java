@@ -5,12 +5,14 @@ import javafx.geometry.Pos;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import logic.GameLogic;
 import logic.TileStorage;
 import utils.PlayerColor;
 
@@ -42,7 +44,7 @@ public class ControlPane extends VBox {
 	public void initializeTilePane() {
 		tilePane = new Canvas(Tile.getTileSize() * 2, Tile.getTileSize() * 2);
 		tilePane.getGraphicsContext2D().drawImage(
-				Tile.createTile().getTileImg(), 0, 0, Tile.getTileSize() * 2, Tile.getTileSize() * 2);
+				new Image(Tile.createTile().getTileURL()), 0, 0, Tile.getTileSize() * 2, Tile.getTileSize() * 2);
 	}
 	
 	public void initializePassButton() {
@@ -56,10 +58,10 @@ public class ControlPane extends VBox {
 		passButton.setOnMouseClicked(event -> drawButtonHandler());
 	}
 	
-	public void drawButtonHandler() {
-		Tile tile = TileStorage.getRandomTile();
+	private void drawButtonHandler() {
 		tilePane.getGraphicsContext2D().drawImage(
-				tile.getTileImg(), 0, 0, Tile.getTileSize() * 2, Tile.getTileSize() * 2);
+				new Image(GameLogic.randomTile().getTileURL()), 
+				0, 0, Tile.getTileSize() * 2, Tile.getTileSize() * 2);
 	}
 	
 }
