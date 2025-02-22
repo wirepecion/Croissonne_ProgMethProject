@@ -24,7 +24,7 @@ public abstract class Tile extends Pane implements Rotatable {
 	private static final int EDGE_DIRECTIONS = 4;
 	private TileType tileType;
 	private List<TileArea> edge;
-	private final String tileURL;
+	private Image tileImg;
 	// edge contains 4 TileArea 
 	// (0) north edge
 	// (1) east edge
@@ -32,17 +32,18 @@ public abstract class Tile extends Pane implements Rotatable {
 	// (3) west edge
 	
 	public Tile(TileType tiletype) {
+		
 		this.tileType = tiletype;
 		this.edge = TileAreaDeterminer.determineTileArea(tileType);
-		String path = "tempTilePic/" + tiletype.toString() + ".png";
-		this.tileURL = ClassLoader.getSystemResource(path).toString();
+		this.tileImg = new Image(ClassLoader.getSystemResource(
+				"tempTilePic/" + tiletype.toString() + ".png").toString());
+		
 		setPrefHeight(TILE_SIZE);
 		setPrefWidth(TILE_SIZE);
 		BackgroundFill bgFill = new BackgroundFill(Color.CHOCOLATE, CornerRadii.EMPTY, Insets.EMPTY);
 		BackgroundFill[] bgFillA = {bgFill};
 		BackgroundSize bgSize = new BackgroundSize(TILE_SIZE, TILE_SIZE, false, false, false, false);
-		Image img = new Image(tileURL);
-		BackgroundImage bgImg = new BackgroundImage(img, null, null, null, bgSize);
+		BackgroundImage bgImg = new BackgroundImage(this.tileImg, null, null, null, bgSize);
 		BackgroundImage[] bgImgA = {bgImg};
 		setBackground(new Background(bgFillA, bgImgA));
 	}
@@ -63,6 +64,10 @@ public abstract class Tile extends Pane implements Rotatable {
 	public void rotate() {
 		Collections.rotate(edge, 1);
 	}
+	
+	public static int getTileSize() {
+		return TILE_SIZE;
+	}
 
 	public static int getEdgeDirections() {
 		return EDGE_DIRECTIONS;
@@ -74,6 +79,10 @@ public abstract class Tile extends Pane implements Rotatable {
 
 	public List<TileArea> getEdge() {
 		return edge;
+	}
+	
+	public Image getTileImg() {
+		return tileImg;
 	}
 
 	private static boolean isOwnable(TileType tileType) {
