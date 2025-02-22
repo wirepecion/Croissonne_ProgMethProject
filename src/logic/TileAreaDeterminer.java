@@ -30,8 +30,8 @@ public class TileAreaDeterminer {
         						TileArea.MOUNTAIN, TileArea.MOUNTAIN));
 
         tileAreaMap.put(TileType.BETWEEN_TWO_MOUNTAIN, 
-        		createTileAreas(TileArea.ABYSS, TileArea.MOUNTAIN, 
-        						TileArea.ABYSS, TileArea.MOUNTAIN));
+        		createTileAreas(TileArea.MOUNTAIN, TileArea.ABYSS, 
+        						TileArea.MOUNTAIN, TileArea.ABYSS));
 
         tileAreaMap.put(TileType.CURVE_OF_DEATH, 
         		createTileAreas(TileArea.ABYSS, TileArea.ABYSS, 
