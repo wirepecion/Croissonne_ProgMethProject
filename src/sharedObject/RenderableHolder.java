@@ -1,18 +1,16 @@
 package sharedObject;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
+import component.Tile;
 import javafx.scene.image.Image;
 // import javafx.scene.media.AudioClip;
 
 public class RenderableHolder {
 	private static final RenderableHolder instance = new RenderableHolder();
 
-	private List<IRenderable> entities;
-	private Comparator<IRenderable> comparator;
+	private List<Tile> tiles;
 	public static Image betweenTwoMountain;
 	public static Image castleOnAbyss;
 	public static Image castleOnMountain;
@@ -38,12 +36,7 @@ public class RenderableHolder {
 	}
 
 	public RenderableHolder() {
-		entities = new ArrayList<IRenderable>();
-		comparator = (IRenderable o1, IRenderable o2) -> {
-			if (o1.getZ() > o2.getZ())
-				return 1;
-			return -1;
-		};
+		tiles = new ArrayList<Tile>();
 	}
 
 	public static RenderableHolder getInstance() {
@@ -89,26 +82,11 @@ public class RenderableHolder {
 		// explosionSound = new AudioClip(ClassLoader.getSystemResource("Explosion.wav").toString());
 	}
 
-	public void add(IRenderable entity) {
-		System.out.println("add");
-		entities.add(entity);
-		Collections.sort(entities, comparator);
-//		for(IRenderable x: entities){
-//			if(x instanceof Tank) System.out.println("tank");
-//			if(x instanceof Mine) System.out.println("mine");
-//			if(x instanceof Field) System.out.println("field");
-//			
-//		}
+	public void add(Tile tile) {
+		tiles.add(tile);
 	}
 
-	public void update() {
-		for (int i = entities.size() - 1; i >= 0; i--) {
-			if (entities.get(i).isRemoved())
-				entities.remove(i);
-		}
-	}
-
-	public List<IRenderable> getEntities() {
-		return entities;
+	public List<Tile> getTiles() {
+		return tiles;
 	}
 }

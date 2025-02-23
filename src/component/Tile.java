@@ -1,5 +1,6 @@
 package component;
 
+import java.awt.event.MouseListener;
 import java.lang.reflect.Field;
 import java.util.Collections;
 
@@ -14,6 +15,7 @@ import sharedObject.RenderableHolder;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
@@ -24,7 +26,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
-public abstract class Tile extends Entity implements Rotatable {
+public abstract class Tile extends Canvas implements Rotatable {
 
 	private static final int TILE_SIZE = 50;
 	private static final int EDGE_DIRECTIONS = 4;
@@ -33,6 +35,7 @@ public abstract class Tile extends Entity implements Rotatable {
 	private int xPosition;
 	private int yPosition;
 	private boolean isPlace;
+	private boolean isRemoved;
 	// edge contains 4 TileArea 
 	// (0) north edge
 	// (1) east edge
@@ -40,9 +43,12 @@ public abstract class Tile extends Entity implements Rotatable {
 	// (3) west edge
 	
 	public Tile(TileType tiletype) {
+		super(TILE_SIZE, TILE_SIZE);
 		this.tileType = tiletype;
 		this.edge = TileAreaDeterminer.determineTileArea(tileType);
 		setPlace(false);
+		setRemoved(false);
+		setOnMouseClicked(event -> MouseClickHandler());
 	}
 
 	public static Tile createTile(TileType tileType) {
@@ -57,9 +63,8 @@ public abstract class Tile extends Entity implements Rotatable {
 		return new RegularTile(TileType.EMPTY);
 	}
 	
-	@Override
 	public void draw(GraphicsContext gc) {
-		gc.drawImage(getImageOfTile(), x, y, TILE_SIZE, TILE_SIZE);
+		gc.drawImage(getImageOfTile(), 0, 0, TILE_SIZE, TILE_SIZE);
 	}
 	
 	public Image getImageOfTile() {
@@ -69,15 +74,31 @@ public abstract class Tile extends Entity implements Rotatable {
 			Image img = (Image) field.get(RenderableHolder.class);
 			return img;
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
-			return RenderableHolder.empty;
+			return null;
 		}
 	}
 	
 	// rotate clockwise
 	public void rotate() {
 		Collections.rotate(edge, 1);
+	}
+	
+	private void MouseClickHandler() {
+		new Thread(() -> {
+			GameLogic.getInstance();
+			if (GameLogic.getCurrentTile() != null && !GameLogic.getCurrentTile().isPlace()) {
+				if (GameLogic.getInstance().isPlaceable(xPosition, yPosition)) {
+					this.tileType = GameLogic.getCurrentTile().getTileType();
+					this.edge = GameLogic.getCurrentTile().getEdge(); 
+					GameLogic.getCurrentTile().setPlace(true);
+					RenderableHolder.getInstance().add(GameLogic.getCurrentTile());
+					GameLogic.getInstance().getBoard().addOnBoard(GameLogic.getCurrentTile(), xPosition, yPosition);
+					draw(GameLogic.getCurrentTile().getGraphicsContext2D());
+					GameLogic.getInstance().getBoard().paintComponent();
+				}
+			}
+		}).start();
 	}
 	
 	public boolean isEmpty() {
@@ -143,6 +164,14 @@ public abstract class Tile extends Entity implements Rotatable {
 
 	public boolean isPlace() {
 		return isPlace;
+	}
+
+	public boolean isRemoved() {
+		return isRemoved;
+	}
+
+	public void setRemoved(boolean isRemoved) {
+		this.isRemoved = isRemoved;
 	}
 
 }

@@ -47,7 +47,6 @@ public class ControlPane extends VBox {
 	
 	public void initializeTilePane() {
 		tilePane = new Canvas(Tile.getTileSize() * 2, Tile.getTileSize() * 2);
-		tilePane.getGraphicsContext2D().setFill(Color.BLACK);
 		tilePane.getGraphicsContext2D().drawImage(
 				RenderableHolder.empty, 0, 0);
 	}
@@ -60,15 +59,17 @@ public class ControlPane extends VBox {
 				Color.DARKRED, CornerRadii.EMPTY, Insets.EMPTY)));
 		passButton.setFont(new Font("Arial Bold", 50));
 		passButton.setStyle("-fx-text-fill: white;");
-		passButton.setOnMouseClicked(event -> drawButtonHandler());
+		passButton.setOnMouseClicked(event -> getNextTile());
 		passButton.setOnMouseEntered(event -> onMouseEnteredHandler());
 		passButton.setOnMouseExited(event -> onMouseExitedHandler());
 	}
 	
-	private void drawButtonHandler() {
+	public void getNextTile() {
+		GameLogic.randomTile();
 		tilePane.getGraphicsContext2D().drawImage(
-				GameLogic.randomTile().getImageOfTile(), 
+				GameLogic.getCurrentTile().getImageOfTile(), 
 				0, 0, Tile.getTileSize() * 2, Tile.getTileSize() * 2);
+		GameLogic.getInstance().update();
 	}
 	
 	private void onMouseEnteredHandler() {

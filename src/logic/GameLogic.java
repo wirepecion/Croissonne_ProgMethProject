@@ -53,10 +53,13 @@ public class GameLogic {
 		return false;
 	}
 	
-	public static Tile randomTile() {
-		TileStorage.getInstance();
+	public static void randomTile() {
 		currentTile = TileStorage.getRandomTile();
-		return currentTile;
+		currentTile.setPlace(false);
+	}
+	
+	public void update() {
+		if (TileStorage.getTileCount() == 0) setGameEnd(true);
 	}
 	
 	public static GameLogic getInstance() {
@@ -78,7 +81,7 @@ public class GameLogic {
 		this.isGameEnd = isGameEnd;
 	}
 
-	public Tile getCurrentTile() {
+	public static Tile getCurrentTile() {
 		return currentTile;
 	}
 	

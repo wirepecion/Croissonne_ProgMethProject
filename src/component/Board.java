@@ -16,29 +16,24 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import logic.TileStorage;
-import sharedObject.IRenderable;
 import sharedObject.RenderableHolder;
+import utils.TileType;
 
-public class Board extends Canvas {
+public class Board extends GridPane {
 	
 	private static final int BOARD_SIZE = 12;
 	private Tile[][] allTiles = new Tile[BOARD_SIZE + 1][BOARD_SIZE + 1];
 	
 	public Board() {
 		
-		super(750, 750);
-		this.setVisible(true);
-		this.getGraphicsContext2D().setFill(Color.RED);
-		this.getGraphicsContext2D().fillRect(5, 5, 740, 740);
+		setHgap(10); setVgap(10);
+		setPadding(new Insets(10));
+		setPrefWidth(800);
+		setAlignment(Pos.CENTER);
+		setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
+		
 		initializeBoard();
 		paintComponent();
-		
-//		setHgap(10); setVgap(10);
-//		setPadding(new Insets(10));
-//		setPrefWidth(800);
-//		setAlignment(Pos.CENTER);
-//		setBorder(new Border(new BorderStroke(Color.RED,BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-//		setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
 		
 	}
 	
@@ -49,23 +44,28 @@ public class Board extends Canvas {
 		for(int row = 0; row < BOARD_SIZE; row++) {
 			for(int col = 0; col < BOARD_SIZE; col++) {
 				Tile tile = Tile.createTile();
+				if (row == 6 && col == 6) {
+					tile = Tile.createTile(TileType.CURVE_RIVER_TURN_LEFT_AT_ABYSS);
+					tile.setPlace(true);
+				}
 				tile.setxPosition(row);
 				tile.setyPosition(col);
-				tile.x = row * 60 + 20;
-				tile.y = col * 60 + 20;
+				this.add(tile, col, row);
 				RenderableHolder.getInstance().add(tile);
 				allTiles[row][col] = tile;
 			}
 		}
 	}
 	
+	public void addOnBoard(Tile tile, int x, int y) {
+		this.add(tile, y, x);
+		allTiles[x][y] = tile;
+		paintComponent();
+	}
+	
 	public void paintComponent() {
-		GraphicsContext gc = this.getGraphicsContext2D();
-		for (IRenderable entity : RenderableHolder.getInstance().getEntities()) {
-			System.out.println(entity.getZ());
-			if (entity.isVisible() && !entity.isRemoved()) {
-				entity.draw(gc);
-			}
+		for (Tile tile : RenderableHolder.getInstance().getTiles()) {
+			tile.draw(tile.getGraphicsContext2D());
 		}
 	}
 	
