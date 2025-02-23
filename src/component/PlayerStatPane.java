@@ -8,13 +8,11 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-import utils.PlayerColor;
 
 public class PlayerStatPane extends GridPane{
 	
@@ -25,33 +23,43 @@ public class PlayerStatPane extends GridPane{
 	private Text penaltyText;
 	
 	public PlayerStatPane(Player player) {		
-		ImageView playerIconImg = new ImageView(new Image(ClassLoader.getSystemResource("BLACK.png").toString()));
+		
+		ImageView playerIconImg = new ImageView(new Image(ClassLoader.getSystemResource("playerIcons/" + player.getColor().toString() + ".png").toString()));
 		playerIconImg.setFitWidth(75);
 		playerIconImg.setFitHeight(100);
-		HBox root = new HBox();
-		root.setPadding(new Insets(10));
-		root.setPrefWidth(300);
-		root.setPrefHeight(100);
-		root.setAlignment(Pos.CENTER);
-		root.setBackground(new Background(new BackgroundFill(Color.AQUA, CornerRadii.EMPTY, Insets.EMPTY)));
+		
+		setPadding(new Insets(10));
+		setPrefWidth(300);
+		setPrefHeight(100);
+		setAlignment(Pos.CENTER);
+		setBackground(new Background(new BackgroundFill(Color.AQUA, CornerRadii.EMPTY, Insets.EMPTY)));
+		
 		VBox playerIcon = new VBox();
 		playerIcon.setPrefWidth(110);
 		playerIcon.setPrefHeight(100);
 		playerIcon.setAlignment(Pos.CENTER);
 		playerIcon.getChildren().add(playerIconImg);
+		
 		VBox playerStats = new VBox();
 		playerStats.setPrefWidth(110);
 		playerStats.setPrefHeight(100);
 		playerStats.setAlignment(Pos.CENTER);
 		playerStats.setSpacing(5);
-		Text playerName = new Text("Titan");
+		
+		Text playerName = new Text(player.getName());
 		playerName.setFont(Font.font("Arial", FontWeight.BOLD, 20));
-		Text playerScore = new Text("Score: 100");
+		
+		Text playerScore = new Text("Score: " + player.getScore());
 		playerScore.setFont(Font.font("Arial", FontWeight.BOLD, 15));
-		Text playerPenalty = new Text("Penalty: 2");
+		
+		Text playerPenalty = new Text("Penalty: " + player.getPenalty());
 		playerPenalty.setFont(Font.font("Arial", FontWeight.BOLD, 15));
+		
 		playerStats.getChildren().addAll(playerName,playerScore,playerPenalty);
-		root.getChildren().addAll(playerIcon,playerStats);
+		
+		add(playerIcon,0,0);
+		add(playerStats,1,0);
+		
 	}
 	
 	
