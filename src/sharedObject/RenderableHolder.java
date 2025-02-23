@@ -1,0 +1,114 @@
+package sharedObject;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+import javafx.scene.image.Image;
+// import javafx.scene.media.AudioClip;
+
+public class RenderableHolder {
+	private static final RenderableHolder instance = new RenderableHolder();
+
+	private List<IRenderable> entities;
+	private Comparator<IRenderable> comparator;
+	public static Image betweenTwoMountain;
+	public static Image castleOnAbyss;
+	public static Image castleOnMountain;
+	public static Image crossroadRiver;
+	public static Image curveOfDeath;
+	public static Image curveRiverBesideAbyss;
+	public static Image curveRiverTurnLeftAtAbyss;
+	public static Image curveRiverTurnRightAtAbyss;
+	public static Image curveRiver;
+	public static Image deepAbyss;
+	public static Image empty;
+	public static Image mountainBase;
+	public static Image straightRiverBesideAbyss;
+	public static Image straightRiver;
+	public static Image tjunctionRiver;
+	public static Image tjunctionRiverBesideAbyss;
+	public static Image waterfallToAbyss;
+	
+	// public static AudioClip  explosionSound;
+
+	static {
+		loadResource();
+	}
+
+	public RenderableHolder() {
+		entities = new ArrayList<IRenderable>();
+		comparator = (IRenderable o1, IRenderable o2) -> {
+			if (o1.getZ() > o2.getZ())
+				return 1;
+			return -1;
+		};
+	}
+
+	public static RenderableHolder getInstance() {
+		return instance;
+	}
+
+	public static void loadResource() {
+		betweenTwoMountain = new Image(ClassLoader.getSystemResourceAsStream(
+				"tempTilePic/BETWEEN_TWO_MOUNTAIN.png"));
+		castleOnAbyss = new Image(ClassLoader.getSystemResourceAsStream(
+				"tempTilePic/CASTLE_ON_ABYSS.png"));
+		castleOnMountain = new Image(ClassLoader.getSystemResourceAsStream(
+				"tempTilePic/CASTLE_ON_MOUNTAIN.png"));
+		crossroadRiver = new Image(ClassLoader.getSystemResourceAsStream(
+				"tempTilePic/CROSSROAD_RIVER.png"));
+		curveOfDeath = new Image(ClassLoader.getSystemResourceAsStream(
+				"tempTilePic/CURVE_OF_DEATH.png"));
+		curveRiverBesideAbyss = new Image(ClassLoader.getSystemResourceAsStream(
+				"tempTilePic/CURVE_RIVER_BESIDE_ABYSS.png"));
+		curveRiverTurnLeftAtAbyss = new Image(ClassLoader.getSystemResourceAsStream(
+				"tempTilePic/CURVE_RIVER_TURN_LEFT_AT_ABYSS.png"));
+		curveRiverTurnRightAtAbyss = new Image(ClassLoader.getSystemResourceAsStream(
+				"tempTilePic/CURVE_RIVER_TURN_RIGHT_AT_ABYSS.png"));
+		curveRiver = new Image(ClassLoader.getSystemResourceAsStream(
+				"tempTilePic/CURVE_RIVER.png"));
+		deepAbyss = new Image(ClassLoader.getSystemResourceAsStream(
+				"tempTilePic/DEEP_ABYSS.png"));
+		empty = new Image(ClassLoader.getSystemResourceAsStream(
+				"tempTilePic/EMPTY.png"));
+		mountainBase = new Image(ClassLoader.getSystemResourceAsStream(
+				"tempTilePic/MOUNTAIN_BASE.png"));
+		straightRiverBesideAbyss = new Image(ClassLoader.getSystemResourceAsStream(
+				"tempTilePic/STRAIGHT_RIVER_BESIDE_ABYSS.png"));
+		straightRiver = new Image(ClassLoader.getSystemResourceAsStream(
+				"tempTilePic/STRAIGHT_RIVER.png"));
+		tjunctionRiver = new Image(ClassLoader.getSystemResourceAsStream(
+				"tempTilePic/TJUNCTION_RIVER.png"));
+		tjunctionRiverBesideAbyss = new Image(ClassLoader.getSystemResourceAsStream(
+				"tempTilePic/TJUNCTION_RIVER_BESIDE_ABYSS.png"));
+		waterfallToAbyss = new Image(ClassLoader.getSystemResourceAsStream(
+				"tempTilePic/WATERFALL_TO_ABYSS.png"));
+		
+		// explosionSound = new AudioClip(ClassLoader.getSystemResource("Explosion.wav").toString());
+	}
+
+	public void add(IRenderable entity) {
+		System.out.println("add");
+		entities.add(entity);
+		Collections.sort(entities, comparator);
+//		for(IRenderable x: entities){
+//			if(x instanceof Tank) System.out.println("tank");
+//			if(x instanceof Mine) System.out.println("mine");
+//			if(x instanceof Field) System.out.println("field");
+//			
+//		}
+	}
+
+	public void update() {
+		for (int i = entities.size() - 1; i >= 0; i--) {
+			if (entities.get(i).isRemoved())
+				entities.remove(i);
+		}
+	}
+
+	public List<IRenderable> getEntities() {
+		return entities;
+	}
+}

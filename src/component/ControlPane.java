@@ -1,5 +1,7 @@
 package component;
 
+import java.awt.image.renderable.RenderableImage;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
@@ -15,6 +17,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import logic.GameLogic;
 import logic.TileStorage;
+import sharedObject.RenderableHolder;
 import utils.PlayerColor;
 
 public class ControlPane extends VBox {
@@ -44,8 +47,9 @@ public class ControlPane extends VBox {
 	
 	public void initializeTilePane() {
 		tilePane = new Canvas(Tile.getTileSize() * 2, Tile.getTileSize() * 2);
+		tilePane.getGraphicsContext2D().setFill(Color.BLACK);
 		tilePane.getGraphicsContext2D().drawImage(
-				new Image(Tile.createTile().getTileURL()), 0, 0, Tile.getTileSize() * 2, Tile.getTileSize() * 2);
+				RenderableHolder.empty, 0, 0);
 	}
 	
 	public void initializePassButton() {
@@ -63,7 +67,7 @@ public class ControlPane extends VBox {
 	
 	private void drawButtonHandler() {
 		tilePane.getGraphicsContext2D().drawImage(
-				new Image(GameLogic.randomTile().getTileURL()), 
+				GameLogic.randomTile().getImageOfTile(), 
 				0, 0, Tile.getTileSize() * 2, Tile.getTileSize() * 2);
 	}
 	

@@ -73,11 +73,11 @@ public class TileAreaDeterminer {
                 createTileAreas(TileArea.ABYSS, TileArea.ABYSS, 
                                 TileArea.RIVER, TileArea.RIVER));
         
-        tileAreaMap.put(TileType.TJUNTION_RIVER, 
+        tileAreaMap.put(TileType.TJUNCTION_RIVER, 
                 createTileAreas(TileArea.MOUNTAIN, TileArea.RIVER, 
                                 TileArea.RIVER, TileArea.RIVER));
         
-        tileAreaMap.put(TileType.TJUNTION_RIVER_BESIDE_ABYSS, 
+        tileAreaMap.put(TileType.TJUNCTION_RIVER_BESIDE_ABYSS, 
                 createTileAreas(TileArea.ABYSS, TileArea.RIVER, 
                                 TileArea.RIVER, TileArea.RIVER));
         

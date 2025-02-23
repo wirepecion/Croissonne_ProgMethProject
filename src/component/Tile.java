@@ -1,6 +1,8 @@
 package component;
 
+import java.lang.reflect.Field;
 import java.util.Collections;
+
 import java.util.List;
 
 import interfaces.Rotatable;
@@ -8,9 +10,11 @@ import utils.TileArea;
 import utils.TileType;
 import logic.GameLogic;
 import logic.TileAreaDeterminer;
+import sharedObject.RenderableHolder;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -20,13 +24,12 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
-public abstract class Tile extends Pane implements Rotatable {
+public abstract class Tile extends Entity implements Rotatable {
 
 	private static final int TILE_SIZE = 50;
 	private static final int EDGE_DIRECTIONS = 4;
 	private TileType tileType;
 	private List<TileArea> edge;
-	private String tileURL;
 	private int xPosition;
 	private int yPosition;
 	private boolean isPlace;
@@ -37,19 +40,9 @@ public abstract class Tile extends Pane implements Rotatable {
 	// (3) west edge
 	
 	public Tile(TileType tiletype) {
-		
 		this.tileType = tiletype;
 		this.edge = TileAreaDeterminer.determineTileArea(tileType);
-		this.tileURL = ClassLoader.getSystemResource(
-				"tempTilePic/" + tiletype.toString() + ".png").toString();
 		setPlace(false);
-		updateTileImage(tileURL);
-		setPrefHeight(TILE_SIZE);
-		setPrefWidth(TILE_SIZE);
-		setOnMouseClicked(event -> onTileClick());
-		setOnMouseEntered(event -> onMouseEnteredHandler());
-		setOnMouseExited(event -> onMouseExitedHandler());
-		
 	}
 
 	public static Tile createTile(TileType tileType) {
@@ -64,50 +57,22 @@ public abstract class Tile extends Pane implements Rotatable {
 		return new RegularTile(TileType.EMPTY);
 	}
 	
-	public void updateTileImage(String tileURL) {
-		BackgroundSize bgSize = new BackgroundSize(TILE_SIZE, TILE_SIZE, false, false, false, false);
-		BackgroundImage bgImg = new BackgroundImage(new Image(tileURL), null, null, null, bgSize);
-		BackgroundImage[] bgImgA = {bgImg};
-		setBackground(new Background(bgImgA));
+	@Override
+	public void draw(GraphicsContext gc) {
+		gc.drawImage(getImageOfTile(), x, y, TILE_SIZE, TILE_SIZE);
 	}
 	
-	private void onTileClick() {
-		Thread thread = new Thread(() -> {
-			if (GameLogic.getInstance().getCurrentTile() != null) {
-				if (!GameLogic.getInstance().getCurrentTile().isPlace()) {
-					if (GameLogic.getInstance().isPlaceable(xPosition, yPosition)) {
-						Tile newTile = GameLogic.getInstance().getCurrentTile();
-						this.tileType = newTile.getTileType();
-						this.edge = newTile.getEdge();
-						this.tileURL = newTile.getTileURL();
-						
-						Platform.runLater(() -> {
-							updateTileImage(newTile.getTileURL());
-						});
-						
-						newTile.setPlace(true);
-						setPlace(true);
-						GameLogic.getInstance().getBoard().setTileOnBoard(newTile, xPosition, yPosition);
-					}
-				}
-			}
-		});
-		
-		thread.start();
-		
-		// To interrupt thread after terminate program
-		Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-		    thread.interrupt();
-		}));
-
-	}
-	
-	private void onMouseEnteredHandler() {
-		setCursor(Cursor.HAND);
-	}
-	
-	private void onMouseExitedHandler() {
-		setCursor(Cursor.DEFAULT);
+	public Image getImageOfTile() {
+		String string = toCamelCase(tileType.toString());
+		try {
+			Field field = RenderableHolder.class.getField(string);
+			Image img = (Image) field.get(RenderableHolder.class);
+			return img;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return RenderableHolder.empty;
+		}
 	}
 	
 	// rotate clockwise
@@ -123,6 +88,18 @@ public abstract class Tile extends Pane implements Rotatable {
 		return tileType.toString().contains("CASTLE") ||
 			   tileType.toString().contains("RIVER");
 	}
+	
+	public String toCamelCase(String str) {
+        String[] words = str.split("_");
+        StringBuilder camelCaseString = new StringBuilder(words[0].toLowerCase());
+
+        for (int i = 1; i < words.length; i++) {
+            camelCaseString.append(words[i].substring(0, 1).toUpperCase())
+                           .append(words[i].substring(1).toLowerCase());
+        }
+
+        return camelCaseString.toString();
+    }
 	
 	public static int getTileSize() {
 		return TILE_SIZE;
@@ -142,10 +119,6 @@ public abstract class Tile extends Pane implements Rotatable {
 	
 	public TileArea getEdge(int idx) {
 		return edge.get(idx);
-	}
-	
-	public String getTileURL() {
-		return tileURL;
 	}
 
 	public int getxPosition() {

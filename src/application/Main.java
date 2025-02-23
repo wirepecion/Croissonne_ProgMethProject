@@ -41,7 +41,7 @@ public class Main extends Application{
 //		Scene scene = new Scene(startGamePane);
 		
 		primaryStage.setScene(scene);
-		primaryStage.setTitle("Croissinee");
+		primaryStage.setTitle("Croissonne");
 		primaryStage.show();
 	}
 	
