@@ -8,8 +8,9 @@ import utils.TileArea;
 import utils.TileType;
 import logic.GameLogic;
 import logic.TileAreaDeterminer;
-
+import javafx.application.Platform;
 import javafx.geometry.Insets;
+import javafx.scene.Cursor;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -46,6 +47,8 @@ public abstract class Tile extends Pane implements Rotatable {
 		setPrefHeight(TILE_SIZE);
 		setPrefWidth(TILE_SIZE);
 		setOnMouseClicked(event -> onTileClick());
+		setOnMouseEntered(event -> onMouseEnteredHandler());
+		setOnMouseExited(event -> onMouseExitedHandler());
 		
 	}
 
@@ -62,30 +65,49 @@ public abstract class Tile extends Pane implements Rotatable {
 	}
 	
 	public void updateTileImage(String tileURL) {
-		BackgroundFill bgFill = new BackgroundFill(Color.CHOCOLATE, CornerRadii.EMPTY, Insets.EMPTY);
-		BackgroundFill[] bgFillA = {bgFill};
 		BackgroundSize bgSize = new BackgroundSize(TILE_SIZE, TILE_SIZE, false, false, false, false);
 		BackgroundImage bgImg = new BackgroundImage(new Image(tileURL), null, null, null, bgSize);
 		BackgroundImage[] bgImgA = {bgImg};
-		setBackground(new Background(bgFillA, bgImgA));
+		setBackground(new Background(bgImgA));
 	}
 	
-	public void onTileClick() {
-		if (GameLogic.getInstance().getCurrentTile() != null) {
-			if (this != GameLogic.getInstance().getCurrentTile()) {
+	private void onTileClick() {
+		Thread thread = new Thread(() -> {
+			if (GameLogic.getInstance().getCurrentTile() != null) {
 				if (!GameLogic.getInstance().getCurrentTile().isPlace()) {
 					if (GameLogic.getInstance().isPlaceable(xPosition, yPosition)) {
 						Tile newTile = GameLogic.getInstance().getCurrentTile();
 						this.tileType = newTile.getTileType();
 						this.edge = newTile.getEdge();
 						this.tileURL = newTile.getTileURL();
-						updateTileImage(newTile.getTileURL());
+						
+						Platform.runLater(() -> {
+							updateTileImage(newTile.getTileURL());
+						});
+						
 						newTile.setPlace(true);
+						setPlace(true);
 						GameLogic.getInstance().getBoard().setTileOnBoard(newTile, xPosition, yPosition);
 					}
 				}
 			}
-		}
+		});
+		
+		thread.start();
+		
+		// To interrupt thread after terminate program
+		Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+		    thread.interrupt();
+		}));
+
+	}
+	
+	private void onMouseEnteredHandler() {
+		setCursor(Cursor.HAND);
+	}
+	
+	private void onMouseExitedHandler() {
+		setCursor(Cursor.DEFAULT);
 	}
 	
 	// rotate clockwise

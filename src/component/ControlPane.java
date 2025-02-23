@@ -2,6 +2,7 @@ package component;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
@@ -56,12 +57,22 @@ public class ControlPane extends VBox {
 		passButton.setFont(new Font("Arial Bold", 50));
 		passButton.setStyle("-fx-text-fill: white;");
 		passButton.setOnMouseClicked(event -> drawButtonHandler());
+		passButton.setOnMouseEntered(event -> onMouseEnteredHandler());
+		passButton.setOnMouseExited(event -> onMouseExitedHandler());
 	}
 	
 	private void drawButtonHandler() {
 		tilePane.getGraphicsContext2D().drawImage(
 				new Image(GameLogic.randomTile().getTileURL()), 
 				0, 0, Tile.getTileSize() * 2, Tile.getTileSize() * 2);
+	}
+	
+	private void onMouseEnteredHandler() {
+		setCursor(Cursor.HAND);
+	}
+	
+	private void onMouseExitedHandler() {
+		setCursor(Cursor.DEFAULT);
 	}
 	
 }
