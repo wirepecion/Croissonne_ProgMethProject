@@ -6,12 +6,12 @@ import java.util.Collections;
 
 import java.util.List;
 
+import data.ResourceLoader;
 import interfaces.Rotatable;
 import utils.TileArea;
 import utils.TileType;
 import logic.GameLogic;
 import logic.TileAreaDeterminer;
-import sharedObject.RenderableHolder;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
@@ -45,10 +45,13 @@ public abstract class Tile extends Canvas implements Rotatable {
 	public Tile(TileType tiletype) {
 		super(TILE_SIZE, TILE_SIZE);
 		this.tileType = tiletype;
-		this.edge = TileAreaDeterminer.determineTileArea(tileType);
+		TileAreaDeterminer tileAreaDeterminer = new TileAreaDeterminer();
+		this.edge = (new TileAreaDeterminer()).determineTileArea(tileType);
 		setPlace(false);
 		setRemoved(false);
 		setOnMouseClicked(event -> MouseClickHandler());
+		setOnMouseEntered(event -> MouseEnteredHandler());
+		setOnMouseExited(event -> MouseExitedHandler());
 	}
 
 	public static Tile createTile(TileType tileType) {
@@ -70,8 +73,8 @@ public abstract class Tile extends Canvas implements Rotatable {
 	public Image getImageOfTile() {
 		String string = toCamelCase(tileType.toString());
 		try {
-			Field field = RenderableHolder.class.getField(string);
-			Image img = (Image) field.get(RenderableHolder.class);
+			Field field = ResourceLoader.class.getField(string);
+			Image img = (Image) field.get(ResourceLoader.class);
 			return img;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -82,23 +85,45 @@ public abstract class Tile extends Canvas implements Rotatable {
 	// rotate clockwise
 	public void rotate() {
 		Collections.rotate(edge, 1);
+		this.setRotate(this.getRotate() + 90);
+		for (int i=0;i<4;i++) {
+			System.out.println(getEdge(i));
+		}
 	}
 	
 	private void MouseClickHandler() {
 		new Thread(() -> {
+			for (int i=0;i<4;i++) {
+				System.out.println(getEdge(i));
+			}
 			GameLogic.getInstance();
 			if (GameLogic.getCurrentTile() != null && !GameLogic.getCurrentTile().isPlace()) {
 				if (GameLogic.getInstance().isPlaceable(xPosition, yPosition)) {
+					System.out.println("get next tile");
 					this.tileType = GameLogic.getCurrentTile().getTileType();
-					this.edge = GameLogic.getCurrentTile().getEdge(); 
+					this.edge = (new TileAreaDeterminer()).determineTileArea(tileType); 
 					GameLogic.getCurrentTile().setPlace(true);
-					RenderableHolder.getInstance().add(GameLogic.getCurrentTile());
+					this.setRotate(ControlPane.getTilePane().getRotate());
+					ControlPane.resetTilepane();
 					GameLogic.getInstance().getBoard().addOnBoard(GameLogic.getCurrentTile(), xPosition, yPosition);
-					draw(GameLogic.getCurrentTile().getGraphicsContext2D());
 					GameLogic.getInstance().getBoard().paintComponent();
+					ControlPane.getNextTile();
+					setCursor(Cursor.DEFAULT);
 				}
 			}
 		}).start();
+	}
+	
+	private void MouseEnteredHandler() {
+		if (!GameLogic.getInstance().isGameEnd()) {
+			if (tileType.equals(TileType.EMPTY)) {
+				setCursor(Cursor.HAND);
+			}
+		}
+	}
+	
+	private void MouseExitedHandler() {
+		setCursor(Cursor.DEFAULT);
 	}
 	
 	public boolean isEmpty() {

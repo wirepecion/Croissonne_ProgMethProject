@@ -10,17 +10,22 @@ import utils.TileType;
 
 public class TileAreaDeterminer {
 	
-	private static final EnumMap<TileType, List<TileArea>> tileAreaMap = new EnumMap<>(TileType.class);
+	private final EnumMap<TileType, List<TileArea>> tileAreaMap;
 	
-	private static List<TileArea> createTileAreas(TileArea... areas) {
+	public TileAreaDeterminer() {
+        tileAreaMap = new EnumMap<>(TileType.class);
+        initializeTileAreaMap();
+    }
+	
+	private List<TileArea> createTileAreas(TileArea... areas) {
         return Arrays.asList(areas);
     }
 	
-	public static List<TileArea> determineTileArea(TileType tileType) {
+	public List<TileArea> determineTileArea(TileType tileType) {
         return tileAreaMap.getOrDefault(tileType, Collections.emptyList());
     }
 	
-	static {
+	private void initializeTileAreaMap() {
         tileAreaMap.put(TileType.CASTLE_ON_MOUNTAIN, 
         		createTileAreas(TileArea.MOUNTAIN, TileArea.MOUNTAIN, 
         						TileArea.MOUNTAIN, TileArea.MOUNTAIN));

@@ -1,4 +1,4 @@
-package sharedObject;
+package data;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,8 +7,8 @@ import component.Tile;
 import javafx.scene.image.Image;
 // import javafx.scene.media.AudioClip;
 
-public class RenderableHolder {
-	private static final RenderableHolder instance = new RenderableHolder();
+public class ResourceLoader {
+	private static final ResourceLoader instance = new ResourceLoader();
 
 	private List<Tile> tiles;
 	public static Image betweenTwoMountain;
@@ -35,11 +35,11 @@ public class RenderableHolder {
 		loadResource();
 	}
 
-	public RenderableHolder() {
+	public ResourceLoader() {
 		tiles = new ArrayList<Tile>();
 	}
 
-	public static RenderableHolder getInstance() {
+	public static ResourceLoader getInstance() {
 		return instance;
 	}
 

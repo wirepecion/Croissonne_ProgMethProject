@@ -2,6 +2,7 @@ package component;
 
 import java.awt.image.renderable.RenderableImage;
 
+import data.ResourceLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
@@ -12,17 +13,17 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import logic.GameLogic;
 import logic.TileStorage;
-import sharedObject.RenderableHolder;
 import utils.PlayerColor;
 
 public class ControlPane extends VBox {
 	
-	private Canvas tilePane;
+	private static Canvas tilePane;
 	private Button passButton;
 	
 	public ControlPane() {
@@ -47,8 +48,10 @@ public class ControlPane extends VBox {
 	
 	public void initializeTilePane() {
 		tilePane = new Canvas(Tile.getTileSize() * 2, Tile.getTileSize() * 2);
-		tilePane.getGraphicsContext2D().drawImage(
-				RenderableHolder.empty, 0, 0);
+		tilePane.setOnMouseClicked(event -> rotateTile());
+		tilePane.setOnMouseEntered(event -> onMouseEnteredHandler());
+		tilePane.setOnMouseExited(event -> onMouseExitedHandler());
+		getNextTile();
 	}
 	
 	public void initializePassButton() {
@@ -64,12 +67,22 @@ public class ControlPane extends VBox {
 		passButton.setOnMouseExited(event -> onMouseExitedHandler());
 	}
 	
-	public void getNextTile() {
+	private void rotateTile() {
+		GameLogic.getCurrentTile().rotate();
+		tilePane.setRotate(tilePane.getRotate() + 90);
+	}
+	
+	public static void getNextTile() {
 		GameLogic.randomTile();
 		tilePane.getGraphicsContext2D().drawImage(
 				GameLogic.getCurrentTile().getImageOfTile(), 
 				0, 0, Tile.getTileSize() * 2, Tile.getTileSize() * 2);
+		resetTilepane();
 		GameLogic.getInstance().update();
+	}
+	
+	public static void resetTilepane() {
+		tilePane.setRotate(0);
 	}
 	
 	private void onMouseEnteredHandler() {
@@ -78,6 +91,10 @@ public class ControlPane extends VBox {
 	
 	private void onMouseExitedHandler() {
 		setCursor(Cursor.DEFAULT);
+	}
+
+	public static Canvas getTilePane() {
+		return tilePane;
 	}
 	
 }

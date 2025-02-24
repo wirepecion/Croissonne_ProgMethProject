@@ -46,6 +46,9 @@ public class TileStorage {
 	public static Tile getRandomTile() {
 		 int idx = new Random().nextInt(tileCount);
 		 Tile tile = tileList.get(idx);
+		 for (int i=0;i<4;i++) {
+			 System.out.println(tile.getEdge(i));
+		 }
 		 tileList.remove(idx);
 		 System.out.println(tileCount);
 		 tileCount--;

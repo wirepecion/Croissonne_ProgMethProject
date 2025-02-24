@@ -42,14 +42,23 @@ public class GameLogic {
 		if (board.getTile(x, y) == null) return true;
 		if (board.getTile(x, y).isEmpty()) return true;
 		Tile anotherTile = board.getTile(x, y);
-		if (tile.getxPosition() - 1 == x)
+		System.out.println(tile.getxPosition() + " " + x + " " + tile.getyPosition() + " " + y);
+		if (tile.getxPosition() - 1 == x) {
+			System.out.println("1 " + tile.getEdge(0) + " " + anotherTile.getEdge(2));
 			return tile.getEdge(0).equals(anotherTile.getEdge(2));
-		if (tile.getxPosition() + 1 == x)
+		}
+		if (tile.getxPosition() + 1 == x) {
+			System.out.println("2 " + tile.getEdge(2) + " " + anotherTile.getEdge(0));
 			return tile.getEdge(2).equals(anotherTile.getEdge(0));
-		if (tile.getyPosition() - 1 == y)
+		}	
+		if (tile.getyPosition() - 1 == y) {
+			System.out.println("3 " + tile.getEdge(3) + " " + anotherTile.getEdge(1));
 			return tile.getEdge(3).equals(anotherTile.getEdge(1));
-		if (tile.getyPosition() + 1 == y)
+		}
+		if (tile.getyPosition() + 1 == y) {
+			System.out.println("4 " + tile.getEdge(1) + " " + anotherTile.getEdge(3));
 			return tile.getEdge(1).equals(anotherTile.getEdge(3));
+		}
 		return false;
 	}
 	

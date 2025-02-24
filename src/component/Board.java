@@ -2,6 +2,7 @@ package component;
 
 import java.awt.Graphics2D;
 
+import data.ResourceLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.canvas.Canvas;
@@ -16,7 +17,6 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import logic.TileStorage;
-import sharedObject.RenderableHolder;
 import utils.TileType;
 
 public class Board extends GridPane {
@@ -51,7 +51,7 @@ public class Board extends GridPane {
 				tile.setxPosition(row);
 				tile.setyPosition(col);
 				this.add(tile, col, row);
-				RenderableHolder.getInstance().add(tile);
+				ResourceLoader.getInstance().add(tile);
 				allTiles[row][col] = tile;
 			}
 		}
@@ -64,7 +64,7 @@ public class Board extends GridPane {
 	}
 	
 	public void paintComponent() {
-		for (Tile tile : RenderableHolder.getInstance().getTiles()) {
+		for (Tile tile : ResourceLoader.getInstance().getTiles()) {
 			tile.draw(tile.getGraphicsContext2D());
 		}
 	}
