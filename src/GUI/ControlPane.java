@@ -1,5 +1,7 @@
-package component;
+package GUI;
 
+import component.Player;
+import component.Tile;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.canvas.Canvas;

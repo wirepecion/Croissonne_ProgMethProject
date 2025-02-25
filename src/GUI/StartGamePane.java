@@ -1,4 +1,4 @@
-package component;
+package GUI;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -48,5 +49,17 @@ public class StartGamePane extends VBox {
 		startButton.setFont(new Font("Arial", 60));
 		startButton.setPadding(new Insets(10, 100, 10, 100));
 		VBox.setMargin(startButton, new Insets(100, 0, 0, 0));
+		
+		startButton.setOnMouseClicked(e -> {
+			startButtonEventHandler();
+		});
 	}
+	
+	private void startButtonEventHandler() {
+		startButton.setDisable(true);
+		getChildren().remove(startButton);
+		
+		
+	}
+	
 }

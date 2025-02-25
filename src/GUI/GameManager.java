@@ -1,5 +1,5 @@
-package component;
+package GUI;
 
 public class GameManager {
-
+	
 }

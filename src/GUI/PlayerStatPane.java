@@ -1,5 +1,6 @@
-package component;
+package GUI;
 
+import component.Player;
 import javafx.geometry.Insets;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;

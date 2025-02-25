@@ -1,8 +1,8 @@
 package application;
 
+import GUI.ControlPane;
+import GUI.StartGamePane;
 import component.Board;
-import component.ControlPane;
-import component.StartGamePane;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
