@@ -1,6 +1,7 @@
 package logic;
 
 import component.Board;
+import component.ControlPane;
 import component.Tile;
 import utils.TileType;
 
@@ -8,7 +9,7 @@ public class GameLogic {
 	
 	private static GameLogic instance = null;
 	private Board board;
-	private boolean isGameEnd;
+	private static boolean isGameEnd;
 	private static Tile currentTile;
 	
 	private GameLogic() {
@@ -63,12 +64,21 @@ public class GameLogic {
 	}
 	
 	public static void randomTile() {
+		if (update()) return;
 		currentTile = TileStorage.getRandomTile();
 		currentTile.setPlace(false);
+		ControlPane.resetTilepane();
+		ControlPane.getTilePane().getGraphicsContext2D().drawImage(
+				GameLogic.getCurrentTile().getImageOfTile(), 
+				0, 0, Tile.getTileSize() * 2, Tile.getTileSize() * 2);
 	}
 	
-	public void update() {
-		if (TileStorage.getTileCount() == 0) setGameEnd(true);
+	public static boolean update() {
+		if (TileStorage.getTileCount() == 0) {
+			isGameEnd = true;
+			return true;
+		}
+		return false;
 	}
 	
 	public static GameLogic getInstance() {

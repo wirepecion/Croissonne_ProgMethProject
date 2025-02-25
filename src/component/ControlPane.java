@@ -3,6 +3,7 @@ package component;
 import java.awt.image.renderable.RenderableImage;
 
 import data.ResourceLoader;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
@@ -51,7 +52,7 @@ public class ControlPane extends VBox {
 		tilePane.setOnMouseClicked(event -> rotateTile());
 		tilePane.setOnMouseEntered(event -> onMouseEnteredHandler());
 		tilePane.setOnMouseExited(event -> onMouseExitedHandler());
-		getNextTile();
+		GameLogic.randomTile();
 	}
 	
 	public void initializePassButton() {
@@ -62,7 +63,7 @@ public class ControlPane extends VBox {
 				Color.DARKRED, CornerRadii.EMPTY, Insets.EMPTY)));
 		passButton.setFont(new Font("Arial Bold", 50));
 		passButton.setStyle("-fx-text-fill: white;");
-		passButton.setOnMouseClicked(event -> getNextTile());
+		passButton.setOnMouseClicked(event -> GameLogic.randomTile());
 		passButton.setOnMouseEntered(event -> onMouseEnteredHandler());
 		passButton.setOnMouseExited(event -> onMouseExitedHandler());
 	}
@@ -70,15 +71,6 @@ public class ControlPane extends VBox {
 	private void rotateTile() {
 		GameLogic.getCurrentTile().rotate();
 		tilePane.setRotate(tilePane.getRotate() + 90);
-	}
-	
-	public static void getNextTile() {
-		GameLogic.randomTile();
-		tilePane.getGraphicsContext2D().drawImage(
-				GameLogic.getCurrentTile().getImageOfTile(), 
-				0, 0, Tile.getTileSize() * 2, Tile.getTileSize() * 2);
-		resetTilepane();
-		GameLogic.getInstance().update();
 	}
 	
 	public static void resetTilepane() {

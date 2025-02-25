@@ -12,6 +12,7 @@ import utils.TileArea;
 import utils.TileType;
 import logic.GameLogic;
 import logic.TileAreaDeterminer;
+import logic.TileStorage;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
@@ -107,7 +108,7 @@ public abstract class Tile extends Canvas implements Rotatable {
 					ControlPane.resetTilepane();
 					GameLogic.getInstance().getBoard().addOnBoard(GameLogic.getCurrentTile(), xPosition, yPosition);
 					GameLogic.getInstance().getBoard().paintComponent();
-					ControlPane.getNextTile();
+					GameLogic.randomTile();
 					setCursor(Cursor.DEFAULT);
 				}
 			}
