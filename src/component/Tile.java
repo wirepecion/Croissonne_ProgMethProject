@@ -13,6 +13,7 @@ import utils.TileType;
 import logic.GameLogic;
 import logic.TileAreaDeterminer;
 import logic.TileStorage;
+import GUI.ControlPane;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;

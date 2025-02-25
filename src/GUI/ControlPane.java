@@ -1,9 +1,7 @@
-package component;
+package GUI;
 
-import java.awt.image.renderable.RenderableImage;
-
-import data.ResourceLoader;
-import javafx.application.Platform;
+import component.Player;
+import component.Tile;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;

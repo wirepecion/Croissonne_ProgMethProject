@@ -1,6 +1,7 @@
-package component;
+package GUI;
 
 import javafx.geometry.Pos;
+import component.Board;
 import javafx.geometry.Insets;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;

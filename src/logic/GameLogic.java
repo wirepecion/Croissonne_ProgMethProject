@@ -1,7 +1,7 @@
 package logic;
 
 import component.Board;
-import component.ControlPane;
+import GUI.ControlPane;
 import component.Tile;
 import utils.TileType;
 
