@@ -35,10 +35,10 @@ public class Main extends Application{
 		
 		//==============================================================//
 		//This one use for test In-Game GUI		
-//		Scene scene = new Scene(root);
+		Scene scene = new Scene(root);
 		
 		//This one use for test Start-Game GUI	
-		Scene scene = new Scene(startGamePane);
+//		Scene scene = new Scene(startGamePane);
 		
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Croissinee");
