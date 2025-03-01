@@ -1,20 +1,20 @@
 package GUI;
 
-import javafx.geometry.Pos;
 import component.Board;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 
-public class InGamePane extends HBox {
+public class InGameScene extends HBox {
 	
 	 private BoardPane boardPane;
 	 private ControlPane controlPane;
 
-	 public InGamePane() {
+	 public InGameScene() {
 		 
 	   boardPane = new BoardPane();
 	   controlPane = new ControlPane();
@@ -30,6 +30,7 @@ public class InGamePane extends HBox {
 
 	public BoardPane getBoardPane() {
 		return boardPane;
+
 	}
 
 	public void setBoard(BoardPane boardPane) {
@@ -43,5 +44,4 @@ public class InGamePane extends HBox {
 	public void setControlPane(ControlPane controlPane) {
 		this.controlPane = controlPane;
 	}
-	 
 }
