@@ -2,6 +2,8 @@ package component;
 
 import java.awt.Graphics2D;
 
+import GUI.BoardPane;
+import GUI.GameManager;
 import data.ResourceLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -23,12 +25,11 @@ public class Board {
 	
 	private static final int BOARD_SIZE = 12;
 	private Tile[][] allTiles = new Tile[BOARD_SIZE + 1][BOARD_SIZE + 1];
+	private BoardPane boardPane;
 	
 	public Board() {
-		
 		initializeBoard();
-		paintComponent();
-		
+		boardPane = new BoardPane(this);
 	}
 	
 	private void initializeBoard() {
@@ -41,23 +42,16 @@ public class Board {
 				}
 				tile.setxPosition(row);
 				tile.setyPosition(col);
-				this.add(tile, col, row);
-				ResourceLoader.getInstance().add(tile);
+				System.out.println(tile.getxPosition() + " " + tile.getyPosition());
 				allTiles[row][col] = tile;
 			}
 		}
 	}
 	
 	public void addOnBoard(Tile tile, int x, int y) {
-		this.add(tile, y, x);
+		GameManager.getInstance().getInGameScene().getBoardPane().add(tile.getTilePane(), y, x);
 		allTiles[x][y] = tile;
-		paintComponent();
-	}
-	
-	public void paintComponent() {
-		for (Tile tile : ResourceLoader.getInstance().getTiles()) {
-			tile.draw(tile.getGraphicsContext2D());
-		}
+		GameManager.getInstance().getInGameScene().getBoardPane().paintComponent();
 	}
 	
 	public static int getBoardSize() {
@@ -76,4 +70,9 @@ public class Board {
 	public void setTileOnBoard(Tile tile, int row, int col) {
 		allTiles[row][col] = tile; 
 	}
+
+	public BoardPane getBoardPane() {
+		return boardPane;
+	}
+	
 }

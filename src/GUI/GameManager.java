@@ -19,7 +19,6 @@ public class GameManager {
 		this.stage = stage;
 		
 		startGameScene = new StartGameScene();
-		inGameScene = new InGameScene();
 		
 		setToStartGameScene();
 	}
@@ -27,7 +26,7 @@ public class GameManager {
 	public void setToStartGameScene() {
 		scene = new Scene(startGameScene);
 		stage.setScene(scene);
-		stage.setTitle("Croisinee");
+		stage.setTitle("Croissonne");
 		stage.show();
 	}
 	
@@ -37,6 +36,7 @@ public class GameManager {
 	}
 	
 	public void switchToInGameScene() {
+		inGameScene = new InGameScene();
 		scene = new Scene(inGameScene);
 		stage.setScene(scene);
 		stage.show();
@@ -45,4 +45,13 @@ public class GameManager {
 	public static GameManager getInstance() {
 		return instance;
 	}
+
+	public StartGameScene getStartGameScene() {
+		return startGameScene;
+	}
+
+	public InGameScene getInGameScene() {
+		return inGameScene;
+	}
+	
 }

@@ -23,13 +23,14 @@ public class Player {
 	}
 	
 	public void updateScore(int value) {
+		System.out.println(123);
 		score += value;
-		playerStatPane.setScoreText(new Text("Score: " + score));
+		playerStatPane.setScoreText("Score: " + score);
 	}
 	
 	public void updatePenalty(int value) {
 		penalty -= value;
-		playerStatPane.setPenaltyText(new Text("Penalty: " + penalty));
+		playerStatPane.setPenaltyText("Penalty: " + penalty);
 	}
 
 	public PlayerColor getColor() {

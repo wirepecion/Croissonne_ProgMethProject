@@ -6,6 +6,8 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import logic.GameLogic;
+import utils.PlayerColor;
 
 public class SelectPlayerPane extends HBox {
 	private Button twoPlayerButton;
@@ -38,6 +40,10 @@ public class SelectPlayerPane extends HBox {
 		
 		//set button's event-handler
 		playerButton.setOnMouseClicked(e -> {
+
+			// this is for test
+			GameLogic.getInstance().newGame(2, new String[] {"A","B"}, new PlayerColor[] {PlayerColor.BLACK, PlayerColor.WHITE});
+			
 			GameManager.getInstance().switchToInGameScene();
 		});
 	}

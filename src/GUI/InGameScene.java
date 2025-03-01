@@ -8,29 +8,33 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import logic.GameLogic;
+import utils.PlayerColor;
 
 public class InGameScene extends HBox {
 	
-	 private BoardPane boardPane;
-	 private ControlPane controlPane;
-
-	 public InGameScene() {
-		 
-	   boardPane = new BoardPane();
-	   controlPane = new ControlPane();
-
-	   setAlignment(Pos.CENTER);  
-	   setSpacing(20);
-	   setPrefWidth(1200);
-	   setPrefHeight(750);
-	   setBackground(new Background(new BackgroundFill(Color.DARKGREY, CornerRadii.EMPTY, Insets.EMPTY)));
-	   getChildren().addAll(boardPane, controlPane);
-	   
-	 }
+	private BoardPane boardPane;
+	private ControlPane controlPane;
+	
+	public InGameScene() {
+		
+		// for test
+		GameLogic.getInstance().newGame(2, new String[] {"A", "B"}, new PlayerColor[] {PlayerColor.BLACK, PlayerColor.WHITE});
+		
+		boardPane = new BoardPane(GameLogic.getInstance().getBoard());
+		controlPane = new ControlPane();
+		
+		setAlignment(Pos.CENTER);  
+		setSpacing(20);
+		setPrefWidth(1200);
+		setPrefHeight(750);
+		setBackground(new Background(new BackgroundFill(Color.DARKGREY, CornerRadii.EMPTY, Insets.EMPTY)));
+		getChildren().addAll(boardPane, controlPane);
+   
+ }
 
 	public BoardPane getBoardPane() {
 		return boardPane;
-
 	}
 
 	public void setBoard(BoardPane boardPane) {

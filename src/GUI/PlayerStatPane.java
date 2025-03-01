@@ -19,7 +19,7 @@ public class PlayerStatPane extends GridPane{
 	
 	private Player player;
 	private String playerIconURL;
-	private Text playerName;
+	private Text nameText;
 	private Text scoreText;
 	private Text penaltyText;
 	
@@ -47,16 +47,16 @@ public class PlayerStatPane extends GridPane{
 		playerStats.setAlignment(Pos.CENTER);
 		playerStats.setSpacing(5);
 		
-		Text playerName = new Text(player.getName());
-		playerName.setFont(Font.font("Arial", FontWeight.BOLD, 20));
+		nameText = new Text(player.getName());
+		nameText.setFont(Font.font("Arial", FontWeight.BOLD, 20));
 		
-		Text playerScore = new Text("Score: " + player.getScore());
-		playerScore.setFont(Font.font("Arial", FontWeight.BOLD, 15));
+		scoreText = new Text("Score: " + player.getScore());
+		scoreText.setFont(Font.font("Arial", FontWeight.BOLD, 15));
 		
-		Text playerPenalty = new Text("Penalty: " + player.getPenalty());
-		playerPenalty.setFont(Font.font("Arial", FontWeight.BOLD, 15));
+		penaltyText = new Text("Penalty: " + player.getPenalty());
+		penaltyText.setFont(Font.font("Arial", FontWeight.BOLD, 15));
 		
-		playerStats.getChildren().addAll(playerName, playerScore, playerPenalty);
+		playerStats.getChildren().addAll(nameText, scoreText, penaltyText);
 		
 		add(playerIcon, 0, 0);
 		add(playerStats, 1, 0);
@@ -67,39 +67,24 @@ public class PlayerStatPane extends GridPane{
 		return player;
 	}
 
-
 	public void setPlayer(Player player) {
 		this.player = player;
 	}
-
 
 	public String getPlayerIconURL() {
 		return playerIconURL;
 	}
 
-
 	public void setPlayerIconURL(String playerIconURL) {
 		this.playerIconURL = playerIconURL;
 	}
-
-
-	public Text getPlayerName() {
-		return playerName;
-	}
-
-
-	public void setPlayerName(Text playerName) {
-		this.playerName = playerName;
-	}
-
 
 	public Text getScoreText() {
 		return scoreText;
 	}
 
-
-	public void setScoreText(Text scoreText) {
-		this.scoreText = scoreText;
+	public void setScoreText(String scoreText) {
+		this.scoreText.setText(scoreText);
 	}
 
 
@@ -107,9 +92,8 @@ public class PlayerStatPane extends GridPane{
 		return penaltyText;
 	}
 
-
-	public void setPenaltyText(Text penaltyText) {
-		this.penaltyText = penaltyText;
+	public void setPenaltyText(String penaltyText) {
+		this.penaltyText.setText(penaltyText);
 	}
 
 }

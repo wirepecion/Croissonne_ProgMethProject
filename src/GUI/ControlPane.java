@@ -12,7 +12,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -31,22 +30,21 @@ public class ControlPane extends VBox {
 		setSpacing(10);
 		setAlignment(Pos.CENTER);
 		
-		//For Test
-		Player player1 = new Player("player1", PlayerColor.BLUE);
-		Player player2 = new Player("player2", PlayerColor.RED);
+		for (int i = 0; i < GameLogic.getPlayer().length; i++) {
+			getChildren().addAll(GameLogic.getPlayer()[i].getPlayerStatPane());
+		}
+		
 		initializeTilePane();
 		initializePassButton();
 		
-		getChildren().addAll(
-			player1.getPlayerStatPane(), 
-			player2.getPlayerStatPane(), 
+		getChildren().addAll( 
 			tilePane,
 			passButton
 		);
 	}
 	
 	public void initializeTilePane() {
-		tilePane = new Canvas(Tile.getTileSize() * 2, Tile.getTileSize() * 2);
+		tilePane = new Canvas(TilePane.getTileSize() * 2, TilePane.getTileSize() * 2);
 		tilePane.setOnMouseClicked(event -> rotateTile());
 		tilePane.setOnMouseEntered(event -> onMouseEnteredHandler());
 		tilePane.setOnMouseExited(event -> onMouseExitedHandler());
@@ -61,7 +59,7 @@ public class ControlPane extends VBox {
 				Color.DARKRED, CornerRadii.EMPTY, Insets.EMPTY)));
 		passButton.setFont(new Font("Arial Bold", 50));
 		passButton.setStyle("-fx-text-fill: white;");
-		passButton.setOnMouseClicked(event -> GameLogic.randomTile());
+		passButton.setOnMouseClicked(event -> onMouseClicked());
 		passButton.setOnMouseEntered(event -> onMouseEnteredHandler());
 		passButton.setOnMouseExited(event -> onMouseExitedHandler());
 	}
@@ -69,6 +67,11 @@ public class ControlPane extends VBox {
 	private void rotateTile() {
 		GameLogic.getCurrentTile().rotate();
 		tilePane.setRotate(tilePane.getRotate() + 90);
+	}
+	
+	private void onMouseClicked() {
+		GameLogic.getCurrentPlayer().updatePenalty(1);
+		GameLogic.randomTile();
 	}
 	
 	public static void resetTilepane() {

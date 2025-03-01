@@ -4,6 +4,7 @@ import component.Board;
 import component.OwnableTile;
 import component.Player;
 import GUI.ControlPane;
+import GUI.TilePane;
 import component.Tile;
 import utils.PlayerColor;
 import utils.TileType;
@@ -50,6 +51,7 @@ public class GameLogic {
 	}
 	
 	private boolean isNotBesideOtherTile(int x, int y) {
+		System.out.println("here");
 		return 	(board.getTile(x - 1, y) == null || board.getTile(x - 1, y).isEmpty()) &&
 				(board.getTile(x + 1, y) == null || board.getTile(x + 1, y).isEmpty()) &&
 				(board.getTile(x, y - 1) == null || board.getTile(x, y - 1).isEmpty()) &&
@@ -85,15 +87,15 @@ public class GameLogic {
 		currentTile.setPlace(false);
 		ControlPane.resetTilepane();
 		ControlPane.getTilePane().getGraphicsContext2D().drawImage(
-				currentTile.getImageOfTile(), 
-				0, 0, Tile.getTileSize() * 2, Tile.getTileSize() * 2);
+				currentTile.getTilePane().getImageOfTile(), 
+				0, 0, TilePane.getTileSize() * 2, TilePane.getTileSize() * 2);
 		nextPlayer();
 	}
 	
 	public static void placeCurrentTile(int x, int y) {
 		currentTile.setPlace(true);
 		board.addOnBoard(currentTile, x, y);
-		board.paintComponent();
+		board.getBoardPane().paintComponent();
 		getCurrentPlayer().updateScore(1);
 		randomTile();
 	}
@@ -127,6 +129,10 @@ public class GameLogic {
 
 	public static Tile getCurrentTile() {
 		return currentTile;
+	}
+	
+	public static Player[] getPlayer() {
+		return playerList;
 	}
 	
 }

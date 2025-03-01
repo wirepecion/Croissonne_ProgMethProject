@@ -3,6 +3,7 @@ package data;
 import java.util.ArrayList;
 import java.util.List;
 
+import GUI.TilePane;
 import component.Tile;
 import javafx.scene.image.Image;
 // import javafx.scene.media.AudioClip;
@@ -10,7 +11,7 @@ import javafx.scene.image.Image;
 public class ResourceLoader {
 	private static final ResourceLoader instance = new ResourceLoader();
 
-	private List<Tile> tiles;
+	private List<TilePane> tilePaneList;
 	public static Image betweenTwoMountain;
 	public static Image castleOnAbyss;
 	public static Image castleOnMountain;
@@ -36,7 +37,7 @@ public class ResourceLoader {
 	}
 
 	public ResourceLoader() {
-		tiles = new ArrayList<Tile>();
+		tilePaneList = new ArrayList<TilePane>();
 	}
 
 	public static ResourceLoader getInstance() {
@@ -82,11 +83,11 @@ public class ResourceLoader {
 		// explosionSound = new AudioClip(ClassLoader.getSystemResource("Explosion.wav").toString());
 	}
 
-	public void add(Tile tile) {
-		tiles.add(tile);
+	public void add(TilePane tilePane) {
+		tilePaneList.add(tilePane);
 	}
 
-	public List<Tile> getTiles() {
-		return tiles;
+	public List<TilePane> getTilePaneList() {
+		return tilePaneList;
 	}
 }
