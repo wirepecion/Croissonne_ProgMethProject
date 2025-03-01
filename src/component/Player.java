@@ -16,6 +16,7 @@ public class Player {
 	private int penalty;
 	
 	public Player(String name, PlayerColor playerColor) {
+		setName(name);
 		setColor(playerColor);
 		setScore(0);
 		setPenalty(0);
