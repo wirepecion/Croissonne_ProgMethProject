@@ -9,6 +9,7 @@ import component.Tile;
 import utils.TileType;
 
 public class TileStorage {
+	private static final TileStorage instance = new TileStorage();
 	
 	private static final int TOTAL_TILES = 61;
 	private static ArrayList<Tile> tileList;
@@ -43,11 +44,19 @@ public class TileStorage {
 	}
 	
 	public static Tile getRandomTile() {
-		 int idx = (tileCount == 0 ? 0 : new Random().nextInt(tileCount));
-		 Tile tile = tileList.get(idx);
-		 tileList.remove(idx);
-		 tileCount--;
-		 return tile;
+		int idx = new Random().nextInt(tileCount);
+		Tile tile = tileList.get(idx);
+		for (int i=0;i<4;i++) {
+		System.out.println(tile.getEdge(i));
+		}
+		tileList.remove(idx);
+		tileCount--;
+		System.out.println(tileCount);
+		return tile;
+	}
+	
+	public static TileStorage getInstance() {
+		return instance;
 	}
 
 	public static ArrayList<Tile> getTileList() {

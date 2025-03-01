@@ -4,6 +4,7 @@ import component.Player;
 import component.Tile;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
@@ -11,6 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -20,7 +22,7 @@ import utils.PlayerColor;
 
 public class ControlPane extends VBox {
 	
-	private Canvas tilePane;
+	private static Canvas tilePane;
 	private Button passButton;
 	
 	public ControlPane() {
@@ -45,8 +47,10 @@ public class ControlPane extends VBox {
 	
 	public void initializeTilePane() {
 		tilePane = new Canvas(Tile.getTileSize() * 2, Tile.getTileSize() * 2);
-		tilePane.getGraphicsContext2D().drawImage(
-				new Image(Tile.createTile().getTileURL()), 0, 0, Tile.getTileSize() * 2, Tile.getTileSize() * 2);
+		tilePane.setOnMouseClicked(event -> rotateTile());
+		tilePane.setOnMouseEntered(event -> onMouseEnteredHandler());
+		tilePane.setOnMouseExited(event -> onMouseExitedHandler());
+		GameLogic.randomTile();
 	}
 	
 	public void initializePassButton() {
@@ -57,13 +61,30 @@ public class ControlPane extends VBox {
 				Color.DARKRED, CornerRadii.EMPTY, Insets.EMPTY)));
 		passButton.setFont(new Font("Arial Bold", 50));
 		passButton.setStyle("-fx-text-fill: white;");
-		passButton.setOnMouseClicked(event -> drawButtonHandler());
+		passButton.setOnMouseClicked(event -> GameLogic.randomTile());
+		passButton.setOnMouseEntered(event -> onMouseEnteredHandler());
+		passButton.setOnMouseExited(event -> onMouseExitedHandler());
 	}
 	
-	private void drawButtonHandler() {
-		tilePane.getGraphicsContext2D().drawImage(
-				new Image(GameLogic.randomTile().getTileURL()), 
-				0, 0, Tile.getTileSize() * 2, Tile.getTileSize() * 2);
+	private void rotateTile() {
+		GameLogic.getCurrentTile().rotate();
+		tilePane.setRotate(tilePane.getRotate() + 90);
+	}
+	
+	public static void resetTilepane() {
+		tilePane.setRotate(0);
+	}
+	
+	private void onMouseEnteredHandler() {
+		setCursor(Cursor.HAND);
+	}
+	
+	private void onMouseExitedHandler() {
+		setCursor(Cursor.DEFAULT);
+	}
+
+	public static Canvas getTilePane() {
+		return tilePane;
 	}
 	
 }

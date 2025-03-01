@@ -1,15 +1,24 @@
 package component;
 
+import java.awt.event.MouseListener;
+import java.lang.reflect.Field;
 import java.util.Collections;
+
 import java.util.List;
 
+import data.ResourceLoader;
 import interfaces.Rotatable;
 import utils.TileArea;
 import utils.TileType;
 import logic.GameLogic;
 import logic.TileAreaDeterminer;
-
+import logic.TileStorage;
+import GUI.ControlPane;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
+import javafx.scene.Cursor;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -19,16 +28,16 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
-public abstract class Tile extends Pane implements Rotatable {
+public abstract class Tile extends Canvas implements Rotatable {
 
 	private static final int TILE_SIZE = 50;
 	private static final int EDGE_DIRECTIONS = 4;
 	private TileType tileType;
 	private List<TileArea> edge;
-	private String tileURL;
 	private int xPosition;
 	private int yPosition;
 	private boolean isPlace;
+	private boolean isRemoved;
 	// edge contains 4 TileArea 
 	// (0) north edge
 	// (1) east edge
@@ -36,17 +45,15 @@ public abstract class Tile extends Pane implements Rotatable {
 	// (3) west edge
 	
 	public Tile(TileType tiletype) {
-		
+		super(TILE_SIZE, TILE_SIZE);
 		this.tileType = tiletype;
-		this.edge = TileAreaDeterminer.determineTileArea(tileType);
-		this.tileURL = ClassLoader.getSystemResource(
-				"tempTilePic/" + tiletype.toString() + ".png").toString();
+		TileAreaDeterminer tileAreaDeterminer = new TileAreaDeterminer();
+		this.edge = (new TileAreaDeterminer()).determineTileArea(tileType);
 		setPlace(false);
-		updateTileImage(tileURL);
-		setPrefHeight(TILE_SIZE);
-		setPrefWidth(TILE_SIZE);
-		setOnMouseClicked(event -> onTileClick());
-		
+		setRemoved(false);
+		setOnMouseClicked(event -> MouseClickHandler());
+		setOnMouseEntered(event -> MouseEnteredHandler());
+		setOnMouseExited(event -> MouseExitedHandler());
 	}
 
 	public static Tile createTile(TileType tileType) {
@@ -61,36 +68,64 @@ public abstract class Tile extends Pane implements Rotatable {
 		return new RegularTile(TileType.EMPTY);
 	}
 	
-	public void updateTileImage(String tileURL) {
-		BackgroundFill bgFill = new BackgroundFill(Color.CHOCOLATE, CornerRadii.EMPTY, Insets.EMPTY);
-		BackgroundFill[] bgFillA = {bgFill};
-		BackgroundSize bgSize = new BackgroundSize(TILE_SIZE, TILE_SIZE, false, false, false, false);
-		BackgroundImage bgImg = new BackgroundImage(new Image(tileURL), null, null, null, bgSize);
-		BackgroundImage[] bgImgA = {bgImg};
-		setBackground(new Background(bgFillA, bgImgA));
+	public void draw(GraphicsContext gc) {
+		gc.drawImage(getImageOfTile(), 0, 0, TILE_SIZE, TILE_SIZE);
 	}
 	
-	public void onTileClick() {
-		if (GameLogic.getInstance().getCurrentTile() != null) {
-			if (this != GameLogic.getInstance().getCurrentTile()) {
-				if (!GameLogic.getInstance().getCurrentTile().isPlace()) {
-					if (GameLogic.getInstance().isPlaceable(xPosition, yPosition)) {
-						Tile newTile = GameLogic.getInstance().getCurrentTile();
-						this.tileType = newTile.getTileType();
-						this.edge = newTile.getEdge();
-						this.tileURL = newTile.getTileURL();
-						updateTileImage(newTile.getTileURL());
-						newTile.setPlace(true);
-						GameLogic.getInstance().getBoard().setTileOnBoard(newTile, xPosition, yPosition);
-					}
-				}
-			}
+	public Image getImageOfTile() {
+		String string = toCamelCase(tileType.toString());
+		try {
+			Field field = ResourceLoader.class.getField(string);
+			Image img = (Image) field.get(ResourceLoader.class);
+			return img;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
 		}
 	}
 	
 	// rotate clockwise
 	public void rotate() {
 		Collections.rotate(edge, 1);
+		this.setRotate(this.getRotate() + 90);
+		for (int i=0;i<4;i++) {
+			System.out.println(getEdge(i));
+		}
+	}
+	
+	private void MouseClickHandler() {
+		new Thread(() -> {
+			for (int i=0;i<4;i++) {
+				System.out.println(getEdge(i));
+			}
+			GameLogic.getInstance();
+			if (GameLogic.getCurrentTile() != null && !GameLogic.getCurrentTile().isPlace()) {
+				if (GameLogic.getInstance().isPlaceable(xPosition, yPosition)) {
+					System.out.println("get next tile");
+					this.tileType = GameLogic.getCurrentTile().getTileType();
+					this.edge = (new TileAreaDeterminer()).determineTileArea(tileType); 
+					GameLogic.getCurrentTile().setPlace(true);
+					this.setRotate(ControlPane.getTilePane().getRotate());
+					ControlPane.resetTilepane();
+					GameLogic.getInstance().getBoard().addOnBoard(GameLogic.getCurrentTile(), xPosition, yPosition);
+					GameLogic.getInstance().getBoard().paintComponent();
+					GameLogic.randomTile();
+					setCursor(Cursor.DEFAULT);
+				}
+			}
+		}).start();
+	}
+	
+	private void MouseEnteredHandler() {
+		if (!GameLogic.getInstance().isGameEnd()) {
+			if (tileType.equals(TileType.EMPTY)) {
+				setCursor(Cursor.HAND);
+			}
+		}
+	}
+	
+	private void MouseExitedHandler() {
+		setCursor(Cursor.DEFAULT);
 	}
 	
 	public boolean isEmpty() {
@@ -101,6 +136,18 @@ public abstract class Tile extends Pane implements Rotatable {
 		return tileType.toString().contains("CASTLE") ||
 			   tileType.toString().contains("RIVER");
 	}
+	
+	public String toCamelCase(String str) {
+        String[] words = str.split("_");
+        StringBuilder camelCaseString = new StringBuilder(words[0].toLowerCase());
+
+        for (int i = 1; i < words.length; i++) {
+            camelCaseString.append(words[i].substring(0, 1).toUpperCase())
+                           .append(words[i].substring(1).toLowerCase());
+        }
+
+        return camelCaseString.toString();
+    }
 	
 	public static int getTileSize() {
 		return TILE_SIZE;
@@ -120,10 +167,6 @@ public abstract class Tile extends Pane implements Rotatable {
 	
 	public TileArea getEdge(int idx) {
 		return edge.get(idx);
-	}
-	
-	public String getTileURL() {
-		return tileURL;
 	}
 
 	public int getxPosition() {
@@ -148,6 +191,14 @@ public abstract class Tile extends Pane implements Rotatable {
 
 	public boolean isPlace() {
 		return isPlace;
+	}
+
+	public boolean isRemoved() {
+		return isRemoved;
+	}
+
+	public void setRemoved(boolean isRemoved) {
+		this.isRemoved = isRemoved;
 	}
 
 }
