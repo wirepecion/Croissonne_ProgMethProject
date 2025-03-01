@@ -1,5 +1,6 @@
 package application;
 
+import GUI.BoardPane;
 import GUI.ControlPane;
 import GUI.StartGamePane;
 import component.Board;
@@ -25,10 +26,10 @@ public class Main extends Application{
 		root.setPrefWidth(1200);
 		root.setBackground(new Background(new BackgroundFill(Color.DARKGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
 		
-		Board board = new Board();
+		BoardPane boardPane = new BoardPane();
 		ControlPane controlPane = new ControlPane();
 		
-		root.getChildren().addAll(board, controlPane);
+		root.getChildren().addAll(boardPane, controlPane);
 		
 		StartGamePane startGamePane = new StartGamePane();	
 

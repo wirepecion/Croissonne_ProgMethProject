@@ -19,18 +19,12 @@ import javafx.scene.paint.Color;
 import logic.TileStorage;
 import utils.TileType;
 
-public class Board extends GridPane {
+public class Board {
 	
 	private static final int BOARD_SIZE = 12;
 	private Tile[][] allTiles = new Tile[BOARD_SIZE + 1][BOARD_SIZE + 1];
 	
 	public Board() {
-		
-		setHgap(10); setVgap(10);
-		setPadding(new Insets(10));
-		setPrefWidth(800);
-		setAlignment(Pos.CENTER);
-		setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
 		
 		initializeBoard();
 		paintComponent();
@@ -38,14 +32,11 @@ public class Board extends GridPane {
 	}
 	
 	private void initializeBoard() {
-		
-		TileStorage.init();
-
 		for(int row = 0; row < BOARD_SIZE; row++) {
 			for(int col = 0; col < BOARD_SIZE; col++) {
 				Tile tile = Tile.createTile();
 				if (row == 6 && col == 6) {
-					tile = Tile.createTile(TileType.CURVE_RIVER_TURN_LEFT_AT_ABYSS);
+					tile = Tile.createTile(TileType.STRAIGHT_RIVER_BESIDE_ABYSS);
 					tile.setPlace(true);
 				}
 				tile.setxPosition(row);

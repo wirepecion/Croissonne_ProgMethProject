@@ -1,24 +1,41 @@
 package logic;
 
 import component.Board;
+import component.OwnableTile;
+import component.Player;
 import GUI.ControlPane;
 import component.Tile;
+import utils.PlayerColor;
 import utils.TileType;
 
 public class GameLogic {
 	
 	private static GameLogic instance = null;
-	private Board board;
+	private static Board board;
 	private static boolean isGameEnd;
 	private static Tile currentTile;
+	private static Player[] playerList;
+	private static int currentPlayerNumber;
 	
-	private GameLogic() {
-		this.newGame();
+	static {
+		TileStorage.init();
 	}
 	
-	public void newGame() {
-		TileStorage.init();
-		this.board = new Board();
+	public void newGame(int NumberOfplayer, String[] playerName, PlayerColor[] playerColor) {
+		board = new Board();
+		playerList = new Player[NumberOfplayer];
+		for (int i = 0; i < NumberOfplayer; i++) {
+			playerList[i] = new Player(playerName[i], playerColor[i]);
+		}
+		currentPlayerNumber = 0;
+	}
+	
+	private static void nextPlayer() {
+		currentPlayerNumber = (currentPlayerNumber + 1) % playerList.length;
+	}
+	
+	public static Player getCurrentPlayer() {
+		return playerList[currentPlayerNumber];
 	}
 	
 	public boolean isPlaceable(int x, int y) {
@@ -26,7 +43,7 @@ public class GameLogic {
 		Tile tile = currentTile;
 		tile.setxPosition(x);
 		tile.setyPosition(y);
-		return  isMatchEdge(tile, x - 1, y) &&
+		return 	isMatchEdge(tile, x - 1, y) &&
 				isMatchEdge(tile, x + 1, y) &&
 				isMatchEdge(tile, x, y - 1) &&
 				isMatchEdge(tile, x, y + 1);
@@ -40,8 +57,7 @@ public class GameLogic {
 	}
 	
 	private boolean isMatchEdge(Tile tile, int x, int y) {
-		if (board.getTile(x, y) == null) return true;
-		if (board.getTile(x, y).isEmpty()) return true;
+		if (board.getTile(x, y) == null || board.getTile(x, y).isEmpty()) return true;
 		Tile anotherTile = board.getTile(x, y);
 		System.out.println(tile.getxPosition() + " " + x + " " + tile.getyPosition() + " " + y);
 		if (tile.getxPosition() - 1 == x) {
@@ -69,8 +85,17 @@ public class GameLogic {
 		currentTile.setPlace(false);
 		ControlPane.resetTilepane();
 		ControlPane.getTilePane().getGraphicsContext2D().drawImage(
-				GameLogic.getCurrentTile().getImageOfTile(), 
+				currentTile.getImageOfTile(), 
 				0, 0, Tile.getTileSize() * 2, Tile.getTileSize() * 2);
+		nextPlayer();
+	}
+	
+	public static void placeCurrentTile(int x, int y) {
+		currentTile.setPlace(true);
+		board.addOnBoard(currentTile, x, y);
+		board.paintComponent();
+		getCurrentPlayer().updateScore(1);
+		randomTile();
 	}
 	
 	public static boolean update() {

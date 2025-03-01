@@ -4,6 +4,7 @@ import GUI.PlayerStatPane;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
 import utils.PlayerColor;
 
 public class Player {
@@ -19,6 +20,16 @@ public class Player {
 		setScore(0);
 		setPenalty(0);
 		playerStatPane = new PlayerStatPane(this);
+	}
+	
+	public void updateScore(int value) {
+		score += value;
+		playerStatPane.setScoreText(new Text("Score: " + score));
+	}
+	
+	public void updatePenalty(int value) {
+		penalty -= value;
+		playerStatPane.setPenaltyText(new Text("Penalty: " + penalty));
 	}
 
 	public PlayerColor getColor() {

@@ -11,12 +11,12 @@ import javafx.scene.paint.Color;
 
 public class InGamePane extends HBox {
 	
-	 private Board board;
+	 private BoardPane boardPane;
 	 private ControlPane controlPane;
 
 	 public InGamePane() {
 		 
-	   board = new Board();
+	   boardPane = new BoardPane();
 	   controlPane = new ControlPane();
 
 	   setAlignment(Pos.CENTER);  
@@ -24,16 +24,16 @@ public class InGamePane extends HBox {
 	   setPrefWidth(1200);
 	   setPrefHeight(750);
 	   setBackground(new Background(new BackgroundFill(Color.DARKGREY, CornerRadii.EMPTY, Insets.EMPTY)));
-	   getChildren().addAll(board, controlPane);
+	   getChildren().addAll(boardPane, controlPane);
 	   
 	 }
 
-	public Board getBoard() {
-		return board;
+	public BoardPane getBoardPane() {
+		return boardPane;
 	}
 
-	public void setBoard(Board board) {
-		this.board = board;
+	public void setBoard(BoardPane boardPane) {
+		this.boardPane = boardPane;
 	}
 
 	public ControlPane getControlPane() {

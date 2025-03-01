@@ -58,8 +58,6 @@ public class StartGamePane extends VBox {
 	private void startButtonEventHandler() {
 		startButton.setDisable(true);
 		getChildren().remove(startButton);
-		
-		
 	}
 	
 }

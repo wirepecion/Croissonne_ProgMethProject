@@ -104,13 +104,10 @@ public abstract class Tile extends Canvas implements Rotatable {
 					System.out.println("get next tile");
 					this.tileType = GameLogic.getCurrentTile().getTileType();
 					this.edge = (new TileAreaDeterminer()).determineTileArea(tileType); 
-					GameLogic.getCurrentTile().setPlace(true);
 					this.setRotate(ControlPane.getTilePane().getRotate());
-					ControlPane.resetTilepane();
-					GameLogic.getInstance().getBoard().addOnBoard(GameLogic.getCurrentTile(), xPosition, yPosition);
-					GameLogic.getInstance().getBoard().paintComponent();
-					GameLogic.randomTile();
 					setCursor(Cursor.DEFAULT);
+					ControlPane.resetTilepane();
+					GameLogic.placeCurrentTile(xPosition, yPosition);
 				}
 			}
 		}).start();

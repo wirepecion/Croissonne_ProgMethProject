@@ -56,13 +56,12 @@ public class PlayerStatPane extends GridPane{
 		Text playerPenalty = new Text("Penalty: " + player.getPenalty());
 		playerPenalty.setFont(Font.font("Arial", FontWeight.BOLD, 15));
 		
-		playerStats.getChildren().addAll(playerName,playerScore,playerPenalty);
+		playerStats.getChildren().addAll(playerName, playerScore, playerPenalty);
 		
-		add(playerIcon,0,0);
-		add(playerStats,1,0);
+		add(playerIcon, 0, 0);
+		add(playerStats, 1, 0);
 		
 	}
-	
 	
 	public Player getPlayer() {
 		return player;
