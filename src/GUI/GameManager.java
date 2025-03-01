@@ -1,5 +1,48 @@
 package GUI;
 
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
 public class GameManager {
 	
+	public static GameManager instance = null;
+	
+	Stage stage;
+	StartGameScene startGameScene;
+	InGameScene inGameScene;
+	
+	Scene scene;
+	
+	public GameManager(Stage stage) {
+		// TODO Auto-generated constructor stub
+		instance = this;
+		this.stage = stage;
+		
+		startGameScene = new StartGameScene();
+		inGameScene = new InGameScene();
+		
+		setToStartGameScene();
+	}
+	
+	public void setToStartGameScene() {
+		scene = new Scene(startGameScene);
+		stage.setScene(scene);
+		stage.setTitle("Croisinee");
+		stage.show();
+	}
+	
+	public void switchToSelectPlayerScene() {
+		startGameScene.removeStartButton();
+		startGameScene.addSelectPlayerButton();
+	}
+	
+	public void switchToInGameScene() {
+		scene = new Scene(inGameScene);
+		stage.setScene(scene);
+		stage.show();
+	}
+	
+	public static GameManager getInstance() {
+		return instance;
+	}
 }
