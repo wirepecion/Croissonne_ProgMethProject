@@ -12,33 +12,19 @@ import utils.TileArea;
 import utils.TileType;
 import logic.GameLogic;
 import logic.TileAreaDeterminer;
-import logic.TileStorage;
-import GUI.ControlPane;
-import GUI.TilePane;
-import javafx.application.Platform;
-import javafx.geometry.Insets;
+import gui.ControlPane;
+import gui.TilePane;
 import javafx.scene.Cursor;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundSize;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 
 public abstract class Tile implements Rotatable {
 
-	private static final int EDGE_DIRECTIONS = 4;
+	protected static final int EDGE_DIRECTIONS = 4;
 	private TilePane tilePane;
-	private TileType tileType;
-	private List<TileArea> edge;
-	private int xPosition;
-	private int yPosition;
+	protected TileType tileType;
+	protected List<TileArea> edge;
+	protected int xPosition;
+	protected int yPosition;
 	private boolean isPlace;
-	private boolean isRemoved;
 	// edge contains 4 TileArea 
 	// (0) north edge
 	// (1) east edge
@@ -49,7 +35,6 @@ public abstract class Tile implements Rotatable {
 		this.tileType = tiletype;
 		this.edge = (new TileAreaDeterminer()).determineTileArea(tileType);
 		setPlace(false);
-		setRemoved(false);
 		this.tilePane = new TilePane(this);
 	}
 
@@ -90,7 +75,7 @@ public abstract class Tile implements Rotatable {
 				tilePane.setRotate(ControlPane.getTilePane().getRotate());
 				tilePane.setCursor(Cursor.DEFAULT);
 				ControlPane.resetTilepane();
-				GameLogic.placeCurrentTile(xPosition, yPosition);
+				GameLogic.getInstance().placeCurrentTile(xPosition, yPosition);
 			}
 		}
 	}
@@ -137,14 +122,6 @@ public abstract class Tile implements Rotatable {
 
 	public boolean isPlace() {
 		return isPlace;
-	}
-
-	public boolean isRemoved() {
-		return isRemoved;
-	}
-
-	public void setRemoved(boolean isRemoved) {
-		this.isRemoved = isRemoved;
 	}
 
 }

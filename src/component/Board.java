@@ -2,8 +2,8 @@ package component;
 
 import java.awt.Graphics2D;
 
-import GUI.BoardPane;
-import GUI.GameManager;
+import gui.BoardPane;
+import gui.GameManager;
 import data.ResourceLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -18,6 +18,7 @@ import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
+import logic.GameLogic;
 import logic.TileStorage;
 import utils.TileType;
 
@@ -42,7 +43,6 @@ public class Board {
 				}
 				tile.setxPosition(row);
 				tile.setyPosition(col);
-				System.out.println(tile.getxPosition() + " " + tile.getyPosition());
 				allTiles[row][col] = tile;
 			}
 		}

@@ -1,4 +1,4 @@
-package GUI;
+package gui;
 
 import component.Board;
 import component.Tile;
@@ -19,7 +19,7 @@ public class BoardPane extends GridPane {
 		setPadding(new Insets(10));
 		setPrefWidth(800);
 		setAlignment(Pos.CENTER);
-		setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
+		setBackground(new Background(new BackgroundFill(Color.LIGHTSLATEGREY, CornerRadii.EMPTY, Insets.EMPTY)));
 		for (int row = 0; row < Board.getBoardSize(); row++) {
 			for (int col = 0; col < Board.getBoardSize(); col++) {
 				TilePane tilePane = new TilePane(board.getTile(row, col));

@@ -3,8 +3,13 @@ package logic;
 import component.Board;
 import component.OwnableTile;
 import component.Player;
-import GUI.ControlPane;
-import GUI.TilePane;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Deque;
+
+import gui.ControlPane;
+import gui.TilePane;
 import component.Tile;
 import utils.PlayerColor;
 import utils.TileType;
@@ -17,6 +22,8 @@ public class GameLogic {
 	private static Tile currentTile;
 	private static Player[] playerList;
 	private static int currentPlayerNumber;
+	private static ArrayList<RiverScoreCollector> riverScoreList;
+	private static ArrayList<int[]> castleScoreList;
 	
 	static {
 		TileStorage.init();
@@ -28,7 +35,14 @@ public class GameLogic {
 		for (int i = 0; i < NumberOfplayer; i++) {
 			playerList[i] = new Player(playerName[i], playerColor[i]);
 		}
+		riverScoreList = new ArrayList<RiverScoreCollector>();
+		castleScoreList = new ArrayList<int[]>();
+	}
+	
+	public static void startGame() {
 		currentPlayerNumber = 0;
+		riverScoreList.add(new RiverScoreCollector(
+				new double[] { 6.5, 6.0 }, 1, new double[] { 6.5, 7.0 }));
 	}
 	
 	private static void nextPlayer() {
@@ -92,12 +106,88 @@ public class GameLogic {
 		nextPlayer();
 	}
 	
-	public static void placeCurrentTile(int x, int y) {
+	public void placeCurrentTile(int x, int y) {
+		if (currentTile instanceof OwnableTile) {
+			((OwnableTile) currentTile).collectScore();
+			if (!(((OwnableTile) currentTile).isCastle())) {
+				System.out.println("river check");
+				riverScoreCheck();
+			}
+		}
+		castleScoreCheck();
 		currentTile.setPlace(true);
 		board.addOnBoard(currentTile, x, y);
 		board.getBoardPane().paintComponent();
-		getCurrentPlayer().updateScore(1);
 		randomTile();
+	}
+	
+	private static void riverScoreCheck() {
+		for (int i = riverScoreList.size() - 1; i >= 0; i--) {
+			System.out.println(i);
+			if (riverScoreList.get(i).isLoop()) {
+				getCurrentPlayer().updateScore(riverScoreList.get(i).getScore());
+				riverScoreList.remove(i);
+			}
+		}
+	}
+	
+	private static void castleScoreCheck() {
+		for (int[] pos : castleScoreList) {
+			boolean isScore = true;
+			for (int i = pos[0] - 1; i <= pos[0] + 1; i++) {
+				for (int j = pos[1] - 1; j <= pos[1] + 1; j++) {
+					if (board.getTile(j, i) == null) continue;
+					if (board.getTile(i, j).isEmpty()) {
+						isScore = false;
+						break;
+					}
+				}
+				if (!isScore) break;
+			}
+			if (isScore) getCurrentPlayer().updateScore(8);
+		}
+	}
+	
+	public void addToRiverScoreList(double[] x, double[] y) {
+		for (RiverScoreCollector collector : riverScoreList) {
+			System.out.println(collector.getLeft()[0] + " " + collector.getLeft()[1] + " " + collector.getScore() + " " + collector.getRight()[0] + " " + collector.getRight()[1]);
+			System.out.println(x[0] + " " + x[1] + " " + y[0] + " " + y[1]);
+			if (checkCollectorLeft(collector, x, y)) return;
+			if (checkCollectorRight(collector, x, y)) return;
+		}
+		riverScoreList.add(new RiverScoreCollector(x, 1, y));
+	}
+	
+	private boolean checkCollectorLeft(RiverScoreCollector collector, double[] x, double[] y) {
+		if (Arrays.equals(collector.getLeft(), x)) {
+			collector.setLeft(y);
+			collector.addScore();
+			return true;
+		} 
+		if (Arrays.equals(collector.getLeft(), y)) {
+			collector.setLeft(x);
+			collector.addScore();
+			return true;
+		}
+		return false;
+	}
+	
+	private boolean checkCollectorRight(RiverScoreCollector collector, double[] x, double[] y) {
+		if (Arrays.equals(collector.getRight(), x)) {
+			collector.setRight(y);
+			collector.addScore();
+			return true;
+		} 
+		if (Arrays.equals(collector.getRight(), y)) {
+			collector.setRight(x);
+			collector.addScore();
+			return true;
+		}
+		return false;
+	}
+	
+	public void addToCastleScoreList(int x, int y) {
+		castleScoreList.add(new int[] {x, y});
 	}
 	
 	public static boolean update() {

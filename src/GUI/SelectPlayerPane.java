@@ -1,4 +1,4 @@
-package GUI;
+package gui;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -41,8 +41,13 @@ public class SelectPlayerPane extends HBox {
 		//set button's event-handler
 		playerButton.setOnMouseClicked(e -> {
 
-			// this is for test
-			GameLogic.getInstance().newGame(2, new String[] {"A","B"}, new PlayerColor[] {PlayerColor.BLACK, PlayerColor.WHITE});
+			if (playerButton.equals(twoPlayerButton)) {
+				GameLogic.getInstance().newGame(2, new String[] {"A","B"}, new PlayerColor[] {PlayerColor.BLACK, PlayerColor.WHITE});
+			} else if (playerButton.equals(threePlayerButton)) {
+				GameLogic.getInstance().newGame(3, new String[] {"A","B","C"}, new PlayerColor[] {PlayerColor.RED, PlayerColor.YELLOW, PlayerColor.BLUE});
+			} else if (playerButton.equals(fourPlayerButton)) {
+				GameLogic.getInstance().newGame(4, new String[] {"A","B","C","D"}, new PlayerColor[] {PlayerColor.GREEN, PlayerColor.ORANGE, PlayerColor.PINK, PlayerColor.PURPLE});
+			}
 			
 			GameManager.getInstance().switchToInGameScene();
 		});
