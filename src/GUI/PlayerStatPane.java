@@ -1,4 +1,4 @@
-package GUI;
+package gui;
 
 import component.Player;
 import javafx.geometry.Insets;

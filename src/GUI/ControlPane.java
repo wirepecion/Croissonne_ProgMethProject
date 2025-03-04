@@ -1,4 +1,4 @@
-package GUI;
+package gui;
 
 import component.Player;
 import component.Tile;
@@ -49,6 +49,7 @@ public class ControlPane extends VBox {
 		tilePane.setOnMouseEntered(event -> onMouseEnteredHandler());
 		tilePane.setOnMouseExited(event -> onMouseExitedHandler());
 		GameLogic.randomTile();
+		GameLogic.startGame();
 	}
 	
 	public void initializePassButton() {

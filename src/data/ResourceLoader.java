@@ -3,7 +3,7 @@ package data;
 import java.util.ArrayList;
 import java.util.List;
 
-import GUI.TilePane;
+import gui.TilePane;
 import component.Tile;
 import javafx.scene.image.Image;
 // import javafx.scene.media.AudioClip;

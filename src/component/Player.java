@@ -1,6 +1,6 @@
 package component;
 
-import GUI.PlayerStatPane;
+import gui.PlayerStatPane;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
@@ -24,7 +24,6 @@ public class Player {
 	}
 	
 	public void updateScore(int value) {
-		System.out.println(123);
 		score += value;
 		playerStatPane.setScoreText("Score: " + score);
 	}

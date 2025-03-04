@@ -1,4 +1,4 @@
-package GUI;
+package gui;
 
 import component.Board;
 import javafx.geometry.Insets;
@@ -17,9 +17,6 @@ public class InGameScene extends HBox {
 	private ControlPane controlPane;
 	
 	public InGameScene() {
-		
-		// for test
-		GameLogic.getInstance().newGame(2, new String[] {"A", "B"}, new PlayerColor[] {PlayerColor.BLACK, PlayerColor.WHITE});
 		
 		boardPane = new BoardPane(GameLogic.getInstance().getBoard());
 		controlPane = new ControlPane();

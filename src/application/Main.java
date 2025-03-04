@@ -1,6 +1,6 @@
 package application;
 
-import GUI.GameManager;
+import gui.GameManager;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
