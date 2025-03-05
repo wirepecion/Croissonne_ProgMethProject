@@ -13,6 +13,9 @@ public class SelectPlayerPane extends HBox {
 	private Button twoPlayerButton;
 	private Button threePlayerButton; 
 	private Button fourPlayerButton;
+	private String[] twoPlayerName = new String[] { "Player 1", "Player 2" };
+	private String[] threePlayerName = new String[] { "Player 1", "Player 2", "Player 3" };
+	private String[] fourPlayerName = new String[] { "Player 1", "Player 2", "Player 3", "Player 4" };
 	
 	public SelectPlayerPane() {
 		//initialize button
@@ -42,14 +45,18 @@ public class SelectPlayerPane extends HBox {
 		playerButton.setOnMouseClicked(e -> {
 
 			if (playerButton.equals(twoPlayerButton)) {
-				GameLogic.getInstance().newGame(2, new String[] {"A","B"}, new PlayerColor[] {PlayerColor.BLACK, PlayerColor.WHITE});
+				GameLogic.setNumberOfPlayer(2);
+				GameLogic.setPlayerName(twoPlayerName);
 			} else if (playerButton.equals(threePlayerButton)) {
-				GameLogic.getInstance().newGame(3, new String[] {"A","B","C"}, new PlayerColor[] {PlayerColor.RED, PlayerColor.YELLOW, PlayerColor.BLUE});
+				GameLogic.setNumberOfPlayer(3);
+				GameLogic.setPlayerName(threePlayerName);
 			} else if (playerButton.equals(fourPlayerButton)) {
-				GameLogic.getInstance().newGame(4, new String[] {"A","B","C","D"}, new PlayerColor[] {PlayerColor.GREEN, PlayerColor.ORANGE, PlayerColor.PINK, PlayerColor.PURPLE});
+				GameLogic.setNumberOfPlayer(4);
+				GameLogic.setPlayerName(fourPlayerName);
 			}
 			
-			GameManager.getInstance().switchToInGameScene();
+			GameManager.getInstance().switchToSelectColorScene();
+			
 		});
 	}
 }

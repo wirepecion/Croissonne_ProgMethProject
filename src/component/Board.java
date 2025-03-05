@@ -51,7 +51,6 @@ public class Board {
 	public void addOnBoard(Tile tile, int x, int y) {
 		GameManager.getInstance().getInGameScene().getBoardPane().add(tile.getTilePane(), y, x);
 		allTiles[x][y] = tile;
-		GameManager.getInstance().getInGameScene().getBoardPane().paintComponent();
 	}
 	
 	public static int getBoardSize() {

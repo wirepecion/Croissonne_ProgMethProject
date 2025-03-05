@@ -17,8 +17,8 @@ import javafx.scene.text.Text;
 
 public class PlayerStatPane extends GridPane{
 	
-	private static final Color BASE_COLOR = Color.AQUA;
-	private static final Color ALERT_COLOR = Color.DARKORANGE;
+	private static final Color BASE_COLOR = Color.LIGHTGRAY;
+	private static final Color ALERT_COLOR = Color.WHITE;
 	private Player player;
 	private String playerIconURL;
 	private Text nameText;
@@ -32,7 +32,7 @@ public class PlayerStatPane extends GridPane{
 		playerIconImg.setFitHeight(100);
 		
 		setPadding(new Insets(10));
-		setPrefWidth(300);
+		setPrefWidth(100);
 		setPrefHeight(100);
 		setAlignment(Pos.CENTER);
 		setBackground(new Background(new BackgroundFill(BASE_COLOR, CornerRadii.EMPTY, Insets.EMPTY)));

@@ -1,5 +1,6 @@
 package data;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,11 +8,14 @@ import gui.TilePane;
 import component.Tile;
 import javafx.scene.image.Image;
 // import javafx.scene.media.AudioClip;
+import javafx.scene.paint.Color;
+import logic.GameLogic;
+import utils.TileType;
 
 public class ResourceLoader {
 	private static final ResourceLoader instance = new ResourceLoader();
 
-	private List<TilePane> tilePaneList;
+	public static Image background;
 	public static Image betweenTwoMountain;
 	public static Image castleOnAbyss;
 	public static Image castleOnMountain;
@@ -36,58 +40,79 @@ public class ResourceLoader {
 		loadResource();
 	}
 
-	public ResourceLoader() {
-		tilePaneList = new ArrayList<TilePane>();
-	}
-
-	public static ResourceLoader getInstance() {
-		return instance;
-	}
-
 	public static void loadResource() {
+		
+		background = new Image(ClassLoader.getSystemResourceAsStream(
+				"BACKGROUND.png"));
+		
+		String tilePath = "tilePic";
+		
 		betweenTwoMountain = new Image(ClassLoader.getSystemResourceAsStream(
-				"tilePic/BETWEEN_TWO_MOUNTAIN.png"));
+				tilePath + "/BETWEEN_TWO_MOUNTAIN.png"));
 		castleOnAbyss = new Image(ClassLoader.getSystemResourceAsStream(
-				"tilePic/CASTLE_ON_ABYSS.png"));
+				tilePath + "/CASTLE_ON_ABYSS.png"));
 		castleOnMountain = new Image(ClassLoader.getSystemResourceAsStream(
-				"tilePic/CASTLE_ON_MOUNTAIN.png"));
+				tilePath + "/CASTLE_ON_MOUNTAIN.png"));
 		crossroadRiver = new Image(ClassLoader.getSystemResourceAsStream(
-				"tilePic/CROSSROAD_RIVER.png"));
+				tilePath + "/CROSSROAD_RIVER.png"));
 		curveOfDeath = new Image(ClassLoader.getSystemResourceAsStream(
-				"tilePic/CURVE_OF_DEATH.png"));
+				tilePath + "/CURVE_OF_DEATH.png"));
 		curveRiverBesideAbyss = new Image(ClassLoader.getSystemResourceAsStream(
-				"tilePic/CURVE_RIVER_BESIDE_ABYSS.png"));
+				tilePath + "/CURVE_RIVER_BESIDE_ABYSS.png"));
 		curveRiverTurnLeftAtAbyss = new Image(ClassLoader.getSystemResourceAsStream(
-				"tilePic/CURVE_RIVER_TURN_LEFT_AT_ABYSS.png"));
+				tilePath + "/CURVE_RIVER_TURN_LEFT_AT_ABYSS.png"));
 		curveRiverTurnRightAtAbyss = new Image(ClassLoader.getSystemResourceAsStream(
-				"tilePic/CURVE_RIVER_TURN_RIGHT_AT_ABYSS.png"));
+				tilePath + "/CURVE_RIVER_TURN_RIGHT_AT_ABYSS.png"));
 		curveRiver = new Image(ClassLoader.getSystemResourceAsStream(
-				"tilePic/CURVE_RIVER.png"));
+				tilePath + "/CURVE_RIVER.png"));
 		deepAbyss = new Image(ClassLoader.getSystemResourceAsStream(
-				"tilePic/DEEP_ABYSS.png"));
+				tilePath + "/DEEP_ABYSS.png"));
 		empty = new Image(ClassLoader.getSystemResourceAsStream(
-				"tilePic/EMPTY.png"));
+				tilePath + "/EMPTY.png"));
 		mountainBase = new Image(ClassLoader.getSystemResourceAsStream(
-				"tilePic/MOUNTAIN_BASE.png"));
+				tilePath + "/MOUNTAIN_BASE.png"));
 		straightRiverBesideAbyss = new Image(ClassLoader.getSystemResourceAsStream(
-				"tilePic/STRAIGHT_RIVER_BESIDE_ABYSS.png"));
+				tilePath + "/STRAIGHT_RIVER_BESIDE_ABYSS.png"));
 		straightRiver = new Image(ClassLoader.getSystemResourceAsStream(
-				"tilePic/STRAIGHT_RIVER.png"));
+				tilePath + "/STRAIGHT_RIVER.png"));
 		tjunctionRiver = new Image(ClassLoader.getSystemResourceAsStream(
-				"tilePic/TJUNCTION_RIVER.png"));
+				tilePath + "/TJUNCTION_RIVER.png"));
 		tjunctionRiverBesideAbyss = new Image(ClassLoader.getSystemResourceAsStream(
-				"tilePic/TJUNCTION_RIVER_BESIDE_ABYSS.png"));
+				tilePath + "/TJUNCTION_RIVER_BESIDE_ABYSS.png"));
 		waterfallToAbyss = new Image(ClassLoader.getSystemResourceAsStream(
-				"tilePic/WATERFALL_TO_ABYSS.png"));
+				tilePath + "/WATERFALL_TO_ABYSS.png"));
 		
 		// explosionSound = new AudioClip(ClassLoader.getSystemResource("Explosion.wav").toString());
 	}
-
-	public void add(TilePane tilePane) {
-		tilePaneList.add(tilePane);
+	
+	public static Image getBackgroundImage() {
+		return background;
 	}
 
-	public List<TilePane> getTilePaneList() {
-		return tilePaneList;
+	public static Image getTileImage(TileType tiletype) {
+		String string;
+		if (tiletype != null) string = toCamelCase(tiletype.name());
+		else string = "empty";
+		try {
+			Field field = ResourceLoader.class.getField(string);
+			Image img = (Image) field.get(ResourceLoader.class);
+			return img;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
+	
+	private static String toCamelCase(String str) {
+        String[] words = str.split("_");
+        StringBuilder camelCaseString = new StringBuilder(words[0].toLowerCase());
+
+        for (int i = 1; i < words.length; i++) {
+            camelCaseString.append(words[i].substring(0, 1).toUpperCase())
+                           .append(words[i].substring(1).toLowerCase());
+        }
+
+        return camelCaseString.toString();
+    }
+	
 }

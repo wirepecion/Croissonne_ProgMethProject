@@ -2,28 +2,20 @@ package component;
 
 import java.util.ArrayList;
 
-import interfaces.Ownable;
+import interfaces.Scoreable;
 import logic.GameLogic;
 import utils.TileArea;
 import utils.TileType;
 
-public class OwnableTile extends Tile implements Ownable {
+public class ScoreableTile extends Tile implements Scoreable {
 	
 	private final boolean isCastle;
 	private boolean isOwned;
 	private Player owner;
 	
-	public OwnableTile(TileType tileType) {
+	public ScoreableTile(TileType tileType) {
 		super(tileType);
 		this.isCastle = tileType.toString().contains("CASTLE");
-		this.isOwned = false;
-		this.owner = null;
-	}
-	
-	@Override
-	public void ownBy(Player player) {
-		this.isOwned = true;
-		this.owner = player;
 	}
 	
 	public void collectScore() {

@@ -12,11 +12,11 @@ import javafx.scene.text.Font;
 
 public class StartGameScene extends VBox {
 	private static final String  TITLE_TEXT = "Croissonne";
-	private static final String  SUBTITLE_TEXT = "Click Start To Begin!";
 	private Label titleLabel;
 	private Label subtitleLabel;
 	private StartGameButton startButton;
 	private SelectPlayerPane selectPlayerPane;
+	private SelectColorPane selectColorPane;
 	
 	public StartGameScene() {
 		
@@ -44,7 +44,7 @@ public class StartGameScene extends VBox {
 		titleLabel.setPadding(new Insets(10));
 		
 		//Sub-title
-		subtitleLabel = new Label(SUBTITLE_TEXT);
+		subtitleLabel = new Label("Click Start To Begin!");
 		subtitleLabel.setFont(new Font("Cambria", 36));
 		VBox.setMargin(subtitleLabel, new Insets(0, 10, 70, 10));
 	}
@@ -57,6 +57,18 @@ public class StartGameScene extends VBox {
 		selectPlayerPane = new SelectPlayerPane();
 		getChildren().add(selectPlayerPane);
 	}
+	
+	public void removeSelectPlayerButton() {
+		getChildren().remove(selectPlayerPane);
+	}
+	
+	public void addSelectColorButton() {
+		selectColorPane = new SelectColorPane();
+		getChildren().add(selectColorPane);
+	}
 
+	public void setSubtitleLabel(String string) {
+		subtitleLabel.setText(string);
+	}
 }
 

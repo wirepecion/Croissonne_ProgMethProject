@@ -39,8 +39,8 @@ public abstract class Tile implements Rotatable {
 	}
 
 	public static Tile createTile(TileType tileType) {
-		if (isOwnable(tileType)) {
-			return new OwnableTile(tileType);
+		if (isScoreable(tileType)) {
+			return new ScoreableTile(tileType);
 		} else {
 			return new RegularTile(tileType);
 		}
@@ -60,7 +60,7 @@ public abstract class Tile implements Rotatable {
 		return tileType.equals(TileType.EMPTY);
 	}
 	
-	private static boolean isOwnable(TileType tileType) {
+	private static boolean isScoreable(TileType tileType) {
 		return tileType.toString().contains("CASTLE") ||
 			   tileType.toString().contains("RIVER");
 	}
@@ -70,11 +70,12 @@ public abstract class Tile implements Rotatable {
 			System.out.println(xPosition + " " + yPosition);
 			if (GameLogic.getInstance().isPlaceable(xPosition, yPosition)) {
 				System.out.println("get next tile");
+				
 				this.tileType = GameLogic.getCurrentTile().getTileType();
 				this.edge = (new TileAreaDeterminer()).determineTileArea(tileType); 
-				tilePane.setRotate(ControlPane.getTilePane().getRotate());
-				tilePane.setCursor(Cursor.DEFAULT);
-				ControlPane.resetTilepane();
+				
+				tilePane.draw();
+				
 				GameLogic.getInstance().placeCurrentTile(xPosition, yPosition);
 			}
 		}

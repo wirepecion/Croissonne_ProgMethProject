@@ -17,22 +17,14 @@ public class BoardPane extends GridPane {
 	public BoardPane(Board board) {
 		setHgap(10); setVgap(10);
 		setPadding(new Insets(10));
-		setPrefWidth(800);
+		setPrefWidth(750);
 		setAlignment(Pos.CENTER);
-		setBackground(new Background(new BackgroundFill(Color.LIGHTSLATEGREY, CornerRadii.EMPTY, Insets.EMPTY)));
 		for (int row = 0; row < Board.getBoardSize(); row++) {
 			for (int col = 0; col < Board.getBoardSize(); col++) {
 				TilePane tilePane = new TilePane(board.getTile(row, col));
+				tilePane.draw();
 				add(tilePane, col, row);
-				ResourceLoader.getInstance().add(tilePane);
 			}
-		}
-		paintComponent();
-	}
-	
-	public void paintComponent() {
-		for (TilePane tilePane : ResourceLoader.getInstance().getTilePaneList()) {
-			tilePane.draw(tilePane.getGraphicsContext2D());
 		}
 	}
 	

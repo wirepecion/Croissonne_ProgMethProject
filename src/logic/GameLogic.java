@@ -1,7 +1,7 @@
 package logic;
 
 import component.Board;
-import component.OwnableTile;
+import component.ScoreableTile;
 import component.Player;
 
 import java.util.ArrayList;
@@ -18,6 +18,9 @@ public class GameLogic {
 	
 	private static GameLogic instance = null;
 	private static Board board;
+	private static int numberOfPlayer;
+	private static String[] playerName;
+	private static ArrayList<PlayerColor> playerColorList = new ArrayList<PlayerColor>();
 	private static boolean isGameEnd;
 	private static Tile currentTile;
 	private static Player[] playerList;
@@ -29,20 +32,17 @@ public class GameLogic {
 		TileStorage.init();
 	}
 	
-	public void newGame(int NumberOfplayer, String[] playerName, PlayerColor[] playerColor) {
+	public void newGame() {
 		board = new Board();
-		playerList = new Player[NumberOfplayer];
-		for (int i = 0; i < NumberOfplayer; i++) {
-			playerList[i] = new Player(playerName[i], playerColor[i]);
+		playerList = new Player[numberOfPlayer];
+		for (int i = 0; i < numberOfPlayer; i++) {
+			playerList[i] = new Player(playerName[i], playerColorList.get(i));
 		}
 		riverScoreList = new ArrayList<RiverScoreCollector>();
-		castleScoreList = new ArrayList<int[]>();
-	}
-	
-	public static void startGame() {
-		getCurrentPlayer().getPlayerStatPane().setAlertColor();
 		riverScoreList.add(new RiverScoreCollector(
 				new double[] { 6.5, 6.0 }, 1, new double[] { 6.5, 7.0 }));
+		castleScoreList = new ArrayList<int[]>();
+		getCurrentPlayer().getPlayerStatPane().setAlertColor();
 	}
 	
 	public static void nextPlayer() {
@@ -52,6 +52,7 @@ public class GameLogic {
 	}
 	
 	public static Player getCurrentPlayer() {
+		if (playerList == null) return null;
 		return playerList[currentPlayerNumber];
 	}
 	
@@ -101,16 +102,13 @@ public class GameLogic {
 		if (update()) return;
 		currentTile = TileStorage.getRandomTile();
 		currentTile.setPlace(false);
-		ControlPane.resetTilepane();
-		ControlPane.getTilePane().getGraphicsContext2D().drawImage(
-				currentTile.getTilePane().getImageOfTile(), 
-				0, 0, TilePane.getTileSize() * 2, TilePane.getTileSize() * 2);
+		ControlPane.showRandomTile();
 	}
 	
 	public void placeCurrentTile(int x, int y) {
-		if (currentTile instanceof OwnableTile) {
-			((OwnableTile) currentTile).collectScore();
-			if (!(((OwnableTile) currentTile).isCastle())) {
+		if (currentTile instanceof ScoreableTile) {
+			((ScoreableTile) currentTile).collectScore();
+			if (!(((ScoreableTile) currentTile).isCastle())) {
 				System.out.println("river check");
 				riverScoreCheck();
 			}
@@ -118,7 +116,6 @@ public class GameLogic {
 		castleScoreCheck();
 		currentTile.setPlace(true);
 		board.addOnBoard(currentTile, x, y);
-		board.getBoardPane().paintComponent();
 		randomTile();
 		nextPlayer();
 	}
@@ -134,7 +131,8 @@ public class GameLogic {
 	}
 	
 	private static void castleScoreCheck() {
-		for (int[] pos : castleScoreList) {
+		for (int idx = castleScoreList.size() - 1; idx >= 0; idx--) {
+			int[] pos = castleScoreList.get(idx);
 			boolean isScore = true;
 			for (int i = pos[0] - 1; i <= pos[0] + 1; i++) {
 				for (int j = pos[1] - 1; j <= pos[1] + 1; j++) {
@@ -146,7 +144,9 @@ public class GameLogic {
 				}
 				if (!isScore) break;
 			}
-			if (isScore) getCurrentPlayer().updateScore(8);
+			if (isScore) {
+				getCurrentPlayer().updateScore(8);
+			}
 		}
 	}
 	
@@ -235,6 +235,10 @@ public class GameLogic {
 		return false;
 	}
 	
+	public static void addPlayerColor(PlayerColor playerColor) {
+		playerColorList.add(playerColor);
+	}
+	
 	public static GameLogic getInstance() {
 		if(instance == null) {
 			instance = new GameLogic();
@@ -244,6 +248,18 @@ public class GameLogic {
 
 	public Board getBoard() {
 		return board;
+	}
+	
+	public static int getNumberOfPlayer() {
+		return numberOfPlayer;
+	}
+
+	public static void setNumberOfPlayer(int numberOfPlayer) {
+		GameLogic.numberOfPlayer = numberOfPlayer;
+	}
+
+	public static void setPlayerName(String[] playerName) {
+		GameLogic.playerName = playerName;
 	}
 
 	public boolean isGameEnd() {

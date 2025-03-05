@@ -35,6 +35,11 @@ public class GameManager {
 		startGameScene.addSelectPlayerButton();
 	}
 	
+	public void switchToSelectColorScene() {
+		startGameScene.removeSelectPlayerButton();
+		startGameScene.addSelectColorButton();
+	}
+	
 	public void switchToInGameScene() {
 		inGameScene = new InGameScene();
 		scene = new Scene(inGameScene);
