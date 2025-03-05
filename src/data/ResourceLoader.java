@@ -42,45 +42,45 @@ public class ResourceLoader {
 
 	public static void loadResource() {
 		
-		background = new Image(ClassLoader.getSystemResourceAsStream(
-				"BACKGROUND.png"));
+		background = new Image(ClassLoader.getSystemResource(
+				"BACKGROUND.png").toString());
 		
 		String tilePath = "tilePic";
 		
-		betweenTwoMountain = new Image(ClassLoader.getSystemResourceAsStream(
-				tilePath + "/BETWEEN_TWO_MOUNTAIN.png"));
-		castleOnAbyss = new Image(ClassLoader.getSystemResourceAsStream(
-				tilePath + "/CASTLE_ON_ABYSS.png"));
-		castleOnMountain = new Image(ClassLoader.getSystemResourceAsStream(
-				tilePath + "/CASTLE_ON_MOUNTAIN.png"));
-		crossroadRiver = new Image(ClassLoader.getSystemResourceAsStream(
-				tilePath + "/CROSSROAD_RIVER.png"));
-		curveOfDeath = new Image(ClassLoader.getSystemResourceAsStream(
-				tilePath + "/CURVE_OF_DEATH.png"));
-		curveRiverBesideAbyss = new Image(ClassLoader.getSystemResourceAsStream(
-				tilePath + "/CURVE_RIVER_BESIDE_ABYSS.png"));
-		curveRiverTurnLeftAtAbyss = new Image(ClassLoader.getSystemResourceAsStream(
-				tilePath + "/CURVE_RIVER_TURN_LEFT_AT_ABYSS.png"));
-		curveRiverTurnRightAtAbyss = new Image(ClassLoader.getSystemResourceAsStream(
-				tilePath + "/CURVE_RIVER_TURN_RIGHT_AT_ABYSS.png"));
-		curveRiver = new Image(ClassLoader.getSystemResourceAsStream(
-				tilePath + "/CURVE_RIVER.png"));
-		deepAbyss = new Image(ClassLoader.getSystemResourceAsStream(
-				tilePath + "/DEEP_ABYSS.png"));
-		empty = new Image(ClassLoader.getSystemResourceAsStream(
-				tilePath + "/EMPTY.png"));
-		mountainBase = new Image(ClassLoader.getSystemResourceAsStream(
-				tilePath + "/MOUNTAIN_BASE.png"));
-		straightRiverBesideAbyss = new Image(ClassLoader.getSystemResourceAsStream(
-				tilePath + "/STRAIGHT_RIVER_BESIDE_ABYSS.png"));
-		straightRiver = new Image(ClassLoader.getSystemResourceAsStream(
-				tilePath + "/STRAIGHT_RIVER.png"));
-		tjunctionRiver = new Image(ClassLoader.getSystemResourceAsStream(
-				tilePath + "/TJUNCTION_RIVER.png"));
-		tjunctionRiverBesideAbyss = new Image(ClassLoader.getSystemResourceAsStream(
-				tilePath + "/TJUNCTION_RIVER_BESIDE_ABYSS.png"));
-		waterfallToAbyss = new Image(ClassLoader.getSystemResourceAsStream(
-				tilePath + "/WATERFALL_TO_ABYSS.png"));
+		betweenTwoMountain = new Image(ClassLoader.getSystemResource(
+				tilePath + "/BETWEEN_TWO_MOUNTAIN.png").toString());
+		castleOnAbyss = new Image(ClassLoader.getSystemResource(
+				tilePath + "/CASTLE_ON_ABYSS.png").toString());
+		castleOnMountain = new Image(ClassLoader.getSystemResource(
+				tilePath + "/CASTLE_ON_MOUNTAIN.png").toString());
+		crossroadRiver = new Image(ClassLoader.getSystemResource(
+				tilePath + "/CROSSROAD_RIVER.png").toString());
+		curveOfDeath = new Image(ClassLoader.getSystemResource(
+				tilePath + "/CURVE_OF_DEATH.png").toString());
+		curveRiverBesideAbyss = new Image(ClassLoader.getSystemResource(
+				tilePath + "/CURVE_RIVER_BESIDE_ABYSS.png").toString());
+		curveRiverTurnLeftAtAbyss = new Image(ClassLoader.getSystemResource(
+				tilePath + "/CURVE_RIVER_TURN_LEFT_AT_ABYSS.png").toString());
+		curveRiverTurnRightAtAbyss = new Image(ClassLoader.getSystemResource(
+				tilePath + "/CURVE_RIVER_TURN_RIGHT_AT_ABYSS.png").toString());
+		curveRiver = new Image(ClassLoader.getSystemResource(
+				tilePath + "/CURVE_RIVER.png").toString());
+		deepAbyss = new Image(ClassLoader.getSystemResource(
+				tilePath + "/DEEP_ABYSS.png").toString());
+		empty = new Image(ClassLoader.getSystemResource(
+				tilePath + "/EMPTY.png").toString());
+		mountainBase = new Image(ClassLoader.getSystemResource(
+				tilePath + "/MOUNTAIN_BASE.png").toString());
+		straightRiverBesideAbyss = new Image(ClassLoader.getSystemResource(
+				tilePath + "/STRAIGHT_RIVER_BESIDE_ABYSS.png").toString());
+		straightRiver = new Image(ClassLoader.getSystemResource(
+				tilePath + "/STRAIGHT_RIVER.png").toString());
+		tjunctionRiver = new Image(ClassLoader.getSystemResource(
+				tilePath + "/TJUNCTION_RIVER.png").toString());
+		tjunctionRiverBesideAbyss = new Image(ClassLoader.getSystemResource(
+				tilePath + "/TJUNCTION_RIVER_BESIDE_ABYSS.png").toString());
+		waterfallToAbyss = new Image(ClassLoader.getSystemResource(
+				tilePath + "/WATERFALL_TO_ABYSS.png").toString());
 		
 		// explosionSound = new AudioClip(ClassLoader.getSystemResource("Explosion.wav").toString());
 	}
