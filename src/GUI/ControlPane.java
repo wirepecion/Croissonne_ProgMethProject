@@ -73,6 +73,7 @@ public class ControlPane extends VBox {
 	private void onMouseClicked() {
 		GameLogic.getCurrentPlayer().updatePenalty(1);
 		GameLogic.randomTile();
+		GameLogic.nextPlayer();
 	}
 	
 	public static void resetTilepane() {

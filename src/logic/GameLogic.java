@@ -40,13 +40,15 @@ public class GameLogic {
 	}
 	
 	public static void startGame() {
-		currentPlayerNumber = 0;
+		getCurrentPlayer().getPlayerStatPane().setAlertColor();
 		riverScoreList.add(new RiverScoreCollector(
 				new double[] { 6.5, 6.0 }, 1, new double[] { 6.5, 7.0 }));
 	}
 	
-	private static void nextPlayer() {
+	public static void nextPlayer() {
+		getCurrentPlayer().getPlayerStatPane().setBaseColor();
 		currentPlayerNumber = (currentPlayerNumber + 1) % playerList.length;
+		getCurrentPlayer().getPlayerStatPane().setAlertColor();
 	}
 	
 	public static Player getCurrentPlayer() {
@@ -103,7 +105,6 @@ public class GameLogic {
 		ControlPane.getTilePane().getGraphicsContext2D().drawImage(
 				currentTile.getTilePane().getImageOfTile(), 
 				0, 0, TilePane.getTileSize() * 2, TilePane.getTileSize() * 2);
-		nextPlayer();
 	}
 	
 	public void placeCurrentTile(int x, int y) {
@@ -119,6 +120,7 @@ public class GameLogic {
 		board.addOnBoard(currentTile, x, y);
 		board.getBoardPane().paintComponent();
 		randomTile();
+		nextPlayer();
 	}
 	
 	private static void riverScoreCheck() {
@@ -149,12 +151,30 @@ public class GameLogic {
 	}
 	
 	public void addToRiverScoreList(double[] x, double[] y) {
-		for (RiverScoreCollector collector : riverScoreList) {
+		boolean isMatchLeft = false, isMatchRight = false;
+		int idxLeft = -1, idxRight = -1;
+		for (int i = 0; i < riverScoreList.size(); i++) {
+			RiverScoreCollector collector = riverScoreList.get(i);
 			System.out.println(collector.getLeft()[0] + " " + collector.getLeft()[1] + " " + collector.getScore() + " " + collector.getRight()[0] + " " + collector.getRight()[1]);
 			System.out.println(x[0] + " " + x[1] + " " + y[0] + " " + y[1]);
-			if (checkCollectorLeft(collector, x, y)) return;
-			if (checkCollectorRight(collector, x, y)) return;
+			if (checkCollectorLeft(collector, x, y)) {
+				isMatchLeft = true;
+				idxLeft = i;
+			}
+			if (checkCollectorRight(collector, x, y)) {
+				isMatchRight = true;
+				idxRight = i;
+			}
+			if (isMatchLeft && isMatchRight) {
+				if (idxLeft == idxRight) {
+					endLoopCollector(collector);
+					return;
+				}
+				mergeCollector(riverScoreList.get(idxLeft), riverScoreList.get(idxRight));
+				return;
+			}
 		}
+		if (isMatchLeft || isMatchRight) return;
 		riverScoreList.add(new RiverScoreCollector(x, 1, y));
 	}
 	
@@ -186,6 +206,19 @@ public class GameLogic {
 		return false;
 	}
 	
+	private void mergeCollector(RiverScoreCollector left, RiverScoreCollector right) {
+		riverScoreList.add(new RiverScoreCollector(
+				right.getLeft(), left.getScore() + right.getScore() - 1, left.getRight()));
+		riverScoreList.remove(left);
+		riverScoreList.remove(right);
+	}
+	
+	private void endLoopCollector(RiverScoreCollector collector) {
+		collector.setLeft(new double[] { -1, -1 });
+		collector.setRight(new double[] { -1, -1 });
+		collector.setScore(collector.getScore() - 1);
+	}
+
 	public void addToCastleScoreList(int x, int y) {
 		castleScoreList.add(new int[] {x, y});
 	}
