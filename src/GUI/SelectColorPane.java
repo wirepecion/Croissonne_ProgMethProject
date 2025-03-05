@@ -41,7 +41,7 @@ public class SelectColorPane extends HBox {
 	
 	private void chooseColor(PlayerColor playerColor) {
 		System.out.println(playerColor.name());
-		GameLogic.getInstance().addPlayerColor(playerColor);
+		GameLogic.addPlayerColor(playerColor);
 		chosenPlayerColor++;
 		if (chosenPlayerColor == GameLogic.getNumberOfPlayer()) 
 			GameManager.getInstance().switchToInGameScene();

@@ -65,7 +65,7 @@ public abstract class Tile implements Rotatable {
 			   tileType.toString().contains("RIVER");
 	}
 	
-	public void onClick() {
+	public boolean onClick() {
 		if (GameLogic.getCurrentTile() != null && !GameLogic.getCurrentTile().isPlace()) {
 			System.out.println(xPosition + " " + yPosition);
 			if (GameLogic.getInstance().isPlaceable(xPosition, yPosition)) {
@@ -74,11 +74,10 @@ public abstract class Tile implements Rotatable {
 				this.tileType = GameLogic.getCurrentTile().getTileType();
 				this.edge = (new TileAreaDeterminer()).determineTileArea(tileType); 
 				
-				tilePane.draw();
-				
-				GameLogic.getInstance().placeCurrentTile(xPosition, yPosition);
+				return true;
 			}
 		}
+		return false;
 	}
 
 	public static int getEdgeDirections() {

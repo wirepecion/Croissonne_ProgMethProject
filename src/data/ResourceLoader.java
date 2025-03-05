@@ -43,25 +43,25 @@ public class ResourceLoader {
 	public static void loadResource() {
 		
 		background = new Image(ClassLoader.getSystemResource(
-				"BACKGROUND.png").toString());
+				"background.png").toString());
 		
-		betweenTwoMountain = nameToImage("betweenTwoMountain");
-		castleOnAbyss = nameToImage("castleOnAbyss");
-		castleOnMountain = nameToImage("castleOnMountain");
-		crossroadRiver = nameToImage("crossroadRiver");
-		curveOfDeath = nameToImage("curveOfDeath");
-		curveRiverBesideAbyss = nameToImage("curveRiverBesideAbyss");
-		curveRiverTurnLeftAtAbyss = nameToImage("curveRiverTurnLeftAtAbyss");
-		curveRiverTurnRightAtAbyss = nameToImage("curveRiverTurnRightAtAbyss");
-		curveRiver = nameToImage("curveRiver");
-		deepAbyss =nameToImage("deepAbyss");
-		empty = nameToImage("empty");
-		mountainBase = nameToImage("mountainBase");
-		straightRiverBesideAbyss = nameToImage("straightRiverBesideAbyss");
-		straightRiver = nameToImage("straightRiver");
-		tjunctionRiver = nameToImage("tjunctionRiver");
-		tjunctionRiverBesideAbyss = nameToImage("tjunctionRiverBesideAbyss");
-		waterfallToAbyss = nameToImage("waterfallToAbyss");
+		betweenTwoMountain = tileNameToImage("betweenTwoMountain");
+		castleOnAbyss = tileNameToImage("castleOnAbyss");
+		castleOnMountain = tileNameToImage("castleOnMountain");
+		crossroadRiver = tileNameToImage("crossroadRiver");
+		curveOfDeath = tileNameToImage("curveOfDeath");
+		curveRiverBesideAbyss = tileNameToImage("curveRiverBesideAbyss");
+		curveRiverTurnLeftAtAbyss = tileNameToImage("curveRiverTurnLeftAtAbyss");
+		curveRiverTurnRightAtAbyss = tileNameToImage("curveRiverTurnRightAtAbyss");
+		curveRiver = tileNameToImage("curveRiver");
+		deepAbyss =tileNameToImage("deepAbyss");
+		empty = tileNameToImage("empty");
+		mountainBase = tileNameToImage("mountainBase");
+		straightRiverBesideAbyss = tileNameToImage("straightRiverBesideAbyss");
+		straightRiver = tileNameToImage("straightRiver");
+		tjunctionRiver = tileNameToImage("tjunctionRiver");
+		tjunctionRiverBesideAbyss = tileNameToImage("tjunctionRiverBesideAbyss");
+		waterfallToAbyss = tileNameToImage("waterfallToAbyss");
 		
 		// explosionSound = new AudioClip(ClassLoader.getSystemResource("Explosion.wav").toString());
 	}
@@ -96,7 +96,7 @@ public class ResourceLoader {
         return camelCaseString.toString();
     }
 	
-	private static Image nameToImage(String string) {
+	private static Image tileNameToImage(String string) {
 		return 	new Image(ClassLoader.getSystemResource(
 				"tilePic/" + convertToSnakeCase(string) + ".png").toString());
 	}

@@ -26,18 +26,20 @@ public class TilePane extends Canvas implements Rotatable {
 	public void draw() {
 		GraphicsContext gc = getGraphicsContext2D();
 		gc.drawImage(ResourceLoader.getTileImage(tile.getTileType()), 0, 0, TILE_SIZE, TILE_SIZE);
-//		setRotate(ControlPane.getTilePane().getRotate());
-//		setCursor(Cursor.DEFAULT);
-//		ControlPane.getTilePane().setRotate(0);
 	}
-
 	
 	public void rotate() {
 		setRotate(getRotate() + 90);
 	}
 	
 	private void MouseClickHandler() {
-		tile.onClick();
+		if (tile.onClick()) {
+			draw();
+			setRotate(ControlPane.getTilePane().getRotate());
+			setCursor(Cursor.DEFAULT);
+			ControlPane.getTilePane().setRotate(0);
+			GameLogic.getInstance().placeCurrentTile(tile.getxPosition(), tile.getyPosition());
+		}
 	}
 	
 	private void MouseEnteredHandler() {
