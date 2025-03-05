@@ -60,8 +60,9 @@ public class OwnableTile extends Tile implements Ownable {
 			);
 		} else {
 			for (int i = 0; i < list.size(); i++) {
+				System.out.println("side: " + positionDeterminer(list.get(i))[0] + " " + positionDeterminer(list.get(i))[1]);
 				GameLogic.getInstance().addToRiverScoreList(
-					new double[] { (double) -1, (double) -1 }, 
+					new double[] { -1.0, -1.0 }, 
 					positionDeterminer(list.get(i))
 				);
 			}

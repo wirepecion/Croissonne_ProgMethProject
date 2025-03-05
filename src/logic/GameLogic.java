@@ -179,12 +179,14 @@ public class GameLogic {
 	}
 	
 	private boolean checkCollectorLeft(RiverScoreCollector collector, double[] x, double[] y) {
-		if (Arrays.equals(collector.getLeft(), x)) {
+		if (Arrays.equals(collector.getLeft(), x) &&
+				!Arrays.equals(x, RiverScoreCollector.getEndloop())) {
 			collector.setLeft(y);
 			collector.addScore();
 			return true;
 		} 
-		if (Arrays.equals(collector.getLeft(), y)) {
+		if (Arrays.equals(collector.getLeft(), y) &&
+				!Arrays.equals(y, RiverScoreCollector.getEndloop())) {
 			collector.setLeft(x);
 			collector.addScore();
 			return true;
@@ -193,12 +195,14 @@ public class GameLogic {
 	}
 	
 	private boolean checkCollectorRight(RiverScoreCollector collector, double[] x, double[] y) {
-		if (Arrays.equals(collector.getRight(), x)) {
+		if (Arrays.equals(collector.getRight(), x) &&
+				!Arrays.equals(x, RiverScoreCollector.getEndloop())) {
 			collector.setRight(y);
 			collector.addScore();
 			return true;
 		} 
-		if (Arrays.equals(collector.getRight(), y)) {
+		if (Arrays.equals(collector.getRight(), y) &&
+				!Arrays.equals(y, RiverScoreCollector.getEndloop())) {
 			collector.setRight(x);
 			collector.addScore();
 			return true;
