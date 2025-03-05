@@ -45,42 +45,23 @@ public class ResourceLoader {
 		background = new Image(ClassLoader.getSystemResource(
 				"BACKGROUND.png").toString());
 		
-		String tilePath = "tilePic";
-		
-		betweenTwoMountain = new Image(ClassLoader.getSystemResource(
-				tilePath + "/BETWEEN_TWO_MOUNTAIN.png").toString());
-		castleOnAbyss = new Image(ClassLoader.getSystemResource(
-				tilePath + "/CASTLE_ON_ABYSS.png").toString());
-		castleOnMountain = new Image(ClassLoader.getSystemResource(
-				tilePath + "/CASTLE_ON_MOUNTAIN.png").toString());
-		crossroadRiver = new Image(ClassLoader.getSystemResource(
-				tilePath + "/CROSSROAD_RIVER.png").toString());
-		curveOfDeath = new Image(ClassLoader.getSystemResource(
-				tilePath + "/CURVE_OF_DEATH.png").toString());
-		curveRiverBesideAbyss = new Image(ClassLoader.getSystemResource(
-				tilePath + "/CURVE_RIVER_BESIDE_ABYSS.png").toString());
-		curveRiverTurnLeftAtAbyss = new Image(ClassLoader.getSystemResource(
-				tilePath + "/CURVE_RIVER_TURN_LEFT_AT_ABYSS.png").toString());
-		curveRiverTurnRightAtAbyss = new Image(ClassLoader.getSystemResource(
-				tilePath + "/CURVE_RIVER_TURN_RIGHT_AT_ABYSS.png").toString());
-		curveRiver = new Image(ClassLoader.getSystemResource(
-				tilePath + "/CURVE_RIVER.png").toString());
-		deepAbyss = new Image(ClassLoader.getSystemResource(
-				tilePath + "/DEEP_ABYSS.png").toString());
-		empty = new Image(ClassLoader.getSystemResource(
-				tilePath + "/EMPTY.png").toString());
-		mountainBase = new Image(ClassLoader.getSystemResource(
-				tilePath + "/MOUNTAIN_BASE.png").toString());
-		straightRiverBesideAbyss = new Image(ClassLoader.getSystemResource(
-				tilePath + "/STRAIGHT_RIVER_BESIDE_ABYSS.png").toString());
-		straightRiver = new Image(ClassLoader.getSystemResource(
-				tilePath + "/STRAIGHT_RIVER.png").toString());
-		tjunctionRiver = new Image(ClassLoader.getSystemResource(
-				tilePath + "/TJUNCTION_RIVER.png").toString());
-		tjunctionRiverBesideAbyss = new Image(ClassLoader.getSystemResource(
-				tilePath + "/TJUNCTION_RIVER_BESIDE_ABYSS.png").toString());
-		waterfallToAbyss = new Image(ClassLoader.getSystemResource(
-				tilePath + "/WATERFALL_TO_ABYSS.png").toString());
+		betweenTwoMountain = nameToImage("betweenTwoMountain");
+		castleOnAbyss = nameToImage("castleOnAbyss");
+		castleOnMountain = nameToImage("castleOnMountain");
+		crossroadRiver = nameToImage("crossroadRiver");
+		curveOfDeath = nameToImage("curveOfDeath");
+		curveRiverBesideAbyss = nameToImage("curveRiverBesideAbyss");
+		curveRiverTurnLeftAtAbyss = nameToImage("curveRiverTurnLeftAtAbyss");
+		curveRiverTurnRightAtAbyss = nameToImage("curveRiverTurnRightAtAbyss");
+		curveRiver = nameToImage("curveRiver");
+		deepAbyss =nameToImage("deepAbyss");
+		empty = nameToImage("empty");
+		mountainBase = nameToImage("mountainBase");
+		straightRiverBesideAbyss = nameToImage("straightRiverBesideAbyss");
+		straightRiver = nameToImage("straightRiver");
+		tjunctionRiver = nameToImage("tjunctionRiver");
+		tjunctionRiverBesideAbyss = nameToImage("tjunctionRiverBesideAbyss");
+		waterfallToAbyss = nameToImage("waterfallToAbyss");
 		
 		// explosionSound = new AudioClip(ClassLoader.getSystemResource("Explosion.wav").toString());
 	}
@@ -113,6 +94,24 @@ public class ResourceLoader {
         }
 
         return camelCaseString.toString();
+    }
+	
+	private static Image nameToImage(String string) {
+		return 	new Image(ClassLoader.getSystemResource(
+				"tilePic/" + convertToSnakeCase(string) + ".png").toString());
+	}
+	
+	private static String convertToSnakeCase(String input) {
+        StringBuilder result = new StringBuilder();
+        for (char c : input.toCharArray()) {
+            if (Character.isUpperCase(c)) {
+                result.append("_");
+                result.append(Character.toLowerCase(c));
+            } else {
+                result.append(c);
+            }
+        }
+        return result.toString();
     }
 	
 }
