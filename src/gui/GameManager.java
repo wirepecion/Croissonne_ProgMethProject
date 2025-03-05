@@ -41,6 +41,14 @@ public class GameManager {
 		stage.setScene(scene);
 		stage.show();
 	}
+	public void switchToEndGameScene() {
+		inGameScene.clearControlPane();
+		inGameScene.addGameOverText();
+		inGameScene.addWinnerText();
+		inGameScene.addPlayerStatPane();
+		inGameScene.addPlayAgainAndExitButton();
+		
+	}
 	
 	public static GameManager getInstance() {
 		return instance;
