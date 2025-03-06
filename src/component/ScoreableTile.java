@@ -10,8 +10,6 @@ import utils.TileType;
 public class ScoreableTile extends Tile implements Scoreable {
 	
 	private final boolean isCastle;
-	private boolean isOwned;
-	private Player owner;
 	
 	public ScoreableTile(TileType tileType) {
 		super(tileType);
@@ -20,7 +18,7 @@ public class ScoreableTile extends Tile implements Scoreable {
 	
 	public void collectScore() {
 		if (isCastle) {
-			GameLogic.getInstance().addToCastleScoreList(yPosition, xPosition);
+			GameLogic.getInstance().addToCastleScoreList(xPosition, yPosition);
 		} else {
 			checkRiverSide();
 		}
@@ -82,14 +80,6 @@ public class ScoreableTile extends Tile implements Scoreable {
 	
 	public boolean isCastle() {
 		return isCastle;
-	}
-
-	public boolean isOwned() {
-		return isOwned;
-	}
-
-	public Player getOwner() {
-		return owner;
 	}
 
 }
