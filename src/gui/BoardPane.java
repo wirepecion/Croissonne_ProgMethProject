@@ -2,7 +2,7 @@ package gui;
 
 import component.Board;
 import component.Tile;
-import data.ResourceLoader;
+import data.ImageLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.Background;

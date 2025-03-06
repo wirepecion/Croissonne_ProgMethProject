@@ -2,7 +2,7 @@ package gui;
 
 import component.Player;
 import component.Tile;
-import data.ResourceLoader;
+import data.ImageLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
@@ -35,6 +35,9 @@ public class ControlPane extends VBox {
 		setSpacing(10);
 		setAlignment(Pos.CENTER);
 		
+		getChildren().clear();
+		
+		Player[] players = GameLogic.getPlayer();
 		for (int i = 0; i < GameLogic.getPlayer().length; i++) {
 			getChildren().addAll(GameLogic.getPlayer()[i].getPlayerStatPane());
 		}
@@ -59,9 +62,9 @@ public class ControlPane extends VBox {
 		tilePane = new Canvas(TilePane.getTileSize() * 3, TilePane.getTileSize() * 3);
 		tilePane.setLayoutX(25);
 		tilePane.setLayoutY(25);
-		tilePane.setOnMouseClicked(event -> rotateTile());
-		tilePane.setOnMouseEntered(event -> { setCursor(Cursor.HAND); });
-		tilePane.setOnMouseExited(event -> { setCursor(Cursor.DEFAULT); });
+		tilePane.setOnMouseClicked(event -> tilePaneClickHandler());
+		tilePane.setOnMouseEntered(event -> setCursor(Cursor.HAND));
+		tilePane.setOnMouseExited(event -> setCursor(Cursor.DEFAULT));
 		GameLogic.randomTile();
 	}
 	
@@ -85,19 +88,21 @@ public class ControlPane extends VBox {
 				Color.FIREBRICK, CornerRadii.EMPTY, Insets.EMPTY)));
 		passButton.setFont(new Font("Arial Bold", 40));
 		passButton.setStyle("-fx-text-fill: white;");
-		passButton.setOnMouseClicked(event -> onMouseClicked());
+		passButton.setOnMouseClicked(event -> passButtonClickHandler());
 		passButton.setOnMouseEntered(event -> onMouseEnteredHandler());
 		passButton.setOnMouseExited(event -> onMouseExitedHandler());
 	}
 	
-	private void rotateTile() {
-		GameLogic.getCurrentTile().rotate();
-		tilePane.setRotate(tilePane.getRotate() + 90);
+	private void tilePaneClickHandler() {
+		if (!GameLogic.getInstance().isGameEnd()) {
+			GameLogic.getCurrentTile().rotate();
+			tilePane.setRotate(tilePane.getRotate() + 90);
+		}
 	}
 	
 	public static void showRandomTile() {
 		tilePane.getGraphicsContext2D().drawImage(
-				ResourceLoader.getTileImage(GameLogic.getCurrentTile().getTileType()), 
+				ImageLoader.getTileImage(GameLogic.getCurrentTile().getTileType()), 
 				0, 0, TilePane.getTileSize() * 3, TilePane.getTileSize() * 3);
 	}
 	
@@ -105,10 +110,10 @@ public class ControlPane extends VBox {
 		remainingText.setText("Tiles Remaining : " + TileStorage.getTileCount());
 	}
 	
-	private void onMouseClicked() {
-		GameLogic.getCurrentPlayer().updatePenalty(1);
-		GameLogic.randomTile();
-		GameLogic.nextPlayer();
+	private void passButtonClickHandler() {
+			GameLogic.getCurrentPlayer().updatePenalty(1);
+			GameLogic.randomTile();
+			GameLogic.nextPlayer();
 	}
 	
 	private void onMouseEnteredHandler() {

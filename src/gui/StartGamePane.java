@@ -1,12 +1,14 @@
 package gui;
 
-import data.ResourceLoader;
+import data.AudioLoader;
+import data.ImageLoader;
 import javafx.application.Platform;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.Pane;
+import utils.MouseEventHandler;
 
 
 public class StartGamePane extends Pane {
@@ -16,6 +18,7 @@ public class StartGamePane extends Pane {
 	MyButton exitBtn;
 	
 	public StartGamePane() {
+		
 		//initialize button
 		initializeStartButton();
 		initializeHowToPlayBtn();
@@ -24,7 +27,7 @@ public class StartGamePane extends Pane {
 		setPrefHeight(750);
 		setPrefWidth(1200);
 		
-		setBackground(new Background(new BackgroundImage(ResourceLoader.getStartGameBackgroundImage(), null, null, null, null)));
+		setBackground(new Background(new BackgroundImage(ImageLoader.getStartGameBackgroundImage(), null, null, null, null)));
 		
 		getChildren().addAll(startBtn, howToPlayBtn, exitBtn);
 	}
@@ -41,8 +44,8 @@ public class StartGamePane extends Pane {
 		startBtn.setOnMouseClicked(e -> {
 			GameManager.getInstance().switchToSelectPlayerPane();
 		});
-		startBtn.setOnMouseEntered(event -> { setCursor(Cursor.HAND); });
-		startBtn.setOnMouseExited(event -> { setCursor(Cursor.DEFAULT); });
+		
+		MouseEventHandler.applyHoverEffect(startBtn);
 	}
 	
 	private void initializeHowToPlayBtn() {
@@ -57,8 +60,8 @@ public class StartGamePane extends Pane {
 		howToPlayBtn.setOnMouseClicked(e -> {
 			GameManager.getInstance().switchToHowToPlayScene();
 		});
-		howToPlayBtn.setOnMouseEntered(event -> { setCursor(Cursor.HAND); });
-		howToPlayBtn.setOnMouseExited(event -> { setCursor(Cursor.DEFAULT); });
+		
+		MouseEventHandler.applyHoverEffect(howToPlayBtn);
 	}
 
 	private void initializeExitButton() {
@@ -73,7 +76,7 @@ public class StartGamePane extends Pane {
 		exitBtn.setOnMouseClicked(e -> {
 			Platform.exit();
 		});
-		exitBtn.setOnMouseEntered(event -> { setCursor(Cursor.HAND); });
-		exitBtn.setOnMouseExited(event -> { setCursor(Cursor.DEFAULT); });
+		
+		MouseEventHandler.applyHoverEffect(exitBtn);
 	}
 }

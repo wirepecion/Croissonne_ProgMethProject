@@ -1,5 +1,6 @@
 package gui;
 
+import data.AudioLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -15,12 +16,13 @@ public class GameManager {
 	SelectColorPane selectColorPane;
 	HowToPlayPane howToPlayPane;
 	
-	InGameScene inGameScene;
+	InGamePane inGameScene;
 	
 	Scene scene;
 	
 	public GameManager(Stage stage) {
 		// TODO Auto-generated constructor stub
+		AudioLoader.playBgAudio();
 		instance = this;
 		this.stage = stage;
 		startGamePane = new StartGamePane();
@@ -53,7 +55,7 @@ public class GameManager {
 	
 	
 	public void switchToInGameScene() {
-		inGameScene = new InGameScene();
+		inGameScene = new InGamePane();
 		scene = new Scene(inGameScene);
 		showStage();
 	}
@@ -62,7 +64,7 @@ public class GameManager {
 		inGameScene.addGameOverText();
 		inGameScene.addWinnerText();
 		inGameScene.addPlayerStatPane();
-		inGameScene.addExitOption();
+		inGameScene.addEndGameOption();
 		
 	}
 	
@@ -76,7 +78,7 @@ public class GameManager {
 		return instance;
 	}
 	
-	public InGameScene getInGameScene() {
+	public InGamePane getInGameScene() {
 		return inGameScene;
 	}
 }

@@ -6,7 +6,7 @@ import java.util.Collections;
 
 import java.util.List;
 
-import data.ResourceLoader;
+import data.ImageLoader;
 import interfaces.Rotatable;
 import utils.TileArea;
 import utils.TileType;

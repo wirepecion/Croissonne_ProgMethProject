@@ -4,7 +4,7 @@ import java.awt.Graphics2D;
 
 import gui.BoardPane;
 import gui.GameManager;
-import data.ResourceLoader;
+import data.ImageLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.canvas.Canvas;
