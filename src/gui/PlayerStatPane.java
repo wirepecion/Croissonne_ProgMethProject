@@ -25,7 +25,7 @@ public class PlayerStatPane extends GridPane{
 	private Text scoreText;
 	private Text penaltyText;
 	
-	public PlayerStatPane(Player player) {		
+	public PlayerStatPane(Player player) {	
 		
 		ImageView playerIconImg = new ImageView(new Image(ClassLoader.getSystemResource("playerIcons/" + player.getColor().toString() + ".png").toString()));
 		playerIconImg.setFitWidth(75);

@@ -10,6 +10,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import logic.GameLogic;
 import utils.PlayerColor;
 import utils.TileType;
@@ -22,13 +23,16 @@ public class SelectColorPane extends HBox {
 	public SelectColorPane() {
 		
 		for (PlayerColor playerColor : PlayerColor.values()) {
+			
 			Canvas canvas = new Canvas(COLOR_SIZE, COLOR_SIZE);
+			canvas.setOnMouseClicked(event -> chooseColor(playerColor, canvas));
+			canvas.setOnMouseEntered(event -> { setCursor(Cursor.HAND); });
+			canvas.setOnMouseExited(event -> { setCursor(Cursor.DEFAULT); });
+			
 			GraphicsContext gc = canvas.getGraphicsContext2D();
 			gc.setFill(Color.valueOf(playerColor.name()));
 			gc.fillOval(0, 0, COLOR_SIZE, COLOR_SIZE);
-			canvas.setOnMouseClicked(event -> chooseColor(playerColor));
-			canvas.setOnMouseEntered(event -> MouseEnteredHandler());
-			canvas.setOnMouseExited(event -> MouseExitedHandler());
+			
 			getChildren().addAll(canvas);
 		}
 		
@@ -39,20 +43,25 @@ public class SelectColorPane extends HBox {
 		
 	}
 	
-	private void chooseColor(PlayerColor playerColor) {
-		System.out.println(playerColor.name());
+	private void chooseColor(PlayerColor playerColor, Canvas canvas) {
+		
 		GameLogic.addPlayerColor(playerColor);
 		chosenPlayerColor++;
+		
+		setCursor(Cursor.DEFAULT);
+		
+		canvas.setOnMouseEntered(null);
+		canvas.setOnMouseClicked(null);
+		
+		GraphicsContext gc = canvas.getGraphicsContext2D();
+		gc.setFill(Color.LIGHTGREY);
+		gc.fillOval(5, 5, 40, 40);
+		gc.setFill(Color.BLACK);
+		gc.setFont(new Font(20));
+		gc.fillText("P" + chosenPlayerColor, 15, 32.5);
+		
 		if (chosenPlayerColor == GameLogic.getNumberOfPlayer()) 
 			GameManager.getInstance().switchToInGameScene();
 	}
-	
-	private void MouseEnteredHandler() {
-		setCursor(Cursor.HAND);
-	}
-	
-	private void MouseExitedHandler() {
-		setCursor(Cursor.DEFAULT);
-	}
-	
+
 }

@@ -1,5 +1,6 @@
 package gui;
 
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -40,7 +41,7 @@ public class StartGameButton extends Pane {
 //		startBtn.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
 		
 		//set event-handler
-		setOnMouseClicked(e -> {
+		startBtn.setOnMouseClicked(e -> {
 			GameManager.getInstance().switchToSelectPlayerScene();
 		});
 	}
@@ -57,7 +58,7 @@ public class StartGameButton extends Pane {
 //		howToPlayBtn.setBackground(new Background(new BackgroundFill(Color.RED, null, null)));
 		
 		//set event-handler
-		setOnMouseClicked(e -> {
+		howToPlayBtn.setOnMouseClicked(e -> {
 			GameManager.getInstance().switchToHowToPlayScene();
 		});
 	}
@@ -74,8 +75,8 @@ public class StartGameButton extends Pane {
 //		exitBtn.setBackground(new Background(new BackgroundFill(Color.BLUE, null, null)));
 		
 		//set event-handler
-		setOnMouseClicked(e -> {
-			GameManager.getInstance().switchToSelectPlayerScene();
+		exitBtn.setOnMouseClicked(e -> {
+			Platform.exit();
 		});
 	}
 }

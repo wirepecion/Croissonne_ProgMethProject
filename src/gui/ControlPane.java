@@ -13,21 +13,25 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import logic.GameLogic;
 import logic.TileStorage;
 import utils.PlayerColor;
 
 public class ControlPane extends VBox {
 	
+	private Pane gameControlPane;
 	private static Canvas tilePane;
+	private static Button remainingText;
 	private Button passButton;
 	
 	public ControlPane() {
 		setPrefHeight(750);
-		setPrefWidth(450);
+		setPrefWidth(400);
 		setSpacing(10);
 		setAlignment(Pos.CENTER);
 		
@@ -35,30 +39,51 @@ public class ControlPane extends VBox {
 			getChildren().addAll(GameLogic.getPlayer()[i].getPlayerStatPane());
 		}
 		
+		initializeGameControlPane();
+		
+		getChildren().addAll(gameControlPane);
+	}
+	
+	private void initializeGameControlPane() {
+		gameControlPane = new Pane();
+		gameControlPane.setPrefHeight(200);
+		
+		initializeRemainingText();
 		initializeTilePane();
 		initializePassButton();
 		
-		getChildren().addAll( 
-			tilePane,
-			passButton
-		);
+		gameControlPane.getChildren().addAll(tilePane, remainingText, passButton);
 	}
 	
-	public void initializeTilePane() {
-		tilePane = new Canvas(TilePane.getTileSize() * 2, TilePane.getTileSize() * 2);
+	private void initializeTilePane() {
+		tilePane = new Canvas(TilePane.getTileSize() * 3, TilePane.getTileSize() * 3);
+		tilePane.setLayoutX(25);
+		tilePane.setLayoutY(25);
 		tilePane.setOnMouseClicked(event -> rotateTile());
-		tilePane.setOnMouseEntered(event -> onMouseEnteredHandler());
-		tilePane.setOnMouseExited(event -> onMouseExitedHandler());
+		tilePane.setOnMouseEntered(event -> { setCursor(Cursor.HAND); });
+		tilePane.setOnMouseExited(event -> { setCursor(Cursor.DEFAULT); });
 		GameLogic.randomTile();
 	}
 	
-	public void initializePassButton() {
+	private void initializeRemainingText() {
+		remainingText = new Button("Tiles Remaining : " + TileStorage.getTileCount());
+		remainingText.setBackground(new Background(new BackgroundFill(
+				Color.GRAY, CornerRadii.EMPTY, Insets.EMPTY)));
+		remainingText.setFont(new Font("Arial Bold", 20));
+		remainingText.setStyle("-fx-text-fill: white;");
+		remainingText.setLayoutX(180);
+		remainingText.setLayoutY(40);
+	}
+	
+	private void initializePassButton() {
 		passButton = new Button("Pass");
-		passButton.setPrefWidth(300);
-		passButton.setPrefHeight(100);
+		passButton.setLayoutX(205);
+		passButton.setLayoutY(90);
+		passButton.setPrefWidth(170);
+		passButton.setPrefHeight(40);
 		passButton.setBackground(new Background(new BackgroundFill(
 				Color.FIREBRICK, CornerRadii.EMPTY, Insets.EMPTY)));
-		passButton.setFont(new Font("Arial Bold", 50));
+		passButton.setFont(new Font("Arial Bold", 40));
 		passButton.setStyle("-fx-text-fill: white;");
 		passButton.setOnMouseClicked(event -> onMouseClicked());
 		passButton.setOnMouseEntered(event -> onMouseEnteredHandler());
@@ -73,7 +98,11 @@ public class ControlPane extends VBox {
 	public static void showRandomTile() {
 		tilePane.getGraphicsContext2D().drawImage(
 				ResourceLoader.getTileImage(GameLogic.getCurrentTile().getTileType()), 
-				0, 0, TilePane.getTileSize() * 2, TilePane.getTileSize() * 2);
+				0, 0, TilePane.getTileSize() * 3, TilePane.getTileSize() * 3);
+	}
+	
+	public static void updateTileRemaining() {
+		remainingText.setText("Tiles Remaining : " + TileStorage.getTileCount());
 	}
 	
 	private void onMouseClicked() {

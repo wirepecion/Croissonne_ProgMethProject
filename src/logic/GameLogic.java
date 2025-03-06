@@ -103,6 +103,7 @@ public class GameLogic {
 		currentTile = TileStorage.getRandomTile();
 		currentTile.setPlace(false);
 		ControlPane.showRandomTile();
+		ControlPane.updateTileRemaining();
 	}
 	
 	public void placeCurrentTile(int x, int y) {
@@ -131,15 +132,16 @@ public class GameLogic {
 	}
 	
 	private static void castleScoreCheck() {
-		System.out.println("");
+		System.out.println("start check castle");
 		for (int idx = castleScoreList.size() - 1; idx >= 0; idx--) {
 			int[] pos = castleScoreList.get(idx);
 			boolean isScore = true;
 			for (int i = pos[0] - 1; i <= pos[0] + 1; i++) {
 				for (int j = pos[1] - 1; j <= pos[1] + 1; j++) {
-					System.out.println("castle is " + i + " " + j);
+					System.out.println("around castle is " + i + " " + j);
 					if (board.getTile(j, i) == null) continue;
 					if (board.getTile(i, j).isEmpty()) {
+						System.out.println("this tile is empty");
 						isScore = false;
 						break;
 					}

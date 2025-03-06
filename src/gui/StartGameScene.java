@@ -1,6 +1,7 @@
 package gui;
 
 import data.ResourceLoader;
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -120,7 +121,7 @@ public class StartGameScene extends Pane {
 		
 		//set event-handler
 		exitBtn.setOnMouseClicked(e -> {
-			GameManager.getInstance().switchToSelectPlayerScene();
+			Platform.exit();
 		});
 	}
 }
