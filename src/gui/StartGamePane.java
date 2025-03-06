@@ -2,10 +2,12 @@ package gui;
 
 import data.ResourceLoader;
 import javafx.application.Platform;
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.Pane;
+import utils.MouseEventHandler;
 
 
 public class StartGamePane extends Pane {
@@ -40,6 +42,8 @@ public class StartGamePane extends Pane {
 		startBtn.setOnMouseClicked(e -> {
 			GameManager.getInstance().switchToSelectPlayerPane();
 		});
+		
+		MouseEventHandler.applyHoverEffect(startBtn);
 	}
 	
 	private void initializeHowToPlayBtn() {
@@ -54,6 +58,8 @@ public class StartGamePane extends Pane {
 		howToPlayBtn.setOnMouseClicked(e -> {
 			GameManager.getInstance().switchToHowToPlayScene();
 		});
+		
+		MouseEventHandler.applyHoverEffect(howToPlayBtn);
 	}
 
 	private void initializeExitButton() {
@@ -68,5 +74,7 @@ public class StartGamePane extends Pane {
 		exitBtn.setOnMouseClicked(e -> {
 			Platform.exit();
 		});
+		
+		MouseEventHandler.applyHoverEffect(exitBtn);
 	}
 }
