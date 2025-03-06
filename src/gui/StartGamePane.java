@@ -58,14 +58,8 @@ public class StartGamePane extends Pane {
 		howToPlayBtn.setOnMouseClicked(e -> {
 			GameManager.getInstance().switchToHowToPlayScene();
 		});
-<<<<<<< HEAD
-		howToPlayBtn.setOnMouseEntered(event -> { setCursor(Cursor.HAND); });
-		howToPlayBtn.setOnMouseExited(event -> { setCursor(Cursor.DEFAULT); });
-||||||| 12c7e07
-=======
 		
 		MouseEventHandler.applyHoverEffect(howToPlayBtn);
->>>>>>> origin/seven
 	}
 
 	private void initializeExitButton() {
@@ -80,13 +74,7 @@ public class StartGamePane extends Pane {
 		exitBtn.setOnMouseClicked(e -> {
 			Platform.exit();
 		});
-<<<<<<< HEAD
-		exitBtn.setOnMouseEntered(event -> { setCursor(Cursor.HAND); });
-		exitBtn.setOnMouseExited(event -> { setCursor(Cursor.DEFAULT); });
-||||||| 12c7e07
-=======
-		
+
 		MouseEventHandler.applyHoverEffect(exitBtn);
->>>>>>> origin/seven
 	}
 }

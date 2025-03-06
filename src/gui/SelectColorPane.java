@@ -64,7 +64,7 @@ public class SelectColorPane extends Pane {
             gc.fillOval(0, 0, COLOR_SIZE, COLOR_SIZE);
 
             // Set event handlers
-            canvas.setOnMouseClicked(event -> chooseColor(playerColor));
+            canvas.setOnMouseClicked(event -> chooseColor(playerColor, canvas));
             MouseEventHandler.applyHoverEffect(canvas);
 
             // Add canvas to the GridPane (colorPane) at (col, row)
