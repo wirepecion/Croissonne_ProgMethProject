@@ -1,6 +1,7 @@
 package gui;
 
 import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class GameManager {
@@ -9,6 +10,7 @@ public class GameManager {
 	
 	Stage stage;
 	StartGameScene startGameScene;
+	HowToPlayPane howToPlayPane;
 	InGameScene inGameScene;
 	
 	Scene scene;
@@ -31,8 +33,15 @@ public class GameManager {
 	}
 	
 	public void switchToSelectPlayerScene() {
-		startGameScene.removeStartButton();
+//		startGameScene.removeStartButton();
 		startGameScene.addSelectPlayerButton();
+	}
+	
+	public void switchToHowToPlayScene() {
+		howToPlayPane = new HowToPlayPane();
+		scene = new Scene(howToPlayPane);
+		stage.setScene(scene);
+		stage.show();
 	}
 	
 	public void switchToSelectColorScene() {

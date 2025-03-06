@@ -131,6 +131,7 @@ public class GameLogic {
 	}
 	
 	private static void castleScoreCheck() {
+		System.out.println("");
 		for (int idx = castleScoreList.size() - 1; idx >= 0; idx--) {
 			int[] pos = castleScoreList.get(idx);
 			boolean isScore = true;
