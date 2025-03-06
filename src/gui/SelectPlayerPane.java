@@ -79,7 +79,6 @@ public class SelectPlayerPane extends Pane {
 		fourPlayerButton.setLayoutX(276);
 		fourPlayerButton.setLayoutY(587);
 
-		
 		//set event-handler
 		fourPlayerButton.setOnMouseClicked(e -> {
 			GameLogic.setNumberOfPlayer(4);
@@ -93,8 +92,8 @@ public class SelectPlayerPane extends Pane {
 	private String[] getPlayerName(int num) {
 		String[] playerNameList = new String[num];
 		
-		for(int i = 1; i <= num; i++) {
-			playerNameList[i-1] = "Player " + i;
+		for (int i = 1; i <= num; i++) {
+			playerNameList[i - 1] = "Player " + i;
 		}
 		
 		return playerNameList;

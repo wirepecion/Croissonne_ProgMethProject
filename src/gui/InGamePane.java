@@ -54,17 +54,15 @@ public class InGamePane extends HBox {
 	
 	public void addWinnerText() {
 		String winners = "Player ";
-		Player winner = GameLogic.getPlayer()[0];
 		int maxPoint = GameLogic.getPlayer()[0].getScore() + GameLogic.getPlayer()[0].getPenalty();
 		for (Player player : GameLogic.getPlayer()) {
 			if (player.getScore() + player.getPenalty() > maxPoint) {
 				maxPoint = player.getScore() + player.getPenalty();
-				winner = player;
 			}
 		}
 		for (Player player : GameLogic.getPlayer()) {
-			if (player.getScore() + player.getPenalty() ==  maxPoint) {
-				winners += player.getName().charAt(player.getName().length()-1) + " ";
+			if (player.getScore() + player.getPenalty() == maxPoint) {
+				winners += player.getName().charAt(player.getName().length() - 1) + " ";
 			}
 		}
 		Button winnerText = new Button(winners + "Wins!");
