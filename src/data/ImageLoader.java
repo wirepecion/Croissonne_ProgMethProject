@@ -13,6 +13,9 @@ public class ImageLoader {
 	public static Image selectColorBackground;
 	public static Image howToPlayBackground;
 	public static Image howToPlayPageOneBackground;
+	public static Image howToPlayPageTwoBackground;
+	public static Image howToPlayPageThreeBackground;
+	public static Image howToPlayPageFourBackground;
 	public static Image inGameBackground;
 	
 	public static Image betweenTwoMountain;
@@ -46,6 +49,10 @@ public class ImageLoader {
 		inGameBackground = nameToBgImage("inGameBackgroundImage");
 		howToPlayBackground = nameToBgImage("howToPlayBackgroundImage");
 		howToPlayPageOneBackground = nameToBgImage("howToPlayPageOneBackgroundImage");
+		howToPlayPageTwoBackground = nameToBgImage("howToPlayPageTwoBackgroundImage");
+		howToPlayPageThreeBackground = nameToBgImage("howToPlayPageThreeBackgroundImage");
+		howToPlayPageFourBackground = nameToBgImage("howToPlayPageFourBackgroundImage");
+		
 		
 		betweenTwoMountain = nameToTileImage("betweenTwoMountain");
 		castleOnAbyss = nameToTileImage("castleOnAbyss");
@@ -90,6 +97,18 @@ public class ImageLoader {
 	
 	public static Image getHowToPlayPageOneBackground() {
 		return howToPlayPageOneBackground;
+	}
+	
+	public static Image getHowToPlayPageTwoBackground() {
+		return howToPlayPageTwoBackground;
+	}
+
+	public static Image getHowToPlayPageThreeBackground() {
+		return howToPlayPageThreeBackground;
+	}
+	
+	public static Image getHowToPlayPageFourBackground() {
+		return howToPlayPageFourBackground;
 	}
 	
 	public static Image getInGameBackgroundImage() {

@@ -11,9 +11,10 @@ import utils.MouseEventHandler;
 
 public class HowToPlayPane extends StackPane {
 	
-	private Button homeButton;
+	private Button leftHomeButton;
+	private Button rightHomeButton;
 	private Button nextPageButton;
-//	private Button prevPageButton;
+	private Button prevPageButton;
 	
 	private Pane howToPlayPageOne;
 	private Pane howToPlayPageTwo;
@@ -32,15 +33,16 @@ public class HowToPlayPane extends StackPane {
 
 	private void initializePages() {
 		// Initialize all pages
-		howToPlayPageOne = createPage(ImageLoader.getHowToPlayPageOneBackground());
-		howToPlayPageTwo = createPage(ImageLoader.getHowToPlayPageOneBackground());
-		howToPlayPageThree = createPage(ImageLoader.getHowToPlayPageOneBackground());
-		howToPlayPageFour = createPage(ImageLoader.getHowToPlayPageOneBackground());
+		howToPlayPageOne = createPage(ResourceLoader.getHowToPlayPageOneBackground());
+		howToPlayPageTwo = createPage(ResourceLoader.getHowToPlayPageTwoBackground());
+		howToPlayPageThree = createPage(ResourceLoader.getHowToPlayPageThreeBackground());
+		howToPlayPageFour = createPage(ResourceLoader.getHowToPlayPageFourBackground());
 
 		// Initialize buttons
-		initializeHomeButton();
+		initializeLeftHomeButton();
+		initializeRightHomeButton();
 		initializeNextPageButton();
-//		initializePrevPageButton();
+		initializePrevPageButton();
 	}
 
 	private Pane createPage(Image backgroundImage) {
@@ -51,17 +53,30 @@ public class HowToPlayPane extends StackPane {
 		return page;
 	}
 
-	private void initializeHomeButton() {
-		homeButton = new Button();
-		homeButton.setPrefHeight(62);
-		homeButton.setPrefWidth(62);
-		homeButton.setTranslateX(400);
-		homeButton.setTranslateY(-290);
-		homeButton.setOpacity(0);
-		homeButton.setOnMouseClicked(e -> {
+	private void initializeLeftHomeButton() {
+		leftHomeButton = new Button();
+		leftHomeButton.setPrefHeight(62);
+		leftHomeButton.setPrefWidth(62);
+		leftHomeButton.setTranslateX(-340);
+		leftHomeButton.setTranslateY(-290);
+		leftHomeButton.setOpacity(0);
+		leftHomeButton.setOnMouseClicked(e -> {
 			GameManager.getInstance().setToStartGamePane();
 		});
-		MouseEventHandler.applyHoverEffect(homeButton);
+		MouseEventHandler.applyHoverEffect(leftHomeButton);
+	}
+	
+	private void initializeRightHomeButton() {
+		rightHomeButton = new Button();
+		rightHomeButton.setPrefHeight(62);
+		rightHomeButton.setPrefWidth(62);
+		rightHomeButton.setTranslateX(380);
+		rightHomeButton.setTranslateY(-290);
+		rightHomeButton.setOpacity(0);
+		rightHomeButton.setOnMouseClicked(e -> {
+			GameManager.getInstance().setToStartGamePane();
+		});
+		MouseEventHandler.applyHoverEffect(rightHomeButton);
 	}
 
 	private void initializeNextPageButton() {
@@ -75,14 +90,16 @@ public class HowToPlayPane extends StackPane {
 		MouseEventHandler.applyHoverEffect(nextPageButton);
 	}
 
-//	private void initializePrevPageButton() {
-//		prevPageButton = new Button();
-//		prevPageButton.setPrefHeight(80);
-//		prevPageButton.setPrefWidth(100);
-//		prevPageButton.setTranslateX(-340);
-//		prevPageButton.setTranslateY(-290);
-//		prevPageButton.setOnMouseClicked(e -> showPage(currentPage - 1));
-//	}
+	private void initializePrevPageButton() {
+		prevPageButton = new Button();
+		prevPageButton.setPrefHeight(60);
+		prevPageButton.setPrefWidth(60);
+		prevPageButton.setTranslateX(-340);
+		prevPageButton.setTranslateY(-290);
+		prevPageButton.setOpacity(0);
+		prevPageButton.setOnMouseClicked(e -> showPage(currentPage - 1));
+		MouseEventHandler.applyHoverEffect(prevPageButton);
+	}
 
 	private void showPage(int pageNumber) {
 		getChildren().clear();
@@ -99,10 +116,12 @@ public class HowToPlayPane extends StackPane {
 		getChildren().add(currentPane);
 
 		// Add buttons based on the current page
-		if (pageNumber == 4) {
-			getChildren().addAll(homeButton);
+		if (pageNumber == 1) {
+			getChildren().addAll(leftHomeButton, nextPageButton);
+		} else if (pageNumber == 4){
+			getChildren().addAll(prevPageButton, rightHomeButton);
 		} else {
-			getChildren().addAll(nextPageButton);
+			getChildren().addAll(prevPageButton, nextPageButton);
 		}
 	}
 }
