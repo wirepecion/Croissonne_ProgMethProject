@@ -2,12 +2,14 @@ package gui;
 
 import component.Board;
 import component.Player;
+import data.ResourceLoader;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
@@ -23,6 +25,8 @@ public class InGameScene extends HBox {
 	
 	public InGameScene() {
 		
+		GameLogic.getInstance().newGame();
+		
 		boardPane = new BoardPane(GameLogic.getInstance().getBoard());
 		controlPane = new ControlPane();
 		
@@ -30,7 +34,7 @@ public class InGameScene extends HBox {
 		setSpacing(20);
 		setPrefWidth(1200);
 		setPrefHeight(750);
-		setBackground(new Background(new BackgroundFill(Color.DARKGREY, CornerRadii.EMPTY, Insets.EMPTY)));
+		setBackground(new Background(new BackgroundImage(ResourceLoader.getInGameBackgroundImage(), null, null, null, null)));
 		getChildren().addAll(boardPane, controlPane);
    
 	}
