@@ -10,6 +10,7 @@ public class Main extends Application{
 	public void start(Stage primaryStage) throws Exception {
 		primaryStage.setResizable(false);
 		new GameManager(primaryStage);
+		primaryStage.setResizable(false);
 	}
 	
 	public static void main(String[] args) {
