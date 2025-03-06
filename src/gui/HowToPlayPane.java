@@ -11,19 +11,10 @@ import utils.MouseEventHandler;
 
 public class HowToPlayPane extends StackPane {
 	
-<<<<<<< HEAD
 	private Button leftHomeButton;
 	private Button rightHomeButton;
 	private Button nextPageButton;
 	private Button prevPageButton;
-||||||| 70e1ab7
-	private MyButton homeButton;
-	private Pane howToPlayPage01;
-=======
-	private Button homeButton;
-	private Button nextPageButton;
-//	private Button prevPageButton;
->>>>>>> origin/titan
 	
 	private Pane howToPlayPageOne;
 	private Pane howToPlayPageTwo;
