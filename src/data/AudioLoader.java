@@ -35,7 +35,7 @@ public class AudioLoader {
 		try {
 			Field field = AudioLoader.class.getField(string);
 			AudioClip audio = (AudioClip) field.get(AudioLoader.class);
-			audio.play();
+			audio.play(0.3);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -47,7 +47,7 @@ public class AudioLoader {
 			Field field = AudioLoader.class.getField(string);
 			AudioClip audio = (AudioClip) field.get(AudioLoader.class);
 			audio.setCycleCount(AudioClip.INDEFINITE);
-			audio.play();
+			audio.play(1.0);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
