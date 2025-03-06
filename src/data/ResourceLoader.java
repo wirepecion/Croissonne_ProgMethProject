@@ -33,6 +33,7 @@ public class ResourceLoader {
 	public static Image curveRiver;
 	public static Image deepAbyss;
 	public static Image empty;
+	public static Image emptyAlert;
 	public static Image mountainBase;
 	public static Image straightRiverBesideAbyss;
 	public static Image straightRiver;
@@ -51,7 +52,7 @@ public class ResourceLoader {
 		startGameBackground = nameToBgImage("startGameBackgroundImage");
 		selectPlayerBackground = nameToBgImage("selectPlayerBackgroundImage");
 		selectColorBackground = nameToBgImage("selectColorBackgroundImage");
-		inGameBackground = nameToBgImage("inGameBackgroundImage");
+		inGameBackground = nameToBgImage("inGameBackgroundImage_4");
 		howToPlayBackground = nameToBgImage("howToPlayBackgroundImage");
 		howToPlayPageOneBackground = nameToBgImage("howToPlayPageOneBackgroundImage");
 		
@@ -64,8 +65,9 @@ public class ResourceLoader {
 		curveRiverTurnLeftAtAbyss = tileNameToImage("curveRiverTurnLeftAtAbyss");
 		curveRiverTurnRightAtAbyss = tileNameToImage("curveRiverTurnRightAtAbyss");
 		curveRiver = tileNameToImage("curveRiver");
-		deepAbyss =tileNameToImage("deepAbyss");
+		deepAbyss = tileNameToImage("deepAbyss");
 		empty = tileNameToImage("empty");
+		emptyAlert = tileNameToImage("emptyAlert");
 		mountainBase = tileNameToImage("mountainBase");
 		straightRiverBesideAbyss = tileNameToImage("straightRiverBesideAbyss");
 		straightRiver = tileNameToImage("straightRiver");
@@ -74,6 +76,10 @@ public class ResourceLoader {
 		waterfallToAbyss = tileNameToImage("waterfallToAbyss");
 		
 		// explosionSound = new AudioClip(ClassLoader.getSystemResource("Explosion.wav").toString());
+	}
+	
+	public static Image getTileEmptyAlert() {
+		return emptyAlert;
 	}
 	
 	public static Image getStartGameBackgroundImage() {

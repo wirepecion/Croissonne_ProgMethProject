@@ -34,6 +34,7 @@ public class TilePane extends Canvas implements Rotatable {
 	
 	private void MouseClickHandler() {
 		if (tile.onClick()) {
+			drawEmptyAlert();
 			draw();
 			setRotate(ControlPane.getTilePane().getRotate());
 			setCursor(Cursor.DEFAULT);
@@ -46,12 +47,29 @@ public class TilePane extends Canvas implements Rotatable {
 		if (!GameLogic.getInstance().isGameEnd()) {
 			if (tile.getTileType().equals(TileType.EMPTY)) {
 				setCursor(Cursor.HAND);
+				drawEmptyAlert();
 			}
 		}
 	}
 	
 	private void MouseExitedHandler() {
 		setCursor(Cursor.DEFAULT);
+		if (!GameLogic.getInstance().isGameEnd()) {
+			if (tile.getTileType().equals(TileType.EMPTY)) {
+				drawEmpty();
+			}
+		}
+	}
+	
+	private void drawEmptyAlert() {
+		GraphicsContext gc = getGraphicsContext2D();
+		gc.drawImage(ResourceLoader.getTileEmptyAlert(), 0, 0, TILE_SIZE, TILE_SIZE);
+	}
+	
+	private void drawEmpty() {
+		GraphicsContext gc = getGraphicsContext2D();
+		gc.clearRect(0, 0, getWidth(), getHeight());
+		draw();
 	}
 	
 	public static int getTileSize() {

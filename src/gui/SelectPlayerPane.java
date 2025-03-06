@@ -4,6 +4,7 @@ import data.ResourceLoader;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
@@ -18,10 +19,6 @@ public class SelectPlayerPane extends Pane {
 	private MyButton twoPlayerButton;
 	private MyButton threePlayerButton; 
 	private MyButton fourPlayerButton;
-	
-//	private String[] twoPlayerName = new String[] { "Player 1", "Player 2" };
-//	private String[] threePlayerName = new String[] { "Player 1", "Player 2", "Player 3" };
-//	private String[] fourPlayerName = new String[] { "Player 1", "Player 2", "Player 3", "Player 4" };
 	
 	public SelectPlayerPane() {
 		
@@ -51,6 +48,8 @@ public class SelectPlayerPane extends Pane {
 			GameLogic.setPlayerName(getPlayerName(2));
 			GameManager.getInstance().switchToSelectColorPane();
 		});
+		twoPlayerButton.setOnMouseEntered(event -> { setCursor(Cursor.HAND); });
+		twoPlayerButton.setOnMouseExited(event -> { setCursor(Cursor.DEFAULT); });
 	}
 	
 	private void initializeThreePlayerButton() {
@@ -67,6 +66,8 @@ public class SelectPlayerPane extends Pane {
 			GameLogic.setPlayerName(getPlayerName(3));
 			GameManager.getInstance().switchToSelectColorPane();
 		});
+		threePlayerButton.setOnMouseEntered(event -> { setCursor(Cursor.HAND); });
+		threePlayerButton.setOnMouseExited(event -> { setCursor(Cursor.DEFAULT); });
 	}
 
 	private void initializeFourPlayerButton() {
@@ -84,6 +85,8 @@ public class SelectPlayerPane extends Pane {
 			GameLogic.setPlayerName(getPlayerName(4));
 			GameManager.getInstance().switchToSelectColorPane();
 		});
+		fourPlayerButton.setOnMouseEntered(event -> { setCursor(Cursor.HAND); });
+		fourPlayerButton.setOnMouseExited(event -> { setCursor(Cursor.DEFAULT); });
 	}
 	
 	private String[] getPlayerName(int num) {

@@ -85,10 +85,10 @@ public class SelectColorPane extends Pane {
 
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 		gc.setFill(Color.LIGHTGREY);
-		gc.fillOval(5, 5, 40, 40);
+		gc.fillOval(5, 5, 60, 60);
 		gc.setFill(Color.BLACK);
-		gc.setFont(new Font(20));
-		gc.fillText("P" + chosenPlayerColor, 15, 32.5);
+		gc.setFont(new Font(30));
+		gc.fillText("P" + chosenPlayerColor, 20, 45);
         if (chosenPlayerColor == GameLogic.getNumberOfPlayer())
             GameManager.getInstance().switchToInGameScene();
     }
