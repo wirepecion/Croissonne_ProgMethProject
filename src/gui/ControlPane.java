@@ -115,6 +115,8 @@ public class ControlPane extends VBox {
 			GameLogic.getCurrentPlayer().updatePenalty(1);
 			GameLogic.randomTile();
 			GameLogic.nextPlayer();
+		} else {
+			GameManager.getInstance().switchToEndGameScene();
 		}
 	}
 	

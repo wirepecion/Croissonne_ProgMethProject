@@ -29,7 +29,7 @@ public class InGamePane extends HBox {
 	public InGamePane() {
 		
 		GameLogic.getInstance().newGame();
-		TileStorage.getInstance().init();
+		TileStorage.init();
 		
 		boardPane = new BoardPane(GameLogic.getInstance().getBoard());
 		controlPane = new ControlPane();

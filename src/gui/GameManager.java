@@ -2,6 +2,7 @@ package gui;
 
 import data.AudioLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -59,18 +60,21 @@ public class GameManager {
 		scene = new Scene(inGameScene);
 		showStage();
 	}
+	
 	public void switchToEndGameScene() {
+		System.out.println("should end game");
 		inGameScene.clearControlPane();
 		inGameScene.addGameOverText();
 		inGameScene.addWinnerText();
 		inGameScene.addPlayerStatPane();
 		inGameScene.addEndGameOption();
-		
 	}
 	
 	private void showStage() {
 		stage.setScene(scene);
-		stage.setTitle(scene.toString());
+		stage.setTitle("Croissonne");
+		stage.getIcons().add(new Image(ClassLoader.getSystemResource(
+				"logo/croissonne_logo.png").toString()));
 		stage.show();
 	}
 	

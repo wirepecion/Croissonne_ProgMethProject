@@ -18,7 +18,6 @@ public class ScoreableTile extends Tile implements Scoreable {
 	
 	public void collectScore() {
 		if (isCastle) {
-			System.out.println("add castle to list");
 			GameLogic.getInstance().addToCastleScoreList(xPosition, yPosition);
 		} else {
 			checkRiverSide();

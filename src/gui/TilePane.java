@@ -14,7 +14,7 @@ import utils.TileType;
 public class TilePane extends Canvas implements Rotatable {
 
 	private static final int TILE_SIZE = 50;
-	Tile tile;
+	private Tile tile;
 
 	public TilePane(Tile tile) {
 		super(TILE_SIZE, TILE_SIZE);

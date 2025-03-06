@@ -102,10 +102,7 @@ public class GameLogic {
 	}
 	
 	public static void randomTile() {
-		if (update()) {
-			GameManager.getInstance().switchToEndGameScene();
-			return;
-		}
+		if (update()) return;
 		currentTile = TileStorage.getRandomTile();
 		currentTile.setPlace(false);
 		ControlPane.showRandomTile();
@@ -123,6 +120,7 @@ public class GameLogic {
 		castleScoreCheck();
 		currentTile.setPlace(true);
 		board.addOnBoard(currentTile, x, y);
+		if (update()) GameManager.getInstance().switchToEndGameScene();
 		randomTile();
 		nextPlayer();
 	}
@@ -240,7 +238,7 @@ public class GameLogic {
 	}
 	
 	public static boolean update() {
-		if (TileStorage.getTileCount() == 1) {
+		if (TileStorage.getTileCount() == 0) {
 			isGameEnd = true;
 			return true;
 		}
@@ -252,7 +250,7 @@ public class GameLogic {
 	}
 	
 	public static GameLogic getInstance() {
-		if(instance == null) {
+		if (instance == null) {
 			instance = new GameLogic();
 		}
 		return instance;
