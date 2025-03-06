@@ -53,7 +53,6 @@ public class ImageLoader {
 		howToPlayPageThreeBackground = nameToBgImage("howToPlayPageThreeBackgroundImage");
 		howToPlayPageFourBackground = nameToBgImage("howToPlayPageFourBackgroundImage");
 		
-		
 		betweenTwoMountain = nameToTileImage("betweenTwoMountain");
 		castleOnAbyss = nameToTileImage("castleOnAbyss");
 		castleOnMountain = nameToTileImage("castleOnMountain");

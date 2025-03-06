@@ -11,10 +11,19 @@ import utils.MouseEventHandler;
 
 public class HowToPlayPane extends StackPane {
 	
+<<<<<<< HEAD
 	private Button leftHomeButton;
 	private Button rightHomeButton;
 	private Button nextPageButton;
 	private Button prevPageButton;
+||||||| 70e1ab7
+	private MyButton homeButton;
+	private Pane howToPlayPage01;
+=======
+	private Button homeButton;
+	private Button nextPageButton;
+//	private Button prevPageButton;
+>>>>>>> origin/titan
 	
 	private Pane howToPlayPageOne;
 	private Pane howToPlayPageTwo;
@@ -29,6 +38,19 @@ public class HowToPlayPane extends StackPane {
 		
 		initializePages();
 		showPage(1); // Start with page 1
+	}
+
+	private void initializePages() {
+		// Initialize all pages
+		howToPlayPageOne = createPage(ImageLoader.getHowToPlayPageOneBackground());
+		howToPlayPageTwo = createPage(ImageLoader.getHowToPlayPageOneBackground());
+		howToPlayPageThree = createPage(ImageLoader.getHowToPlayPageOneBackground());
+		howToPlayPageFour = createPage(ImageLoader.getHowToPlayPageOneBackground());
+
+		// Initialize buttons
+		initializeHomeButton();
+		initializeNextPageButton();
+//		initializePrevPageButton();
 	}
 
 	private void initializePages() {

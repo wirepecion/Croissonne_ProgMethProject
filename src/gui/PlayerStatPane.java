@@ -62,7 +62,6 @@ public class PlayerStatPane extends GridPane{
 		
 		add(playerIcon, 0, 0);
 		add(playerStats, 1, 0);
-		
 	}
 	
 	public void setBaseColor() {

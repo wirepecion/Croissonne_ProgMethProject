@@ -35,6 +35,9 @@ public class ControlPane extends VBox {
 		setSpacing(10);
 		setAlignment(Pos.CENTER);
 		
+		getChildren().clear();
+		
+		Player[] players = GameLogic.getPlayer();
 		for (int i = 0; i < GameLogic.getPlayer().length; i++) {
 			getChildren().addAll(GameLogic.getPlayer()[i].getPlayerStatPane());
 		}

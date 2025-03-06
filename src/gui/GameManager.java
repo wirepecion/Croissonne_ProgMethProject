@@ -64,7 +64,7 @@ public class GameManager {
 		inGameScene.addGameOverText();
 		inGameScene.addWinnerText();
 		inGameScene.addPlayerStatPane();
-		inGameScene.addPlayAgainAndExitButton();
+		inGameScene.addEndGameOption();
 		
 	}
 	
