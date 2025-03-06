@@ -59,9 +59,9 @@ public class ControlPane extends VBox {
 		tilePane = new Canvas(TilePane.getTileSize() * 3, TilePane.getTileSize() * 3);
 		tilePane.setLayoutX(25);
 		tilePane.setLayoutY(25);
-		tilePane.setOnMouseClicked(event -> rotateTile());
-		tilePane.setOnMouseEntered(event -> { setCursor(Cursor.HAND); });
-		tilePane.setOnMouseExited(event -> { setCursor(Cursor.DEFAULT); });
+		tilePane.setOnMouseClicked(event -> tilePaneClickHandler());
+		tilePane.setOnMouseEntered(event -> setCursor(Cursor.HAND));
+		tilePane.setOnMouseExited(event -> setCursor(Cursor.DEFAULT));
 		GameLogic.randomTile();
 	}
 	
@@ -85,14 +85,16 @@ public class ControlPane extends VBox {
 				Color.FIREBRICK, CornerRadii.EMPTY, Insets.EMPTY)));
 		passButton.setFont(new Font("Arial Bold", 40));
 		passButton.setStyle("-fx-text-fill: white;");
-		passButton.setOnMouseClicked(event -> onMouseClicked());
+		passButton.setOnMouseClicked(event -> passButtonClickHandler());
 		passButton.setOnMouseEntered(event -> onMouseEnteredHandler());
 		passButton.setOnMouseExited(event -> onMouseExitedHandler());
 	}
 	
-	private void rotateTile() {
-		GameLogic.getCurrentTile().rotate();
-		tilePane.setRotate(tilePane.getRotate() + 90);
+	private void tilePaneClickHandler() {
+		if (!GameLogic.getInstance().isGameEnd()) {
+			GameLogic.getCurrentTile().rotate();
+			tilePane.setRotate(tilePane.getRotate() + 90);
+		}
 	}
 	
 	public static void showRandomTile() {
@@ -105,10 +107,12 @@ public class ControlPane extends VBox {
 		remainingText.setText("Tiles Remaining : " + TileStorage.getTileCount());
 	}
 	
-	private void onMouseClicked() {
-		GameLogic.getCurrentPlayer().updatePenalty(1);
-		GameLogic.randomTile();
-		GameLogic.nextPlayer();
+	private void passButtonClickHandler() {
+		if (!GameLogic.update()) {
+			GameLogic.getCurrentPlayer().updatePenalty(1);
+			GameLogic.randomTile();
+			GameLogic.nextPlayer();
+		}
 	}
 	
 	private void onMouseEnteredHandler() {
