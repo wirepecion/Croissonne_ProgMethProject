@@ -94,7 +94,6 @@ public class InGamePane extends HBox {
 		playAgainButton.setOnMouseClicked(e -> {
 			GameManager.getInstance().switchToInGameScene();
 		});
-		MouseEventHandler.applyHoverEffect(playAgainButton);
 		
 		Button menuButton = new Button("MENU");
 		menuButton.setPrefWidth(150);
@@ -105,7 +104,6 @@ public class InGamePane extends HBox {
 		menuButton.setOnMouseClicked(e -> {
 			GameManager.getInstance().setToStartGamePane();
 		});
-		MouseEventHandler.applyHoverEffect(menuButton);
 		
 		Button exitButton = new Button("EXIT");
 		exitButton.setPrefWidth(150);
@@ -116,7 +114,6 @@ public class InGamePane extends HBox {
 		exitButton.setOnMouseClicked(e -> {
 			Platform.exit();
 		});
-		MouseEventHandler.applyHoverEffect(exitButton);
 		
 		endGameOption.getChildren().addAll(playAgainButton,menuButton,exitButton);
 		
