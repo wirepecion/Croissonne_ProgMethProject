@@ -15,7 +15,7 @@ public class GameManager {
 	SelectColorPane selectColorPane;
 	HowToPlayPane howToPlayPane;
 	
-	InGameScene inGameScene;
+	InGamePane inGameScene;
 	
 	Scene scene;
 	
@@ -53,7 +53,7 @@ public class GameManager {
 	
 	
 	public void switchToInGameScene() {
-		inGameScene = new InGameScene();
+		inGameScene = new InGamePane();
 		scene = new Scene(inGameScene);
 		showStage();
 	}
@@ -76,7 +76,7 @@ public class GameManager {
 		return instance;
 	}
 	
-	public InGameScene getInGameScene() {
+	public InGamePane getInGameScene() {
 		return inGameScene;
 	}
 }

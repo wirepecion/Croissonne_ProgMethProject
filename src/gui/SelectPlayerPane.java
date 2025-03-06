@@ -13,6 +13,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import logic.GameLogic;
+import utils.MouseEventHandler;
 import utils.PlayerColor;
 
 public class SelectPlayerPane extends Pane {
@@ -48,8 +49,8 @@ public class SelectPlayerPane extends Pane {
 			GameLogic.setPlayerName(getPlayerName(2));
 			GameManager.getInstance().switchToSelectColorPane();
 		});
-		twoPlayerButton.setOnMouseEntered(event -> { setCursor(Cursor.HAND); });
-		twoPlayerButton.setOnMouseExited(event -> { setCursor(Cursor.DEFAULT); });
+		
+		MouseEventHandler.applyHoverEffect(twoPlayerButton);
 	}
 	
 	private void initializeThreePlayerButton() {
@@ -66,8 +67,14 @@ public class SelectPlayerPane extends Pane {
 			GameLogic.setPlayerName(getPlayerName(3));
 			GameManager.getInstance().switchToSelectColorPane();
 		});
+<<<<<<< HEAD
 		threePlayerButton.setOnMouseEntered(event -> { setCursor(Cursor.HAND); });
 		threePlayerButton.setOnMouseExited(event -> { setCursor(Cursor.DEFAULT); });
+||||||| 12c7e07
+=======
+		
+		MouseEventHandler.applyHoverEffect(threePlayerButton);
+>>>>>>> origin/seven
 	}
 
 	private void initializeFourPlayerButton() {
@@ -85,8 +92,14 @@ public class SelectPlayerPane extends Pane {
 			GameLogic.setPlayerName(getPlayerName(4));
 			GameManager.getInstance().switchToSelectColorPane();
 		});
+<<<<<<< HEAD
 		fourPlayerButton.setOnMouseEntered(event -> { setCursor(Cursor.HAND); });
 		fourPlayerButton.setOnMouseExited(event -> { setCursor(Cursor.DEFAULT); });
+||||||| 12c7e07
+=======
+		
+		MouseEventHandler.applyHoverEffect(fourPlayerButton);
+>>>>>>> origin/seven
 	}
 	
 	private String[] getPlayerName(int num) {

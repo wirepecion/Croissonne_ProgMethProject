@@ -15,6 +15,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import logic.GameLogic;
+import utils.MouseEventHandler;
 import utils.PlayerColor;
 
 public class SelectColorPane extends Pane {
@@ -61,6 +62,10 @@ public class SelectColorPane extends Pane {
             GraphicsContext gc = canvas.getGraphicsContext2D();
             gc.setFill(Color.valueOf(playerColor.name()));
             gc.fillOval(0, 0, COLOR_SIZE, COLOR_SIZE);
+
+            // Set event handlers
+            canvas.setOnMouseClicked(event -> chooseColor(playerColor));
+            MouseEventHandler.applyHoverEffect(canvas);
 
             // Add canvas to the GridPane (colorPane) at (col, row)
             colorPane.add(canvas, col, row);

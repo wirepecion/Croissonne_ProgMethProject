@@ -20,12 +20,12 @@ import javafx.scene.text.Text;
 import logic.GameLogic;
 import utils.PlayerColor;
 
-public class InGameScene extends HBox {
+public class InGamePane extends HBox {
 	
 	private BoardPane boardPane;
 	private ControlPane controlPane;
 	
-	public InGameScene() {
+	public InGamePane() {
 		
 		GameLogic.getInstance().newGame();
 		
