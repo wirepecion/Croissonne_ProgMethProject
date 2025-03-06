@@ -34,6 +34,7 @@ public class GameLogic {
 	}
 	
 	public void newGame() {
+		setGameEnd(false);
 		board = new Board();
 		currentPlayerNumber = 0;
 		
