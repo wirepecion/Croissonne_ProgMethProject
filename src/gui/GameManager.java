@@ -1,5 +1,6 @@
 package gui;
 
+import data.AudioLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -21,6 +22,7 @@ public class GameManager {
 	
 	public GameManager(Stage stage) {
 		// TODO Auto-generated constructor stub
+		AudioLoader.playBgAudio();
 		instance = this;
 		this.stage = stage;
 		startGamePane = new StartGamePane();

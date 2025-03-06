@@ -2,7 +2,7 @@ package gui;
 
 import component.Tile;
 import data.ImageLoader;
-import data.SoundLoader;
+import data.AudioLoader;
 import interfaces.Rotatable;
 import javafx.scene.Cursor;
 import javafx.scene.canvas.Canvas;
@@ -37,7 +37,7 @@ public class TilePane extends Canvas implements Rotatable {
 		if (tile.onClick()) {
 			drawEmpty();
 			draw();
-			SoundLoader.playTileSound();
+			AudioLoader.playTileAudio();
 			setRotate(ControlPane.getTilePane().getRotate());
 			setCursor(Cursor.DEFAULT);
 			ControlPane.getTilePane().setRotate(0);

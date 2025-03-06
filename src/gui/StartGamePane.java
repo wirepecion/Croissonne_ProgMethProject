@@ -1,5 +1,6 @@
 package gui;
 
+import data.AudioLoader;
 import data.ImageLoader;
 import javafx.application.Platform;
 import javafx.scene.Cursor;
@@ -17,6 +18,7 @@ public class StartGamePane extends Pane {
 	MyButton exitBtn;
 	
 	public StartGamePane() {
+		
 		//initialize button
 		initializeStartButton();
 		initializeHowToPlayBtn();
