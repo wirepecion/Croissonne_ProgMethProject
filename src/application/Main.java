@@ -8,7 +8,6 @@ public class Main extends Application{
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		primaryStage.setResizable(false);
 		new GameManager(primaryStage);
 		primaryStage.setResizable(false);
 	}

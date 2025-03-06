@@ -54,7 +54,7 @@ public class SelectColorPane extends Pane {
         for (PlayerColor playerColor : PlayerColor.values()) {
             Canvas canvas = new Canvas(COLOR_SIZE, COLOR_SIZE);
 			// Set event handlers
-            canvas.setOnMouseClicked(event -> chooseColor(playerColor));
+            canvas.setOnMouseClicked(event -> chooseColor(playerColor, canvas));
             canvas.setOnMouseEntered(event -> { setCursor(Cursor.HAND); });
             canvas.setOnMouseExited(event -> { setCursor(Cursor.DEFAULT); });
 
@@ -74,7 +74,7 @@ public class SelectColorPane extends Pane {
         }
     }
 
-    private void chooseColor(PlayerColor playerColor) {
+    private void chooseColor(PlayerColor playerColor, Canvas canvas) {
         GameLogic.addPlayerColor(playerColor);
         chosenPlayerColor++;
 
