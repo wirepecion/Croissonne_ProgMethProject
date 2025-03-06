@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.Deque;
 
 import gui.ControlPane;
+import gui.GameManager;
 import gui.TilePane;
 import component.Tile;
 import utils.PlayerColor;
@@ -99,7 +100,10 @@ public class GameLogic {
 	}
 	
 	public static void randomTile() {
-		if (update()) return;
+		if (update()) {
+			GameManager.getInstance().switchToEndGameScene();
+			return;
+		}
 		currentTile = TileStorage.getRandomTile();
 		currentTile.setPlace(false);
 		ControlPane.showRandomTile();
@@ -234,7 +238,7 @@ public class GameLogic {
 	}
 	
 	public static boolean update() {
-		if (TileStorage.getTileCount() == 0) {
+		if (TileStorage.getTileCount() == 1) {
 			isGameEnd = true;
 			return true;
 		}

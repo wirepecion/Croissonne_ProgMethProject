@@ -56,6 +56,7 @@ public class ControlPane extends VBox {
 	}
 	
 	private void initializeTilePane() {
+		System.out.println("in process ...");
 		tilePane = new Canvas(TilePane.getTileSize() * 3, TilePane.getTileSize() * 3);
 		tilePane.setLayoutX(25);
 		tilePane.setLayoutY(25);

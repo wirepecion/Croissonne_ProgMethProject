@@ -51,15 +51,21 @@ public class InGameScene extends HBox {
 	}
 	
 	public void addWinnerText() {
+		String winners = "Player ";
 		Player winner = GameLogic.getPlayer()[0];
 		int maxPoint = GameLogic.getPlayer()[0].getScore() + GameLogic.getPlayer()[0].getPenalty();
 		for (Player player : GameLogic.getPlayer()) {
-			if (player.getScore() - player.getPenalty() > maxPoint) {
+			if (player.getScore() + player.getPenalty() > maxPoint) {
 				maxPoint = player.getScore() + player.getPenalty();
 				winner = player;
 			}
 		}
-		Text winnerText = new Text(winner + " Wins!");
+		for (Player player : GameLogic.getPlayer()) {
+			if (player.getScore() + player.getPenalty() ==  maxPoint) {
+				winners += player.getName().charAt(player.getName().length()-1) + " ";
+			}
+		}
+		Text winnerText = new Text(winners + "Wins!");
 		winnerText.setFont(new Font(30));
 		controlPane.getChildren().add(winnerText);
 	}
@@ -70,20 +76,31 @@ public class InGameScene extends HBox {
 		}
 	}
 	
-	public void addPlayAgainAndExitButton() {
+	public void addExitOption() {
 		
-		HBox playAgainAndExitButton = new HBox();
-		playAgainAndExitButton.setSpacing(30);
-		playAgainAndExitButton.setAlignment(Pos.CENTER);
+		HBox exitOption = new HBox();
+		exitOption.setSpacing(30);
+		exitOption.setAlignment(Pos.CENTER);
 		
 		Button playAgainButton = new Button("PLAY AGAIN");
 		playAgainButton.setPrefWidth(150);
 		playAgainButton.setPrefHeight(50);
 		playAgainButton.setBackground(new Background(new BackgroundFill(
 				Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY)));
-		playAgainButton.setFont(new Font("Arial Bold", 15));
+		playAgainButton.setFont(new Font("Arial Bold", 14));
 		playAgainButton.setStyle("-fx-text-fill: white;");
 		playAgainButton.setOnMouseClicked(e -> {
+			GameManager.getInstance().switchToInGameScene();
+		});
+		
+		Button menuButton = new Button("MENU");
+		menuButton.setPrefWidth(150);
+		menuButton.setPrefHeight(50);
+		menuButton.setBackground(new Background(new BackgroundFill(
+				Color.ORANGE, CornerRadii.EMPTY, Insets.EMPTY)));
+		menuButton.setFont(new Font("Arial Bold", 15));
+		menuButton.setStyle("-fx-text-fill: white;");
+		menuButton.setOnMouseClicked(e -> {
 			GameManager.getInstance().setToStartGamePane();
 		});
 		
@@ -98,9 +115,9 @@ public class InGameScene extends HBox {
 			Platform.exit();
 		});
 		
-		playAgainAndExitButton.getChildren().addAll(playAgainButton,exitButton);
+		exitOption.getChildren().addAll(playAgainButton,menuButton,exitButton);
 		
-		controlPane.getChildren().add(playAgainAndExitButton);
+		controlPane.getChildren().add(exitOption);
  	}
 
 	public BoardPane getBoardPane() {
