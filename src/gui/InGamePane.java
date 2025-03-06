@@ -2,7 +2,7 @@ package gui;
 
 import component.Board;
 import component.Player;
-import data.ResourceLoader;
+import data.ImageLoader;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -36,7 +36,7 @@ public class InGamePane extends HBox {
 		setSpacing(20);
 		setPrefWidth(1200);
 		setPrefHeight(750);
-		setBackground(new Background(new BackgroundImage(ResourceLoader.getInGameBackgroundImage(), null, null, null, null)));
+		setBackground(new Background(new BackgroundImage(ImageLoader.getInGameBackgroundImage(), null, null, null, null)));
 		getChildren().addAll(boardPane, controlPane);
    
 	}

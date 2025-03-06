@@ -2,7 +2,7 @@ package gui;
 
 import component.Player;
 import component.Tile;
-import data.ResourceLoader;
+import data.ImageLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
@@ -99,7 +99,7 @@ public class ControlPane extends VBox {
 	
 	public static void showRandomTile() {
 		tilePane.getGraphicsContext2D().drawImage(
-				ResourceLoader.getTileImage(GameLogic.getCurrentTile().getTileType()), 
+				ImageLoader.getTileImage(GameLogic.getCurrentTile().getTileType()), 
 				0, 0, TilePane.getTileSize() * 3, TilePane.getTileSize() * 3);
 	}
 	

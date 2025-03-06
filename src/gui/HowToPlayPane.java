@@ -1,6 +1,6 @@
 package gui;
 
-import data.ResourceLoader;
+import data.ImageLoader;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
@@ -32,10 +32,10 @@ public class HowToPlayPane extends StackPane {
 
 	private void initializePages() {
 		// Initialize all pages
-		howToPlayPageOne = createPage(ResourceLoader.getHowToPlayPageOneBackground());
-		howToPlayPageTwo = createPage(ResourceLoader.getHowToPlayPageOneBackground());
-		howToPlayPageThree = createPage(ResourceLoader.getHowToPlayPageOneBackground());
-		howToPlayPageFour = createPage(ResourceLoader.getHowToPlayPageOneBackground());
+		howToPlayPageOne = createPage(ImageLoader.getHowToPlayPageOneBackground());
+		howToPlayPageTwo = createPage(ImageLoader.getHowToPlayPageOneBackground());
+		howToPlayPageThree = createPage(ImageLoader.getHowToPlayPageOneBackground());
+		howToPlayPageFour = createPage(ImageLoader.getHowToPlayPageOneBackground());
 
 		// Initialize buttons
 		initializeHomeButton();

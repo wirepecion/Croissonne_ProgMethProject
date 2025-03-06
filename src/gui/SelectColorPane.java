@@ -2,7 +2,7 @@ package gui;
 
 import java.util.ArrayList;
 
-import data.ResourceLoader;
+import data.ImageLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
@@ -45,7 +45,7 @@ public class SelectColorPane extends Pane {
         // Add the colorPane to this pane
         getChildren().add(colorPane);
 
-        setBackground(new Background(new BackgroundImage(ResourceLoader.getSelectColorBackgroundImage(), null, null, null, null)));
+        setBackground(new Background(new BackgroundImage(ImageLoader.getSelectColorBackgroundImage(), null, null, null, null)));
     }
 
     private void initializeColor() {
@@ -54,18 +54,14 @@ public class SelectColorPane extends Pane {
 
         for (PlayerColor playerColor : PlayerColor.values()) {
             Canvas canvas = new Canvas(COLOR_SIZE, COLOR_SIZE);
-			// Set event handlers
+            // Set event handlers
             canvas.setOnMouseClicked(event -> chooseColor(playerColor, canvas));
-            canvas.setOnMouseEntered(event -> { setCursor(Cursor.HAND); });
-            canvas.setOnMouseExited(event -> { setCursor(Cursor.DEFAULT); });
+            canvas.setOnMouseEntered(event -> setCursor(Cursor.HAND));
+            canvas.setOnMouseExited(event -> setCursor(Cursor.DEFAULT));
 
             GraphicsContext gc = canvas.getGraphicsContext2D();
             gc.setFill(Color.valueOf(playerColor.name()));
             gc.fillOval(0, 0, COLOR_SIZE, COLOR_SIZE);
-
-            // Set event handlers
-            canvas.setOnMouseClicked(event -> chooseColor(playerColor));
-            MouseEventHandler.applyHoverEffect(canvas);
 
             // Add canvas to the GridPane (colorPane) at (col, row)
             colorPane.add(canvas, col, row);

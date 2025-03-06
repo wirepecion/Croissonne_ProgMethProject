@@ -1,7 +1,8 @@
 package gui;
 
 import component.Tile;
-import data.ResourceLoader;
+import data.ImageLoader;
+import data.SoundLoader;
 import interfaces.Rotatable;
 import javafx.scene.Cursor;
 import javafx.scene.canvas.Canvas;
@@ -11,10 +12,10 @@ import logic.GameLogic;
 import utils.TileType;
 
 public class TilePane extends Canvas implements Rotatable {
-	
+
 	private static final int TILE_SIZE = 50;
 	Tile tile;
-	
+
 	public TilePane(Tile tile) {
 		super(TILE_SIZE, TILE_SIZE);
 		this.tile = tile;
@@ -22,27 +23,28 @@ public class TilePane extends Canvas implements Rotatable {
 		setOnMouseEntered(event -> MouseEnteredHandler());
 		setOnMouseExited(event -> MouseExitedHandler());
 	}
-	
+
 	public void draw() {
 		GraphicsContext gc = getGraphicsContext2D();
-		gc.drawImage(ResourceLoader.getTileImage(tile.getTileType()), 0, 0, TILE_SIZE, TILE_SIZE);
+		gc.drawImage(ImageLoader.getTileImage(tile.getTileType()), 0, 0, TILE_SIZE, TILE_SIZE);
 	}
-	
+
 	public void rotate() {
 		setRotate(getRotate() + 90);
 	}
-	
+
 	private void MouseClickHandler() {
 		if (tile.onClick()) {
-			drawEmptyAlert();
+			drawEmpty();
 			draw();
+			SoundLoader.playTileSound();
 			setRotate(ControlPane.getTilePane().getRotate());
 			setCursor(Cursor.DEFAULT);
 			ControlPane.getTilePane().setRotate(0);
 			GameLogic.getInstance().placeCurrentTile(tile.getxPosition(), tile.getyPosition());
 		}
 	}
-	
+
 	private void MouseEnteredHandler() {
 		if (!GameLogic.getInstance().isGameEnd()) {
 			if (tile.getTileType().equals(TileType.EMPTY)) {
@@ -51,7 +53,7 @@ public class TilePane extends Canvas implements Rotatable {
 			}
 		}
 	}
-	
+
 	private void MouseExitedHandler() {
 		setCursor(Cursor.DEFAULT);
 		if (!GameLogic.getInstance().isGameEnd()) {
@@ -60,18 +62,18 @@ public class TilePane extends Canvas implements Rotatable {
 			}
 		}
 	}
-	
+
 	private void drawEmptyAlert() {
 		GraphicsContext gc = getGraphicsContext2D();
-		gc.drawImage(ResourceLoader.getTileEmptyAlert(), 0, 0, TILE_SIZE, TILE_SIZE);
+		gc.drawImage(ImageLoader.getTileEmptyAlert(), 0, 0, TILE_SIZE, TILE_SIZE);
 	}
-	
+
 	private void drawEmpty() {
 		GraphicsContext gc = getGraphicsContext2D();
 		gc.clearRect(0, 0, getWidth(), getHeight());
 		draw();
 	}
-	
+
 	public static int getTileSize() {
 		return TILE_SIZE;
 	}

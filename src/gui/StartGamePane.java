@@ -1,6 +1,6 @@
 package gui;
 
-import data.ResourceLoader;
+import data.ImageLoader;
 import javafx.application.Platform;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
@@ -25,7 +25,7 @@ public class StartGamePane extends Pane {
 		setPrefHeight(750);
 		setPrefWidth(1200);
 		
-		setBackground(new Background(new BackgroundImage(ResourceLoader.getStartGameBackgroundImage(), null, null, null, null)));
+		setBackground(new Background(new BackgroundImage(ImageLoader.getStartGameBackgroundImage(), null, null, null, null)));
 		
 		getChildren().addAll(startBtn, howToPlayBtn, exitBtn);
 	}
@@ -58,14 +58,8 @@ public class StartGamePane extends Pane {
 		howToPlayBtn.setOnMouseClicked(e -> {
 			GameManager.getInstance().switchToHowToPlayScene();
 		});
-<<<<<<< HEAD
-		howToPlayBtn.setOnMouseEntered(event -> { setCursor(Cursor.HAND); });
-		howToPlayBtn.setOnMouseExited(event -> { setCursor(Cursor.DEFAULT); });
-||||||| 12c7e07
-=======
 		
 		MouseEventHandler.applyHoverEffect(howToPlayBtn);
->>>>>>> origin/seven
 	}
 
 	private void initializeExitButton() {
@@ -80,13 +74,7 @@ public class StartGamePane extends Pane {
 		exitBtn.setOnMouseClicked(e -> {
 			Platform.exit();
 		});
-<<<<<<< HEAD
-		exitBtn.setOnMouseEntered(event -> { setCursor(Cursor.HAND); });
-		exitBtn.setOnMouseExited(event -> { setCursor(Cursor.DEFAULT); });
-||||||| 12c7e07
-=======
 		
 		MouseEventHandler.applyHoverEffect(exitBtn);
->>>>>>> origin/seven
 	}
 }

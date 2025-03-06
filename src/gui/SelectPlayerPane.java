@@ -1,6 +1,6 @@
 package gui;
 
-import data.ResourceLoader;
+import data.ImageLoader;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -30,7 +30,7 @@ public class SelectPlayerPane extends Pane {
 		setPrefHeight(750);
 		setPrefWidth(1200);
 		
-		setBackground(new Background(new BackgroundImage(ResourceLoader.getSelectPlayerBackground(), null, null, null, null)));
+		setBackground(new Background(new BackgroundImage(ImageLoader.getSelectPlayerBackground(), null, null, null, null)));
 		
 		getChildren().addAll(twoPlayerButton, threePlayerButton, fourPlayerButton);
 	}
@@ -94,7 +94,7 @@ public class SelectPlayerPane extends Pane {
 		String[] playerNameList = new String[num];
 		
 		for(int i = 1; i <= num; i++) {
-			playerNameList[i-1] = "PLayer " + i;
+			playerNameList[i-1] = "Player " + i;
 		}
 		
 		return playerNameList;
