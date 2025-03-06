@@ -9,8 +9,12 @@ public class GameManager {
 	public static GameManager instance = null;
 	
 	Stage stage;
-	StartGameScene startGameScene;
+	
+	StartGamePane startGamePane;
+	SelectPlayerPane selectPlayerPane;
+	SelectColorPane selectColorPane;
 	HowToPlayPane howToPlayPane;
+	
 	InGameScene inGameScene;
 	
 	Scene scene;
@@ -19,41 +23,39 @@ public class GameManager {
 		// TODO Auto-generated constructor stub
 		instance = this;
 		this.stage = stage;
-		
-		startGameScene = new StartGameScene();
-		
-		setToStartGameScene();
+		startGamePane = new StartGamePane();
+		setToStartGamePane();
 	}
 	
-	public void setToStartGameScene() {
-		scene = new Scene(startGameScene);
-		stage.setScene(scene);
-		stage.setTitle("Croissonne");
-		stage.show();
+	public void setToStartGamePane() {
+		startGamePane = new StartGamePane();
+		scene = new Scene(startGamePane);
+		showStage();
 	}
 	
-	public void switchToSelectPlayerScene() {
-//		startGameScene.removeStartButton();
-		startGameScene.addSelectPlayerButton();
+	public void switchToSelectPlayerPane() {
+		selectPlayerPane = new SelectPlayerPane();
+		scene = new Scene(selectPlayerPane);
+		showStage();
+	}
+	
+	public void switchToSelectColorPane() {
+		selectColorPane = new SelectColorPane();
+		scene = new Scene(selectColorPane);
+		showStage();
 	}
 	
 	public void switchToHowToPlayScene() {
 		howToPlayPane = new HowToPlayPane();
 		scene = new Scene(howToPlayPane);
-		stage.setScene(scene);
-		stage.show();
+		showStage();
 	}
 	
-	public void switchToSelectColorScene() {
-		startGameScene.removeSelectPlayerButton();
-		startGameScene.addSelectColorButton();
-	}
 	
 	public void switchToInGameScene() {
 		inGameScene = new InGameScene();
 		scene = new Scene(inGameScene);
-		stage.setScene(scene);
-		stage.show();
+		showStage();
 	}
 	public void switchToEndGameScene() {
 		inGameScene.clearControlPane();
@@ -64,16 +66,17 @@ public class GameManager {
 		
 	}
 	
+	private void showStage() {
+		stage.setScene(scene);
+		stage.setTitle(scene.toString());
+		stage.show();
+	}
+	
 	public static GameManager getInstance() {
 		return instance;
 	}
-
-	public StartGameScene getStartGameScene() {
-		return startGameScene;
-	}
-
+	
 	public InGameScene getInGameScene() {
 		return inGameScene;
 	}
-	
 }

@@ -15,9 +15,12 @@ import utils.TileType;
 public class ResourceLoader {
 	private static final ResourceLoader instance = new ResourceLoader();
 
-	public static Image inGameBackground;
 	public static Image startGameBackground;
+	public static Image selectPlayerBackground;
+	public static Image selectColorBackground;
 	public static Image howToPlayBackground;
+	public static Image howToPlayPageOneBackground;
+	public static Image inGameBackground;
 	
 	public static Image betweenTwoMountain;
 	public static Image castleOnAbyss;
@@ -46,8 +49,11 @@ public class ResourceLoader {
 	public static void loadResource() {
 		
 		startGameBackground = nameToBgImage("startGameBackgroundImage");
+		selectPlayerBackground = nameToBgImage("selectPlayerBackgroundImage");
+		selectColorBackground = nameToBgImage("selectColorBackgroundImage");
 		inGameBackground = nameToBgImage("inGameBackgroundImage");
 		howToPlayBackground = nameToBgImage("howToPlayBackgroundImage");
+		howToPlayPageOneBackground = nameToBgImage("howToPlayPageOneBackgroundImage");
 		
 		betweenTwoMountain = tileNameToImage("betweenTwoMountain");
 		castleOnAbyss = tileNameToImage("castleOnAbyss");
@@ -74,8 +80,20 @@ public class ResourceLoader {
 		return startGameBackground;
 	}
 	
+	public static Image getSelectPlayerBackground() {
+		return selectPlayerBackground;
+	}
+	
+	public static Image getSelectColorBackgroundImage() {
+		return selectColorBackground;
+	}
+	
 	public static Image getHowToPlayImage() {
 		return howToPlayBackground;
+	}
+	
+	public static Image getHowToPlayPageOneBackground() {
+		return howToPlayPageOneBackground;
 	}
 	
 	public static Image getInGameBackgroundImage() {

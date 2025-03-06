@@ -82,7 +82,7 @@ public class InGameScene extends HBox {
 		playAgainButton.setFont(new Font("Arial Bold", 15));
 		playAgainButton.setStyle("-fx-text-fill: white;");
 		playAgainButton.setOnMouseClicked(e -> {
-			GameManager.getInstance().setToStartGameScene();
+			GameManager.getInstance().setToStartGamePane();
 		});
 		
 		Button exitButton = new Button("EXIT");
