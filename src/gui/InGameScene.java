@@ -18,6 +18,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import logic.GameLogic;
+import logic.TileStorage;
 import utils.PlayerColor;
 
 public class InGameScene extends HBox {
@@ -28,6 +29,7 @@ public class InGameScene extends HBox {
 	public InGameScene() {
 		
 		GameLogic.getInstance().newGame();
+		TileStorage.getInstance().init();
 		
 		boardPane = new BoardPane(GameLogic.getInstance().getBoard());
 		controlPane = new ControlPane();
