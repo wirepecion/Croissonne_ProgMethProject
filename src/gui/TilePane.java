@@ -7,7 +7,6 @@ import interfaces.Rotatable;
 import javafx.scene.Cursor;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 import logic.GameLogic;
 import utils.TileType;
 

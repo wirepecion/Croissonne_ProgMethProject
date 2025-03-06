@@ -6,7 +6,6 @@ import javafx.scene.image.Image;
 import utils.TileType;
 
 public class ImageLoader {
-	private static final ImageLoader instance = new ImageLoader();
 
 	public static Image startGameBackground;
 	public static Image selectPlayerBackground;

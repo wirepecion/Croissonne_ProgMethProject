@@ -1,10 +1,6 @@
 package gui;
 
-import java.util.ArrayList;
-
 import data.ImageLoader;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -15,7 +11,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import logic.GameLogic;
-import utils.MouseEventHandler;
 import utils.PlayerColor;
 
 public class SelectColorPane extends Pane {
@@ -41,7 +36,6 @@ public class SelectColorPane extends Pane {
         setPrefHeight(750);
         setPrefWidth(1200);
 
-
         // Add the colorPane to this pane
         getChildren().add(colorPane);
 
@@ -54,6 +48,7 @@ public class SelectColorPane extends Pane {
 
         for (PlayerColor playerColor : PlayerColor.values()) {
             Canvas canvas = new Canvas(COLOR_SIZE, COLOR_SIZE);
+            
             // Set event handlers
             canvas.setOnMouseClicked(event -> chooseColor(playerColor, canvas));
             canvas.setOnMouseEntered(event -> setCursor(Cursor.HAND));

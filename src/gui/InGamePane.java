@@ -1,14 +1,11 @@
 package gui;
 
-import component.Board;
 import component.Player;
 import data.ImageLoader;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BackgroundImage;
@@ -16,10 +13,8 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import logic.GameLogic;
 import logic.TileStorage;
-import utils.PlayerColor;
 
 public class InGamePane extends HBox {
 	

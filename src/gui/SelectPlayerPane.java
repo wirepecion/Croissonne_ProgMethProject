@@ -1,20 +1,11 @@
 package gui;
 
 import data.ImageLoader;
-import javafx.application.Platform;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Cursor;
-import javafx.scene.control.Button;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 import logic.GameLogic;
 import utils.MouseEventHandler;
-import utils.PlayerColor;
 
 public class SelectPlayerPane extends Pane {
 	private MyButton twoPlayerButton;

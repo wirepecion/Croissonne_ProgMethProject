@@ -1,10 +1,8 @@
 package gui;
 
-import data.AudioLoader;
 import data.ImageLoader;
 import javafx.application.Platform;
 import javafx.scene.Cursor;
-import javafx.scene.control.Button;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.Pane;

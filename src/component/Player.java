@@ -1,10 +1,6 @@
 package component;
 
 import gui.PlayerStatPane;
-import javafx.geometry.Insets;
-import javafx.scene.Scene;
-import javafx.scene.layout.HBox;
-import javafx.scene.text.Text;
 import utils.PlayerColor;
 
 public class Player {

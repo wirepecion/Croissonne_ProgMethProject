@@ -1,16 +1,9 @@
 package gui;
 
 import component.Board;
-import component.Tile;
-import data.ImageLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
-import utils.TileType;
 
 public class BoardPane extends GridPane {
 

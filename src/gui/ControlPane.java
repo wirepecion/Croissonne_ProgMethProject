@@ -1,15 +1,11 @@
 package gui;
 
-import component.Player;
-import component.Tile;
 import data.ImageLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -17,10 +13,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import logic.GameLogic;
 import logic.TileStorage;
-import utils.PlayerColor;
 
 public class ControlPane extends VBox {
 	
@@ -37,7 +31,6 @@ public class ControlPane extends VBox {
 		
 		getChildren().clear();
 		
-		Player[] players = GameLogic.getPlayer();
 		for (int i = 0; i < GameLogic.getPlayer().length; i++) {
 			getChildren().addAll(GameLogic.getPlayer()[i].getPlayerStatPane());
 		}
@@ -89,8 +82,8 @@ public class ControlPane extends VBox {
 		passButton.setFont(new Font("Arial Bold", 40));
 		passButton.setStyle("-fx-text-fill: white;");
 		passButton.setOnMouseClicked(event -> passButtonClickHandler());
-		passButton.setOnMouseEntered(event -> onMouseEnteredHandler());
-		passButton.setOnMouseExited(event -> onMouseExitedHandler());
+		passButton.setOnMouseEntered(event -> setCursor(Cursor.HAND));
+		passButton.setOnMouseExited(event -> setCursor(Cursor.DEFAULT));
 	}
 	
 	private void tilePaneClickHandler() {
@@ -120,14 +113,6 @@ public class ControlPane extends VBox {
 		}
 	}
 	
-	private void onMouseEnteredHandler() {
-		setCursor(Cursor.HAND);
-	}
-	
-	private void onMouseExitedHandler() {
-		setCursor(Cursor.DEFAULT);
-	}
-
 	public static Canvas getTilePane() {
 		return tilePane;
 	}

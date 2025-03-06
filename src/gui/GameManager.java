@@ -3,7 +3,6 @@ package gui;
 import data.AudioLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class GameManager {
@@ -22,7 +21,6 @@ public class GameManager {
 	Scene scene;
 	
 	public GameManager(Stage stage) {
-		// TODO Auto-generated constructor stub
 		AudioLoader.playBgAudio();
 		instance = this;
 		this.stage = stage;
@@ -62,7 +60,6 @@ public class GameManager {
 	}
 	
 	public void switchToEndGameScene() {
-		System.out.println("should end game");
 		inGameScene.clearControlPane();
 		inGameScene.addGameOverText();
 		inGameScene.addWinnerText();

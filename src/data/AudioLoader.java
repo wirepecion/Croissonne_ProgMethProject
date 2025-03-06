@@ -6,8 +6,6 @@ import javafx.scene.media.AudioClip;
 
 public class AudioLoader {
 	
-	private static final AudioLoader instance = new AudioLoader();
-	
 	public static AudioClip tileAudio0;
 	public static AudioClip tileAudio1;
 	public static AudioClip tileAudio2;
