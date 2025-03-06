@@ -43,8 +43,8 @@ public class SelectPlayerPane extends Pane {
 		twoPlayerButton = new MyButton();
 		
 		//set's button style
-		twoPlayerButton.setLayoutX(275);
-		twoPlayerButton.setLayoutY(310);
+		twoPlayerButton.setLayoutX(276);
+		twoPlayerButton.setLayoutY(312);
 		
 		//set event-handler
 		twoPlayerButton.setOnMouseClicked(e -> {
@@ -61,8 +61,8 @@ public class SelectPlayerPane extends Pane {
 		threePlayerButton = new MyButton();
 		
 		//set's button style
-		threePlayerButton.setLayoutX(275);
-		threePlayerButton.setLayoutY(476);
+		threePlayerButton.setLayoutX(276);
+		threePlayerButton.setLayoutY(447);
 
 		//set event-handler
 		threePlayerButton.setOnMouseClicked(e -> {
@@ -79,8 +79,8 @@ public class SelectPlayerPane extends Pane {
 		fourPlayerButton = new MyButton();
 		
 		//set's button style
-		fourPlayerButton.setLayoutX(275);
-		fourPlayerButton.setLayoutY(603);
+		fourPlayerButton.setLayoutX(276);
+		fourPlayerButton.setLayoutY(587);
 
 		
 		//set event-handler
