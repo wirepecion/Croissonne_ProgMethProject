@@ -1,57 +1,54 @@
 package gui;
 
+import data.ResourceLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
-public class StartGameScene extends VBox {
+public class StartGameScene extends Pane {
 	private static final String  TITLE_TEXT = "Croissonne";
-	private Label titleLabel;
-	private Label subtitleLabel;
-	private StartGameButton startButton;
+	
+	private StartGameButton startGameButton;
 	private SelectPlayerPane selectPlayerPane;
 	private SelectColorPane selectColorPane;
 	
+	Button startBtn;
+	Button howToPlayBtn;
+	Button exitBtn;
+	
+	Pane howToPlayPane;
+	
 	public StartGameScene() {
 		
-		//initialize component
-		initializeLabel();
-		startButton = new StartGameButton();	
+		//initialize component	
+		
+		initializeStartButton();
+		initializeHowToPlayBtn();
+		initializeExitButton();
+		
 		
 		//set scene's style
-		setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
+		setBackground(new Background(new BackgroundImage(ResourceLoader.getStartGameBackgroundImage(), null, null, null, null)));
 		setPrefHeight(750);
 		setPrefWidth(1200);
-		setAlignment(Pos.CENTER);
+//		setAlignment(Pos.CENTER);
 		
 		//add component in this scene
-		getChildren().addAll(titleLabel, subtitleLabel, startButton);
+		getChildren().addAll(startBtn, howToPlayBtn, exitBtn);
 	}
 	
 	
-	private void initializeLabel() {
-		//set label's style
-		
-		//Title
-		titleLabel = new Label(TITLE_TEXT);
-		titleLabel.setFont(new Font("Georgia", 120));
-		titleLabel.setPadding(new Insets(10));
-		
-		//Sub-title
-		subtitleLabel = new Label("Click Start To Begin!");
-		subtitleLabel.setFont(new Font("Cambria", 36));
-		VBox.setMargin(subtitleLabel, new Insets(0, 10, 70, 10));
-	}
-	
-	public void removeStartButton() {
-		getChildren().remove(startButton);
-	}
 	
 	public void addSelectPlayerButton() {
 		selectPlayerPane = new SelectPlayerPane();
@@ -66,9 +63,65 @@ public class StartGameScene extends VBox {
 		selectColorPane = new SelectColorPane();
 		getChildren().add(selectColorPane);
 	}
+	
+	private void initializeStartButton() {
+		
+		startBtn = new Button();
+		
+		//set's button style
+		startBtn.setLayoutX(275);
+		startBtn.setLayoutY(310);
+		startBtn.setPrefWidth(350);
+		startBtn.setPrefHeight(90);
+		startBtn.setOpacity(0);
+//		startBtn.setVisible(false);
+//		startBtn.setDisable(false);
+//		startBtn.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
+		
+		//set event-handler
+		startBtn.setOnMouseClicked(e -> {
+			GameManager.getInstance().switchToSelectPlayerScene();
+		});
+	}
+	
+	private void initializeHowToPlayBtn() {
+		
+		howToPlayBtn = new Button();
+		
+		//set's button style
+		howToPlayBtn.setLayoutX(275);
+		howToPlayBtn.setLayoutY(476);
+		howToPlayBtn.setPrefWidth(350);
+		howToPlayBtn.setPrefHeight(90);
+		howToPlayBtn.setOpacity(0);
+//		howToPlayBtn.setVisible(false);
+//		howToPlayBtn.setDisable(false);
+//		howToPlayBtn.setBackground(new Background(new BackgroundFill(Color.RED, null, null)));
+		
+		//set event-handler
+		howToPlayBtn.setOnMouseClicked(e -> {
+			GameManager.getInstance().switchToHowToPlayScene();
+		});
+	}
 
-	public void setSubtitleLabel(String string) {
-		subtitleLabel.setText(string);
+	private void initializeExitButton() {
+	
+		exitBtn = new Button();
+		
+		//set's button style
+		exitBtn.setLayoutX(275);
+		exitBtn.setLayoutY(603);
+		exitBtn.setPrefWidth(350);
+		exitBtn.setPrefHeight(90);
+		exitBtn.setOpacity(0);
+//		exitBtn.setVisible(false);
+//		exitBtn.setDisable(false);
+//		exitBtn.setBackground(new Background(new BackgroundFill(Color.BLUE, null, null)));
+		
+		//set event-handler
+		exitBtn.setOnMouseClicked(e -> {
+			GameManager.getInstance().switchToSelectPlayerScene();
+		});
 	}
 }
 

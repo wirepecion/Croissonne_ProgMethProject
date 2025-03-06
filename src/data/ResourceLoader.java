@@ -15,7 +15,10 @@ import utils.TileType;
 public class ResourceLoader {
 	private static final ResourceLoader instance = new ResourceLoader();
 
-	public static Image background;
+	public static Image inGameBackground;
+	public static Image startGameBackground;
+	public static Image howToPlayBackground;
+	
 	public static Image betweenTwoMountain;
 	public static Image castleOnAbyss;
 	public static Image castleOnMountain;
@@ -42,8 +45,9 @@ public class ResourceLoader {
 
 	public static void loadResource() {
 		
-		background = new Image(ClassLoader.getSystemResource(
-				"BACKGROUND.png").toString());
+		startGameBackground = nameToBgImage("startGameBackgroundImage");
+		inGameBackground = nameToBgImage("inGameBackgroundImage");
+		howToPlayBackground = nameToBgImage("howToPlayBackgroundImage");
 		
 		betweenTwoMountain = nameToImage("betweenTwoMountain");
 		castleOnAbyss = nameToImage("castleOnAbyss");
@@ -66,8 +70,16 @@ public class ResourceLoader {
 		// explosionSound = new AudioClip(ClassLoader.getSystemResource("Explosion.wav").toString());
 	}
 	
-	public static Image getBackgroundImage() {
-		return background;
+	public static Image getStartGameBackgroundImage() {
+		return startGameBackground;
+	}
+	
+	public static Image getHowToPlayImage() {
+		return howToPlayBackground;
+	}
+	
+	public static Image getInGameBackgroundImage() {
+		return inGameBackground;
 	}
 
 	public static Image getTileImage(TileType tiletype) {
@@ -99,6 +111,16 @@ public class ResourceLoader {
 	private static Image nameToImage(String string) {
 		return 	new Image(ClassLoader.getSystemResource(
 				"tilePic/" + convertToSnakeCase(string) + ".png").toString());
+	}
+	
+	private static Image nameToBgImage(String string) {
+		return new Image(ClassLoader.getSystemResource(
+				"background/" + convertToSnakeCase(string) + ".png").toString());
+	}
+	
+	private static Image nameToBtImage(String string) {
+		return new Image(ClassLoader.getSystemResource(
+				"button/" + convertToSnakeCase(string) + ".png").toString());
 	}
 	
 	private static String convertToSnakeCase(String input) {

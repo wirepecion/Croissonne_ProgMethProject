@@ -33,7 +33,7 @@ public class InGameScene extends HBox {
 		setPrefWidth(1200);
 		setPrefHeight(750);
 		setBackground(new Background(new BackgroundImage(
-			ResourceLoader.getBackgroundImage(), 
+			ResourceLoader.getInGameBackgroundImage(), 
 			BackgroundRepeat.NO_REPEAT, 
 			BackgroundRepeat.NO_REPEAT, 
 			BackgroundPosition.CENTER, 
