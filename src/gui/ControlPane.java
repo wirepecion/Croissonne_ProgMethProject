@@ -8,6 +8,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -77,8 +78,7 @@ public class ControlPane extends VBox {
 		passButton.setLayoutY(90);
 		passButton.setPrefWidth(170);
 		passButton.setPrefHeight(40);
-		passButton.setBackground(new Background(new BackgroundFill(
-				Color.FIREBRICK, CornerRadii.EMPTY, Insets.EMPTY)));
+		passButton.setBackground(new Background(new BackgroundImage(ImageLoader.getPassBackground(), null, null, null, null)));
 		passButton.setFont(new Font("Arial Bold", 40));
 		passButton.setStyle("-fx-text-fill: white;");
 		passButton.setOnMouseClicked(event -> passButtonClickHandler());

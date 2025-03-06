@@ -17,6 +17,11 @@ public class ImageLoader {
 	public static Image howToPlayPageFourBackground;
 	public static Image inGameBackground;
 	
+	public static Image passBackground;
+	public static Image playAgainBackground;
+	public static Image menuBackground;
+	public static Image exitBackground;
+	
 	public static Image betweenTwoMountain;
 	public static Image castleOnAbyss;
 	public static Image castleOnMountain;
@@ -51,6 +56,11 @@ public class ImageLoader {
 		howToPlayPageTwoBackground = nameToBgImage("howToPlayPageTwoBackgroundImage");
 		howToPlayPageThreeBackground = nameToBgImage("howToPlayPageThreeBackgroundImage");
 		howToPlayPageFourBackground = nameToBgImage("howToPlayPageFourBackgroundImage");
+		
+		passBackground = nameToBtImage("passButton");
+		playAgainBackground = nameToBtImage("playAgainButton");
+		menuBackground = nameToBtImage("menuButton");
+		exitBackground = nameToBtImage("exitButton");
 		
 		betweenTwoMountain = nameToTileImage("betweenTwoMountain");
 		castleOnAbyss = nameToTileImage("castleOnAbyss");
@@ -111,6 +121,22 @@ public class ImageLoader {
 	
 	public static Image getInGameBackgroundImage() {
 		return inGameBackground;
+	}
+	
+	public static Image getPassBackground() {
+		return passBackground;
+	}
+	
+	public static Image getPlayAgainBackground() {
+		return playAgainBackground;
+	}
+	
+	public static Image getMenuBackground() {
+		return menuBackground;
+	}
+	
+	public static Image getExitBackground() {
+		return exitBackground;
 	}
 
 	public static Image getTileImage(TileType tiletype) {

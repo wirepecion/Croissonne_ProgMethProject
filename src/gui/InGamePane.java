@@ -1,5 +1,8 @@
 package gui;
 
+import java.awt.event.MouseEvent;
+
+import component.Board;
 import component.Player;
 import data.ImageLoader;
 import javafx.application.Platform;
@@ -15,6 +18,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import logic.GameLogic;
 import logic.TileStorage;
+import utils.MouseEventHandler;
+import utils.PlayerColor;
 
 public class InGamePane extends HBox {
 	
@@ -80,8 +85,7 @@ public class InGamePane extends HBox {
 		Button playAgainButton = new Button("PLAY AGAIN");
 		playAgainButton.setPrefWidth(150);
 		playAgainButton.setPrefHeight(50);
-		playAgainButton.setBackground(new Background(new BackgroundFill(
-				Color.GREEN, CornerRadii.EMPTY, Insets.EMPTY)));
+		playAgainButton.setBackground(new Background(new BackgroundImage(ImageLoader.getPlayAgainBackground(), null, null, null, null)));
 		playAgainButton.setFont(new Font("Arial Bold", 14));
 		playAgainButton.setStyle("-fx-text-fill: white;");
 		playAgainButton.setOnMouseClicked(e -> {
@@ -91,8 +95,7 @@ public class InGamePane extends HBox {
 		Button menuButton = new Button("MENU");
 		menuButton.setPrefWidth(150);
 		menuButton.setPrefHeight(50);
-		menuButton.setBackground(new Background(new BackgroundFill(
-				Color.ORANGE, CornerRadii.EMPTY, Insets.EMPTY)));
+		menuButton.setBackground(new Background(new BackgroundImage(ImageLoader.getMenuBackground(), null, null, null, null)));
 		menuButton.setFont(new Font("Arial Bold", 15));
 		menuButton.setStyle("-fx-text-fill: white;");
 		menuButton.setOnMouseClicked(e -> {
@@ -102,8 +105,7 @@ public class InGamePane extends HBox {
 		Button exitButton = new Button("EXIT");
 		exitButton.setPrefWidth(150);
 		exitButton.setPrefHeight(50);
-		exitButton.setBackground(new Background(new BackgroundFill(
-				Color.DARKRED, CornerRadii.EMPTY, Insets.EMPTY)));
+		exitButton.setBackground(new Background(new BackgroundImage(ImageLoader.getExitBackground(), null, null, null, null)));
 		exitButton.setFont(new Font("Arial Bold", 15));
 		exitButton.setStyle("-fx-text-fill: white;");
 		exitButton.setOnMouseClicked(e -> {
@@ -114,6 +116,7 @@ public class InGamePane extends HBox {
 		
 		controlPane.getChildren().add(endGameOption);
  	}
+	
 
 	public BoardPane getBoardPane() {
 		return boardPane;
