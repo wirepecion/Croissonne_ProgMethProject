@@ -1,6 +1,7 @@
 package logic;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -22,11 +23,12 @@ public class TileStorage {
 	}
 
 	public static void populateWordTile() {
-		File file = new File("res/tiles.txt");
 		
 		Scanner sc;
+		
 		try {
-			sc = new Scanner(file);
+			InputStream inputStream = ClassLoader.getSystemResourceAsStream("tiles.txt");
+			sc = new Scanner(inputStream);
 			
 			while (sc.hasNext()) {
 				String tileTypeString = sc.next();

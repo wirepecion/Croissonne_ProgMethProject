@@ -66,7 +66,7 @@ public class StartGamePane extends Pane {
 	
 		exitBtn = new MyButton();
 		
-		//set's button position
+		//set button's position
 		exitBtn.setLayoutX(275);
 		exitBtn.setLayoutY(603);
 		
@@ -74,8 +74,6 @@ public class StartGamePane extends Pane {
 		exitBtn.setOnMouseClicked(e -> {
 			Platform.exit();
 		});
-		exitBtn.setOnMouseEntered(event -> { setCursor(Cursor.HAND); });
-		exitBtn.setOnMouseExited(event -> { setCursor(Cursor.DEFAULT); });
 		
 		MouseEventHandler.applyHoverEffect(exitBtn);
 	}

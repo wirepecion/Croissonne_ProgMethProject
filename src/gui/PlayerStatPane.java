@@ -27,7 +27,7 @@ public class PlayerStatPane extends GridPane{
 	
 	public PlayerStatPane(Player player) {	
 		
-		ImageView playerIconImg = new ImageView(new Image(ClassLoader.getSystemResource("playerIcons/" + player.getColor().toString() + ".png").toString()));
+		ImageView playerIconImg = new ImageView(new Image(ClassLoader.getSystemResource("playerIcons/" + player.getColor().toString().toLowerCase() + ".png").toString()));
 		playerIconImg.setFitWidth(75);
 		playerIconImg.setFitHeight(100);
 		

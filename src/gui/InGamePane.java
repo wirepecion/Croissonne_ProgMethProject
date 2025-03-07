@@ -2,12 +2,12 @@ package gui;
 
 import java.awt.event.MouseEvent;
 
-import component.Board;
 import component.Player;
 import data.ImageLoader;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -19,7 +19,6 @@ import javafx.scene.text.Font;
 import logic.GameLogic;
 import logic.TileStorage;
 import utils.MouseEventHandler;
-import utils.PlayerColor;
 
 public class InGamePane extends HBox {
 	
@@ -91,6 +90,8 @@ public class InGamePane extends HBox {
 		playAgainButton.setOnMouseClicked(e -> {
 			GameManager.getInstance().switchToInGameScene();
 		});
+		playAgainButton.setOnMouseEntered(event -> playAgainButton.setCursor(Cursor.HAND));
+		playAgainButton.setOnMouseExited(event -> playAgainButton.setCursor(Cursor.DEFAULT));
 		
 		Button menuButton = new Button("MENU");
 		menuButton.setPrefWidth(150);
@@ -101,6 +102,8 @@ public class InGamePane extends HBox {
 		menuButton.setOnMouseClicked(e -> {
 			GameManager.getInstance().setToStartGamePane();
 		});
+		menuButton.setOnMouseEntered(event -> menuButton.setCursor(Cursor.HAND));
+		menuButton.setOnMouseExited(event -> menuButton.setCursor(Cursor.DEFAULT));
 		
 		Button exitButton = new Button("EXIT");
 		exitButton.setPrefWidth(150);
@@ -111,8 +114,10 @@ public class InGamePane extends HBox {
 		exitButton.setOnMouseClicked(e -> {
 			Platform.exit();
 		});
+		exitButton.setOnMouseEntered(event -> exitButton.setCursor(Cursor.HAND));
+		exitButton.setOnMouseExited(event -> exitButton.setCursor(Cursor.DEFAULT));
 		
-		endGameOption.getChildren().addAll(playAgainButton,menuButton,exitButton);
+		endGameOption.getChildren().addAll(playAgainButton, menuButton, exitButton);
 		
 		controlPane.getChildren().add(endGameOption);
  	}
