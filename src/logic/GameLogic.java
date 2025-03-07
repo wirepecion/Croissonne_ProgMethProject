@@ -118,6 +118,7 @@ public class GameLogic {
 	
 	private static void riverScoreCheck() {
 		for (int i = riverScoreList.size() - 1; i >= 0; i--) {
+			RiverScoreCollector rv = riverScoreList.get(i);
 			if (riverScoreList.get(i).isLoop()) {
 				getCurrentPlayer().updateScore(riverScoreList.get(i).getScore());
 				riverScoreList.remove(i);
@@ -159,14 +160,15 @@ public class GameLogic {
 				isMatchRight = true;
 				idxRight = i;
 			}
-			if (isMatchLeft && isMatchRight) {
-				if (idxLeft == idxRight) {
-					endLoopCollector(collector);
-					return;
-				}
-				mergeCollector(riverScoreList.get(idxLeft), riverScoreList.get(idxRight));
+		}
+		if (isMatchLeft && isMatchRight) {
+			if (idxLeft == idxRight) {
+				endLoopCollector(riverScoreList.get(idxLeft));
 				return;
 			}
+			mergeCollector(riverScoreList.get(idxLeft), 
+					riverScoreList.get(idxRight));
+			return;
 		}
 		if (isMatchLeft || isMatchRight) return;
 		riverScoreList.add(new RiverScoreCollector(x, 1, y));
