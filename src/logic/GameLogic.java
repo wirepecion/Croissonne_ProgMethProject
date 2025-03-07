@@ -131,7 +131,6 @@ public class GameLogic {
 			boolean isScore = true;
 			for (int i = pos[0] - 1; i <= pos[0] + 1; i++) {
 				for (int j = pos[1] - 1; j <= pos[1] + 1; j++) {
-					System.out.println("around castle is " + i + " " + j);
 					if (board.getTile(j, i) == null) continue;
 					if (board.getTile(i, j).isEmpty()) {
 						isScore = false;

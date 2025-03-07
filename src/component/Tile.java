@@ -57,7 +57,8 @@ public abstract class Tile implements Rotatable {
 	
 	private static boolean isScoreable(TileType tileType) {
 		return tileType.toString().contains("CASTLE") ||
-			   tileType.toString().contains("RIVER");
+			   tileType.toString().contains("RIVER") ||
+			   tileType.toString().contains("WATERFALL");
 	}
 	
 	public boolean onClick() {

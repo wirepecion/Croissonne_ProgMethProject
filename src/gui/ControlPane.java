@@ -1,5 +1,6 @@
 package gui;
 
+import component.Player;
 import data.ImageLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -109,6 +110,9 @@ public class ControlPane extends VBox {
 			GameLogic.randomTile();
 			GameLogic.nextPlayer();
 		} else {
+			for (Player player : GameLogic.getPlayer()) {
+				player.getPlayerStatPane().setAlertColor();
+			}
 			GameManager.getInstance().switchToEndGameScene();
 		}
 	}

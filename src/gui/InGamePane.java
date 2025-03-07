@@ -48,6 +48,7 @@ public class InGamePane extends HBox {
 	public void addGameOverText() {
 		Button gameOverText = new Button("Game Over");
 		gameOverText.setFont(new Font(48));
+		gameOverText.setBackground(new Background(new BackgroundFill(Color.WHEAT, CornerRadii.EMPTY, Insets.EMPTY)));
 		controlPane.getChildren().add(gameOverText);
 	}
 	
@@ -66,6 +67,7 @@ public class InGamePane extends HBox {
 		}
 		Button winnerText = new Button(winners + "Wins!");
 		winnerText.setFont(new Font(30));
+		winnerText.setBackground(new Background(new BackgroundFill(Color.ANTIQUEWHITE, CornerRadii.EMPTY, Insets.EMPTY)));
 		controlPane.getChildren().add(winnerText);
 	}
 	
