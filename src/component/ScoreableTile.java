@@ -9,7 +9,7 @@ import utils.TileType;
 
 public class ScoreableTile extends Tile implements Scoreable {
 	
-	private final boolean isCastle;
+	private boolean isCastle;
 	
 	public ScoreableTile(TileType tileType) {
 		super(tileType);

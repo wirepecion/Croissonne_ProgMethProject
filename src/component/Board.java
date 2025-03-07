@@ -47,10 +47,6 @@ public class Board {
 		if (row < 0 || col < 0 || row > BOARD_SIZE || col > BOARD_SIZE) return null;
 		return allTiles[row][col];
 	}
-	
-	public void setTileOnBoard(Tile tile, int row, int col) {
-		allTiles[row][col] = tile; 
-	}
 
 	public BoardPane getBoardPane() {
 		return boardPane;
