@@ -1,20 +1,15 @@
 package component;
 
-import java.awt.event.MouseListener;
-import java.lang.reflect.Field;
 import java.util.Collections;
 
 import java.util.List;
 
-import data.ResourceLoader;
 import interfaces.Rotatable;
 import utils.TileArea;
 import utils.TileType;
 import logic.GameLogic;
 import logic.TileAreaDeterminer;
-import gui.ControlPane;
 import gui.TilePane;
-import javafx.scene.Cursor;
 
 public abstract class Tile implements Rotatable {
 
@@ -62,23 +57,21 @@ public abstract class Tile implements Rotatable {
 	
 	private static boolean isScoreable(TileType tileType) {
 		return tileType.toString().contains("CASTLE") ||
-			   tileType.toString().contains("RIVER");
+			   tileType.toString().contains("RIVER") ||
+			   tileType.toString().contains("WATERFALL");
 	}
 	
-	public void onClick() {
+	public boolean onClick() {
 		if (GameLogic.getCurrentTile() != null && !GameLogic.getCurrentTile().isPlace()) {
-			System.out.println(xPosition + " " + yPosition);
 			if (GameLogic.getInstance().isPlaceable(xPosition, yPosition)) {
-				System.out.println("get next tile");
 				
 				this.tileType = GameLogic.getCurrentTile().getTileType();
 				this.edge = (new TileAreaDeterminer()).determineTileArea(tileType); 
 				
-				tilePane.draw();
-				
-				GameLogic.getInstance().placeCurrentTile(xPosition, yPosition);
+				return true;
 			}
 		}
+		return false;
 	}
 
 	public static int getEdgeDirections() {
@@ -124,5 +117,5 @@ public abstract class Tile implements Rotatable {
 	public boolean isPlace() {
 		return isPlace;
 	}
-
+	
 }

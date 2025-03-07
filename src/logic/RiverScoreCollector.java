@@ -20,7 +20,6 @@ public class RiverScoreCollector {
 	}
 	
 	public boolean isLoop() {
-		System.out.println(left[0] + " " + left[1] + " " + score + " " + right[0] + " " + right[1]);
 		return 	(Arrays.equals(left, endLoop) &&
 				Arrays.equals(right, endLoop)) ||
 				Arrays.equals(left, right);

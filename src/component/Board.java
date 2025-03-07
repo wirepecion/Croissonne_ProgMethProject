@@ -1,25 +1,7 @@
 package component;
 
-import java.awt.Graphics2D;
-
 import gui.BoardPane;
 import gui.GameManager;
-import data.ResourceLoader;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.layout.BorderStrokeStyle;
-import javafx.scene.layout.BorderWidths;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
-import logic.GameLogic;
-import logic.TileStorage;
 import utils.TileType;
 
 public class Board {
@@ -57,7 +39,7 @@ public class Board {
 		return BOARD_SIZE;
 	}
 	
-	public Tile[][] getAllTiles() {
+	public Tile[][] getTile() {
 		return allTiles;
 	}
 	
