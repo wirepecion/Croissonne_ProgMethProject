@@ -38,7 +38,7 @@ This project is built using a strict **MVC-inspired architecture** to ensure mod
 * **Area Control:** The `TileAreaDeterminer` dynamically assesses board state to determine valid placement zones.
 
 ### 3. Resource Management
-* **Asset Loading:** Dedicated `AudioLoader` and `ImageLoader` classes handle standard I/O operations efficiently, managing resources for 9 player colors and over 15 unique tile types[cite: 1, 3].
+* **Asset Loading:** Dedicated `AudioLoader` and `ImageLoader` classes handle standard I/O operations efficiently, managing resources for 9 player colors and over 15 unique tile types.
 
 ---
 
@@ -82,7 +82,7 @@ java -jar croissonne.jar
 
 ## 📸 Gallery
 
-  * **Dynamic Menus:** Main Menu, Player Selection (up to 9 colors), and Tutorial screens[cite: 1, 3].
+  * **Dynamic Menus:** Main Menu, Player Selection (up to 9 colors), and Tutorial screens.
   * **Visual Feedback:** Custom graphics for distinct tiles like `WATERFALL_TO_ABYSS` and `TJUNCTION_RIVER`.
 
 *(Note: Add screenshots of your gameplay here to make the repo pop\!)*
